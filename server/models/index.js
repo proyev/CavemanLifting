@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/caveman');
+mongoose.connect('mongodb://localhost:27017/caveman_db');
 
 const db = mongoose.connection;
 

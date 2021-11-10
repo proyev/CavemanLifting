@@ -6,12 +6,14 @@ const workoutSchema = new Schema({
   date: { type: Date },
   routine: [
     {
+      lift: String,
       weight: Number,
       sets: Number,
       reps: Number,
       rest: Number,
     },
   ],
+  notes: { type: String },
 });
 
 module.exports = mongoose.model('Myworkout', workoutSchema);

@@ -7,8 +7,9 @@ const userSchema = new Schema({
   location: { type: String },
   prs: [
     {
-      workout: String,
-      record: String,
+      workout: { type: String },
+      weight: { type: Number },
+      reps: { type: Number },
     },
   ],
 });

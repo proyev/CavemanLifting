@@ -3,9 +3,8 @@ const Workout = require('../models/workout.model');
 
 const getUser = async (req, res) => {
   try {
-    const user = await User.find();
-    console.log(user);
-    res.send(user);
+    const user = await User.findOne();
+    res.status(200).send(user);
   } catch (e) {
     console.error(e);
   }
@@ -14,8 +13,7 @@ const getUser = async (req, res) => {
 const getWorkouts = async (req, res) => {
   try {
     const workouts = await Workout.find();
-    console.log(workouts);
-    res.send(workouts);
+    res.status(200).send(workouts);
   } catch (e) {
     console.error(e);
   }
@@ -23,9 +21,8 @@ const getWorkouts = async (req, res) => {
 
 const postWorkout = async (req, res) => {
   try {
-    const { title, date, routine } = req.body;
-    const workoutToPost = await Workout.create({ title, date, routine });
-    console.log(workoutToPost);
+    const { title, date, routine, notes } = req.body;
+    const workoutToPost = await Workout.create({ title, date, routine, notes });
     res.status(201);
     res.send(workoutToPost);
   } catch (e) {
@@ -34,3 +31,7 @@ const postWorkout = async (req, res) => {
 };
 
 module.exports = { getUser, getWorkouts, postWorkout };
+
+// TODO:
+//  Add removal of workout
+//  Add editing of created workouts

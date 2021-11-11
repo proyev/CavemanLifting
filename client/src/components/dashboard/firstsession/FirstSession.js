@@ -1,10 +1,10 @@
 import React from 'react';
-import { Button, Card } from 'react-bootstrap';
-import './Session.css';
+import { Card, Button } from 'react-bootstrap';
 
-export default function Session({ workout }) {
+export default function FirstSession({ workout }) {
+  console.log(workout);
   return (
-    <Card style={{ width: '18rem' }}>
+    <Card style={{ width: '50rem' }}>
       <Card.Body>
         <Card.Title>{workout.title}</Card.Title>
         <Card.Text>{workout.notes}</Card.Text>

@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function latestsession() {
+export default function sessionForm() {
   return (
     <div>
-      <p>lastsess</p>
+      <p>sessform</p>
     </div>
   );
 }

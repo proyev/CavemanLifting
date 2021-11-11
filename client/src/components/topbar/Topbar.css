@@ -1,0 +1,17 @@
+.navbar__container {
+  background-color: rgb(168, 79, 44);
+  box-shadow: 0px 0px 10px 1px #3333;
+  font-size: 25px;
+}
+.logo {
+  margin-right: 10px;
+}
+
+#profiler {
+  margin-right: 5px;
+  border-radius: 100px;
+}
+
+#profile__name {
+  font-size: 20px;
+}

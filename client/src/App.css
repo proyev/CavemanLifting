@@ -1,1 +1,9 @@
-
+.App {
+  /* padding: 15px; */
+  height: 100vh;
+  background: linear-gradient(10deg, #7c310e88, #ca982c);
+}
+.sidedash__container {
+  display: flex;
+  justify-content: space-between;
+}

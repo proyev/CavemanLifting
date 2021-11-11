@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function sessioncreate() {
+export default function sessionCreate() {
   return (
     <div>
       <p>sesscreate</p>

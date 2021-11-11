@@ -28,9 +28,18 @@ function getWorkouts() {
   return fetchRequest('/dashboard');
 }
 
+function postWorkout(body) {
+  return fetchRequest('/exercise', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+}
+
 const ApiService = {
   getGeolocatedGyms,
   getWorkouts,
+  postWorkout,
 };
 
 module.exports = ApiService;

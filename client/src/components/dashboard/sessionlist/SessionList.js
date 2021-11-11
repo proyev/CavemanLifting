@@ -5,7 +5,7 @@ import Firstsession from '../firstsession/FirstSession';
 export default function SessionList({ workouts }) {
   return workouts.map((workout) => {
     if (workouts.indexOf(workout) === 0) {
-      return <Firstsession workout={workout} />;
+      return <Firstsession workout={workout} key={workout._id} />;
     }
     return workout ? (
       <Session workout={workout} key={workout._id} />

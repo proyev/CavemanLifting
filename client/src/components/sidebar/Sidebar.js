@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Sidebar.css';
+
+import SessionForm from '../sessioncreation/sessionform/SessionForm';
 import profilePic from '../../assets/caveman_profile_pic.PNG';
 import logo from '../../assets/caveman.svg';
 import home from '../../assets/home.svg';
@@ -8,7 +10,7 @@ import dumbbell from '../../assets/fitness-centre.svg';
 import building from '../../assets/building.svg';
 import plus from '../../assets/plus.svg';
 
-export default function Sidebar() {
+export default function Sidebar({ toggleForm }) {
   return (
     <div className="sidebar__container">
       <a href="/" class="text-center">
@@ -71,7 +73,7 @@ export default function Sidebar() {
           </a>
         </li>
         <li>
-          <a href="/exercise" class="nav-link text-white">
+          <button class="nav-link text-white" onClick={toggleForm}>
             <img
               alt="Add a new session"
               src={plus}
@@ -80,7 +82,7 @@ export default function Sidebar() {
               height="20"
             />
             Create New Session
-          </a>
+          </button>
         </li>
       </ul>
       <hr />

@@ -10,3 +10,8 @@
   /* border-radius: 250px; */
   /* justify-content: center; */
 }
+
+.routine__display {
+  display: flex;
+  justify-content: space-evenly;
+}

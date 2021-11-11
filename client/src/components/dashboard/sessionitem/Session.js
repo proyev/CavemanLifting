@@ -10,12 +10,12 @@ export default function Session({ workout }) {
       <Card.Body>
         <Card.Text as="h5">{workout.notes}</Card.Text>
         <hr />
-        <Card.Text>
+        <Card.Text as="h5">
           {workout.routine.map((routine) => {
             return (
               <div key={routine._id}>
                 <h5>Exercise: {routine.lift}</h5>
-                <h5>Weight: {routine.weight}</h5>
+                <h5>Weight: {routine.weight} kg</h5>
                 <h5>Rest per set: {routine.rest}s</h5>
                 <hr />
               </div>

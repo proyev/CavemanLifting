@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import './SessionForm.css';
 
 export default function SessionForm({ showForm, toggleForm, postWorkout }) {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
-  const [routine, setRoutine] = useState('');
+  const [routine, setRoutine] = useState([]);
   const [notes, setNotes] = useState('');
 
   const handleClose = () => toggleForm();
@@ -28,9 +29,13 @@ export default function SessionForm({ showForm, toggleForm, postWorkout }) {
     if (!date) return alert('Cmon man you need to put a date');
     if (!routine) return alert('No-one gonna find you if there aint no venue');
     if (!notes) return alert('Nothing?');
+    const eachExercise = routine.split('\n');
+    const routineArray = routine.split(',');
+    console.log(routineArray);
+    const obj = {};
     postWorkout(title, date, routine, notes);
     setTitle('');
-    setRoutine('');
+    setRoutine([]);
     setDate('');
     setNotes('');
   }
@@ -42,7 +47,7 @@ export default function SessionForm({ showForm, toggleForm, postWorkout }) {
           <Modal.Title>Enter Session Details</Modal.Title>
         </Modal.Header>
 
-        <Modal.Body>
+        <Modal.Body className="input__details">
           <form onSubmit={handleSubmit} className="form_container">
             <h4>Title</h4>
             <input
@@ -61,21 +66,24 @@ export default function SessionForm({ showForm, toggleForm, postWorkout }) {
               onChange={handleDate}
             ></input>
             <h4>Routine</h4>
-
-            <input
+            <textarea
               type="text"
               placeholder="Layout routine..."
               value={routine}
               onChange={handleRoutine}
-            ></input>
+              rows={7.5}
+              cols={70}
+            ></textarea>
             <h4>Notes</h4>
 
-            <input
+            <textarea
               type="text"
               placeholder="Insert notes..."
               value={notes}
               onChange={handleNotes}
-            ></input>
+              rows={7.5}
+              cols={70}
+            ></textarea>
           </form>
         </Modal.Body>
 
@@ -83,7 +91,7 @@ export default function SessionForm({ showForm, toggleForm, postWorkout }) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleSubmit}>
             Save Changes
           </Button>
         </Modal.Footer>

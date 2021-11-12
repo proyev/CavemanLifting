@@ -1,22 +1,28 @@
 import './App.css';
 import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './components/dashboard/Dashboard.js';
 import Sidebar from './components/sidebar/Sidebar.js';
 import SessionForm from './components/sessioncreation/sessionform/SessionForm';
+import Gym from './components/gyms/Gym';
 
 import ApiService, { postWorkout } from './ApiService';
 
 function App() {
   const [workouts, setWorkouts] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [displayComp, setComp] = useState('');
+  const [displayComp, setComp] = useState(0);
 
   function componentDecider(route) {
     console.log(route);
     if (route === '/dashboard') {
+      setComp(0);
+      // setComp(<Dashboard workouts={workouts} />);
+      // return <Dashboard workouts={workouts} />;
     } else if (route === '/profile') {
     } else if (route === '/workoutinfo') {
     } else if (route === '/gyms') {
+      setComp(1);
     } else {
     }
   }
@@ -54,17 +60,18 @@ function App() {
         />
       )}
       <div className="sidedash__container">
-        <Sidebar
-          createWorkout={createWorkout}
-          toggleForm={toggleForm}
-          componentDecider={componentDecider}
-        />
-        {/* <Dashboard workouts={workouts} /> */}
-        {displayComp === '' ? (
-          <Dashboard workouts={workouts} />
-        ) : (
-          componentDecider(displayComp)
-        )}
+        <Router>
+          <Sidebar createWorkout={createWorkout} toggleForm={toggleForm} />
+          <Routes>
+            <Route
+              path="/dashboard"
+              element={<Dashboard workouts={workouts} />}
+            />
+            <Route path="/profile" element={<Gym />} />
+            <Route path="/workoutinfo" element={<Gym />} />
+            <Route path="/gyms" element={<Gym />} />
+          </Routes>
+        </Router>
       </div>
     </div>
   );

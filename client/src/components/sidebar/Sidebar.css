@@ -1,9 +1,14 @@
 .sidebar__container {
   margin: 0;
-  background-color: rgb(92, 90, 89);
+  background-color: rgb(94, 94, 94);
   display: flex;
   flex-direction: column;
   padding: 8px;
-  width: 20vw;
+  width: 15vw;
   height: 100vh;
+}
+
+#logo__pic {
+  height: 10vh;
+  width: 13.5vw;
 }

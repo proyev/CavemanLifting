@@ -20,7 +20,7 @@ export default function Sidebar({ toggleForm }) {
         <li className="nav-item">
           <a
             href="/dashboard"
-            className="nav-link text-white"
+            className="nav-link text-dark"
             aria-current="page"
           >
             <img
@@ -34,7 +34,7 @@ export default function Sidebar({ toggleForm }) {
           </a>
         </li>
         <li>
-          <a href="/profile" className="nav-link text-white">
+          <a href="/profile" className="nav-link text-dark">
             <img
               alt="Navigate to profile"
               src={user}
@@ -46,7 +46,7 @@ export default function Sidebar({ toggleForm }) {
           </a>
         </li>
         <li>
-          <a href="/workoutinfo" className="nav-link text-white">
+          <a href="/workoutinfo" className="nav-link text-dark">
             <img
               alt="View workouts"
               src={dumbbell}
@@ -58,7 +58,7 @@ export default function Sidebar({ toggleForm }) {
           </a>
         </li>
         <li>
-          <a href="/gyms" className="nav-link text-white">
+          <a href="/gyms" className="nav-link text-dark">
             <img
               alt="View local gyms"
               src={building}
@@ -70,7 +70,7 @@ export default function Sidebar({ toggleForm }) {
           </a>
         </li>
         <li>
-          <button className="nav-link text-white" onClick={toggleForm}>
+          <button className="nav-link text-dark" onClick={toggleForm}>
             <img
               alt="Add a new session"
               src={plus}
@@ -83,21 +83,20 @@ export default function Sidebar({ toggleForm }) {
         </li>
       </ul>
       <hr />
-      <div className="dropdown">
-        <a
-          href="/profile"
-          className="d-flex align-items-center text-white text-decoration-none"
-        >
-          <img
-            src={profilePic}
-            alt=""
-            width="55"
-            height="55"
-            className="rounded-circle me-2"
-          />
-          <strong>Unga Bunga</strong>
-        </a>
-      </div>
+
+      <a
+        href="/profile"
+        className="d-flex align-items-center text-dark text-decoration-none"
+      >
+        <img
+          src={profilePic}
+          alt=""
+          width="55"
+          height="55"
+          className="rounded-circle me-2"
+        />
+        <strong>Unga Bunga</strong>
+      </a>
     </div>
   );
 }

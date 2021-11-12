@@ -2,8 +2,7 @@ import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import './FirstSession.css';
 
-export default function FirstSession({ workout }) {
-  console.log(workout);
+export default function FirstSession({ workout, toggleDetailsForm }) {
   return (
     <Card className="firstsession__container" style={{ width: '50rem' }}>
       <Card.Header as="h4">{workout.title}</Card.Header>
@@ -14,8 +13,8 @@ export default function FirstSession({ workout }) {
           {workout.routine.map((routine) => {
             return (
               <div key={routine._id}>
-                <h5>Exercise: {routine.lift}</h5>
-                <h5>Weight: {routine.weight} kg</h5>
+                <h5>{routine.lift}</h5>
+                <h5>{routine.weight} kg</h5>
                 <h5>Sets: {routine.sets}</h5>
                 <h5>Reps: {routine.reps}</h5>
                 <h5>Rest per set: {routine.rest}s</h5>
@@ -24,7 +23,9 @@ export default function FirstSession({ workout }) {
             );
           })}
         </Card.Text>
-        <Button variant="dark">Details</Button>
+        <Button variant="dark" onClick={() => toggleDetailsForm(workout._id)}>
+          Add details
+        </Button>
       </Card.Body>
     </Card>
   );

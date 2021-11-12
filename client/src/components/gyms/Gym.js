@@ -12,9 +12,9 @@ export default function Gym() {
 
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const [lng, setLng] = useState(-118);
-  const [lat, setLat] = useState(34);
-  const [zoom, setZoom] = useState(15);
+  const [lng, setLng] = useState(-118.2437);
+  const [lat, setLat] = useState(34.052);
+  const [zoom, setZoom] = useState(14.5);
 
   function addMarkers(data) {
     /* For each feature in the GeoJSON object above: */
@@ -143,7 +143,7 @@ export default function Gym() {
     <div>
       <div className="sidebar">
         <div className="heading">
-          <h1>Local gyms</h1>
+          <h3>Local gyms</h3>
         </div>
         <div id="listings" className="listings"></div>
       </div>

@@ -1,34 +1,41 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Dashboard from './components/dashboard/Dashboard.js';
 import Sidebar from './components/sidebar/Sidebar.js';
 import SessionForm from './components/sessioncreation/sessionform/SessionForm';
+import SessionDetails from './components/dashboard/sessiondetails/SessionDetails';
 import Gym from './components/gyms/Gym';
+import Profile from './components/profile/Profile';
+// import WorkoutInfo from './components/profile/Profile';
 
-import ApiService, { postWorkout } from './ApiService';
+import ApiService from './ApiService';
 
 function App() {
   const [workouts, setWorkouts] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [displayComp, setComp] = useState(0);
+  const [detailsForm, setDetailsForm] = useState('');
+  const [infoAdd, setInfoAdd] = useState(false);
 
-  function componentDecider(route) {
-    console.log(route);
-    if (route === '/dashboard') {
-      setComp(0);
-      // setComp(<Dashboard workouts={workouts} />);
-      // return <Dashboard workouts={workouts} />;
-    } else if (route === '/profile') {
-    } else if (route === '/workoutinfo') {
-    } else if (route === '/gyms') {
-      setComp(1);
-    } else {
-    }
-  }
+  const notifyAdd = () =>
+    toast('New session added!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+    });
+  const notifyDetails = () =>
+    toast('Details have been added!🎉', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+    });
 
-  function createWorkout(title, date, routine, notes = '') {
-    ApiService.postWorkout({ title, date, routine, notes }).then((workout) => {
+  function postWorkout(title, date, notes = '') {
+    ApiService.postWorkout({ title, date, notes }).then((workout) => {
       console.log(workout);
       setWorkouts((prevList) => {
         const newList = [workout, ...prevList];
@@ -37,10 +44,36 @@ function App() {
         return newList;
       });
     });
+    notifyAdd();
+  }
+
+  function addInfo(body, id) {
+    ApiService.addInfo(body, id).then((workout) => {
+      console.log(workout);
+
+      setWorkouts((prevList) => {
+        const filteredArr = prevList.filter(
+          (workoutCard) => workout._id !== workoutCard._id
+        );
+        console.log(filteredArr);
+        const newList = [workout, ...filteredArr];
+
+        newList.sort((a, b) => sortByDate(b, a));
+        console.log(newList);
+        setInfoAdd(!infoAdd);
+
+        return newList;
+      });
+    });
+    notifyDetails();
   }
 
   function toggleForm() {
     setShowForm(!showForm);
+  }
+
+  function toggleDetailsForm(id = '') {
+    id.length ? setDetailsForm(id) : setDetailsForm('');
   }
 
   useEffect(() => {
@@ -48,10 +81,11 @@ function App() {
       const orderedWorkouts = workouts.sort((a, b) => sortByDate(b, a));
       return setWorkouts(orderedWorkouts);
     });
-  }, []);
+  }, [infoAdd]);
 
   return (
     <div className="App">
+      <ToastContainer />
       {showForm && (
         <SessionForm
           showForm={showForm}
@@ -59,15 +93,27 @@ function App() {
           postWorkout={postWorkout}
         />
       )}
+      {detailsForm && (
+        <SessionDetails
+          detailsForm={detailsForm}
+          toggleDetailsForm={toggleDetailsForm}
+          addInfo={addInfo}
+        />
+      )}
       <div className="sidedash__container">
         <Router>
-          <Sidebar createWorkout={createWorkout} toggleForm={toggleForm} />
+          <Sidebar postWorkout={postWorkout} toggleForm={toggleForm} />
           <Routes>
             <Route
               path="/dashboard"
-              element={<Dashboard workouts={workouts} />}
+              element={
+                <Dashboard
+                  workouts={workouts}
+                  toggleDetailsForm={toggleDetailsForm}
+                />
+              }
             />
-            <Route path="/profile" element={<Gym />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/workoutinfo" element={<Gym />} />
             <Route path="/gyms" element={<Gym />} />
           </Routes>

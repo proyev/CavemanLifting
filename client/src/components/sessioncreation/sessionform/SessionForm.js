@@ -5,7 +5,6 @@ import './SessionForm.css';
 export default function SessionForm({ showForm, toggleForm, postWorkout }) {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
-  const [routine, setRoutine] = useState([]);
   const [notes, setNotes] = useState('');
 
   const handleClose = () => toggleForm();
@@ -19,25 +18,19 @@ export default function SessionForm({ showForm, toggleForm, postWorkout }) {
   function handleDate(e) {
     setDate(e.target.value);
   }
-  function handleRoutine(e) {
-    setRoutine(e.target.value);
-  }
 
   function handleSubmit(e) {
     e.preventDefault();
     if (!title) return alert('Please enter a title bruh');
     if (!date) return alert('Cmon man you need to put a date');
-    if (!routine) return alert('No-one gonna find you if there aint no venue');
     if (!notes) return alert('Nothing?');
-    const eachExercise = routine.split('\n');
-    const routineArray = routine.split(',');
-    console.log(routineArray);
-    const obj = {};
-    postWorkout(title, date, routine, notes);
+
+    postWorkout(title, date, notes);
+
     setTitle('');
-    setRoutine([]);
     setDate('');
     setNotes('');
+    handleClose();
   }
 
   return (
@@ -65,15 +58,6 @@ export default function SessionForm({ showForm, toggleForm, postWorkout }) {
               value={date}
               onChange={handleDate}
             ></input>
-            <h4>Routine</h4>
-            <textarea
-              type="text"
-              placeholder="Layout routine..."
-              value={routine}
-              onChange={handleRoutine}
-              rows={7.5}
-              cols={70}
-            ></textarea>
             <h4>Notes</h4>
 
             <textarea

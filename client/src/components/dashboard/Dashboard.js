@@ -4,11 +4,14 @@ import './Dashboard.css';
 import SessionList from './sessionlist/SessionList';
 // import Gym from '../gyms/Gym';
 
-export default function Dashboard({ workouts }) {
+export default function Dashboard({ workouts, toggleDetailsForm }) {
   return (
     <div className="dashboard">
       <div className="list__container">
-        <SessionList workouts={workouts} />
+        <SessionList
+          workouts={workouts}
+          toggleDetailsForm={toggleDetailsForm}
+        />
       </div>
     </div>
   );

@@ -11,11 +11,12 @@
   position: absolute;
   margin-left: 17.5%;
   width: 17.5%;
-  height: 100%;
-  top: 0;
-  left: 0;
+  height: 50%;
+  border-radius: 10px;
+  top: 2vh;
+  left: 2vw;
   overflow: hidden;
-  border-right: 1px solid rgba(0, 0, 0, 0.25);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   z-index: 1;
   background: rgb(209, 196, 196);
 }
@@ -49,6 +50,7 @@ a:hover {
 }
 
 .heading {
+  text-align: center;
   background: rgb(192, 189, 189);
   border-bottom: 1px solid #eee;
   height: 60px;
@@ -58,8 +60,8 @@ a:hover {
 
 .map-container {
   position: absolute;
-  left: 35%;
-  width: 65%;
+  left: 17.5%;
+  width: 82.5%;
   top: 0;
   bottom: 0;
 }
@@ -92,7 +94,7 @@ a:hover {
 
 .listings .item.active .title,
 .listings .item .title:hover {
-  color: #c63f3f;
+  color: #ce4c4c;
 }
 
 .listings .item.active {
@@ -110,7 +112,7 @@ a:hover {
 }
 
 .mapboxgl-popup-content h3 {
-  background: #91c949;
+  background: #5d8d1e;
   color: #fff;
   margin: 0;
   padding: 10px;
@@ -149,6 +151,6 @@ a:hover {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #00853e;
+  background: #fefffe;
   border-radius: 0;
 }

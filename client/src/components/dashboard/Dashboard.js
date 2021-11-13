@@ -5,6 +5,7 @@ import SessionList from './sessionlist/SessionList';
 // import Gym from '../gyms/Gym';
 
 export default function Dashboard({ workouts, toggleDetailsForm }) {
+  console.log('hmm');
   return (
     <div className="dashboard">
       <div className="list__container">

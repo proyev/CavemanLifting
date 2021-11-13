@@ -20,18 +20,20 @@ function App() {
   const [infoAdd, setInfoAdd] = useState(false);
 
   const notifyAdd = () =>
-    toast('New session added!', {
+    toast.info('New session added!', {
       position: 'top-center',
       autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
+      theme: 'dark',
     });
   const notifyDetails = () =>
-    toast('Details have been added!🎉', {
+    toast.info('Details have been added!🎉', {
       position: 'top-center',
       autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
+      theme: 'dark',
     });
 
   function postWorkout(title, date, notes = '') {
@@ -97,7 +99,6 @@ function App() {
         <SessionDetails
           detailsForm={detailsForm}
           toggleDetailsForm={toggleDetailsForm}
-          addInfo={addInfo}
         />
       )}
       <div className="sidedash__container">
@@ -113,7 +114,7 @@ function App() {
                 />
               }
             />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={<Profile workouts={workouts} />} />
             <Route path="/workoutinfo" element={<Gym />} />
             <Route path="/gyms" element={<Gym />} />
           </Routes>

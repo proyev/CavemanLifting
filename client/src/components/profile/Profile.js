@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
+import './Profile.css';
+import Heatmap from './heatmap/Heatmap';
 
-export default function Profile() {
+export default function Profile({ workouts }) {
+  const [workoutData, setWorkoutData] = useState([]);
+
   return (
-    <div>
-      <p>profile</p>
+    <div id="profile__page">
+      {workouts.length && <Heatmap workouts={workouts} />}
     </div>
   );
 }

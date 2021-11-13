@@ -20,3 +20,8 @@ app.use(router);
     console.log(err);
   }
 })();
+
+/*
+This is a relatively standard Express, MongoDB, Mongoose setup
+Checkout the controllers for additional comments on the code.
+*/

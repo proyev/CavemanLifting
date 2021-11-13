@@ -5,10 +5,6 @@ export default function Heatmap({ workouts }) {
   // console.log(workouts);
 
   function generateData(count, yrange) {
-    const decider = {
-      10: 'Oct',
-      11: 'Nov',
-    };
     var i = 0;
     var series = [];
     while (i < count) {
@@ -25,6 +21,7 @@ export default function Heatmap({ workouts }) {
     return series;
   }
 
+  // eslint-disable-next-line no-unused-vars
   function generateTheHeat(data) {
     console.log(data);
   }

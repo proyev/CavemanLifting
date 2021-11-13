@@ -100,6 +100,7 @@ export default function Gym() {
     if (popUps[0]) popUps[0].remove();
 
     // VS code will probably give out about this, however it is used for pop-ups on the map
+    // eslint-disable-next-line no-unused-vars
     const popup = new mapboxgl.Popup({ closeOnClick: false })
       .setLngLat(currentFeature.geometry.coordinates)
       .setHTML(

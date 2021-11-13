@@ -4,7 +4,7 @@ import './Sidebar.css';
 import profilePic from '../../assets/caveman_profile_pic.PNG';
 import logo from '../../assets/caveman.svg';
 import home from '../../assets/home.svg';
-import user from '../../assets/user.svg';
+import user from '../../assets/user2.svg';
 import dumbbell from '../../assets/fitness-centre.svg';
 import building from '../../assets/building.svg';
 import plus from '../../assets/plus.svg';

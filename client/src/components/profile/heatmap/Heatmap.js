@@ -55,7 +55,6 @@ export default function Heatmap({ workouts }) {
 
   return (
     <div id="chart">
-      {/* <p>{workouts[0].title}</p> */}
       <ReactApexChart
         options={{
           chart: {
@@ -72,7 +71,7 @@ export default function Heatmap({ workouts }) {
         series={[
           {
             name: 'Nov',
-            data: generateData(month1),
+            data: generateData(month3),
           },
           {
             name: 'Oct',
@@ -80,7 +79,7 @@ export default function Heatmap({ workouts }) {
           },
           {
             name: 'Sept',
-            data: generateData(month3),
+            data: generateData(month1),
           },
         ]}
         type="heatmap"

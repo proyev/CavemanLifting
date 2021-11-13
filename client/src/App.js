@@ -25,18 +25,18 @@ function App() {
 
   const notifyAdd = () =>
     toast.info('New session added!', {
-      position: 'top-center',
-      autoClose: 2000,
-      hideProgressBar: false,
+      position: 'top-right',
+      autoClose: 1500,
+      hideProgressBar: true,
       closeOnClick: true,
       theme: 'dark',
     });
 
   const notifyDetails = () =>
     toast.info('Details have been added!🎉', {
-      position: 'top-center',
-      autoClose: 2000,
-      hideProgressBar: false,
+      position: 'top-right',
+      autoClose: 1500,
+      hideProgressBar: true,
       closeOnClick: true,
       theme: 'dark',
     });

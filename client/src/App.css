@@ -1,9 +1,11 @@
 .App {
   /* padding: 15px; */
   /* height: 100vh; */
-  background: linear-gradient(to right, #e96443, #904e95);
+  background: linear-gradient(to right, #1f363d, #70a9a1, #cfe0c3);
 }
 .sidedash__container {
   display: flex;
-  justify-content: space-between;
+  align-items: stretch;
+  /* justify-content: stretch; */
+  width: 100%;
 }

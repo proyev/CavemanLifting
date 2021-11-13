@@ -8,29 +8,34 @@ export default function SessionList({ workouts, toggleDetailsForm }) {
   // Displays session as components, sets first in list to a seperate component with it's
   // own unique styling
   return (
-    <div className="scroller">
-      <div className="session__container">
-        {workouts.map((workout) => {
-          if (workouts.indexOf(workout) === 0) {
-            return (
-              <Firstsession
-                workout={workout}
-                key={workout._id}
-                toggleDetailsForm={toggleDetailsForm}
-              />
-            );
-          }
-          return workout ? (
-            <Session
+    // <div className="scroller">
+    <div className="session__container">
+      {workouts.map((workout) => {
+        if (workouts.indexOf(workout) === 0) {
+          return (
+            <Firstsession
               workout={workout}
               key={workout._id}
               toggleDetailsForm={toggleDetailsForm}
             />
-          ) : (
-            <p>Go hit the gym bud</p>
           );
-        })}
-      </div>
+        }
+        return workout ? (
+          <Session
+            workout={workout}
+            key={workout._id}
+            toggleDetailsForm={toggleDetailsForm}
+          />
+        ) : (
+          <p>Go hit the gym bud</p>
+        );
+      })}
     </div>
+    // </div>
   );
 }
+
+// return (
+// user === '' ? Login : Logout
+//
+// )

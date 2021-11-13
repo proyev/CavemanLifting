@@ -99,6 +99,7 @@ function App() {
         <SessionDetails
           detailsForm={detailsForm}
           toggleDetailsForm={toggleDetailsForm}
+          addInfo={addInfo}
         />
       )}
       <div className="sidedash__container">

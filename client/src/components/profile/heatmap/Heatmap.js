@@ -1,37 +1,56 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 
 export default function Heatmap({ workouts }) {
-  // console.log(workouts);
+  const [month1, setMonth1] = useState([]);
+  const [month2, setMonth2] = useState([]);
+  const [month3, setMonth3] = useState([]);
 
-  function generateData(count, yrange) {
-    var i = 0;
-    var series = [];
-    while (i < count) {
-      var x = (i + 1).toString();
-      var y =
-        Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
-
-      series.push({
-        x: x,
-        y: y,
-      });
+  function generateData(daysToFill) {
+    let i = 0;
+    const series = [];
+    while (i <= 30) {
+      const x = (i + 1).toString();
+      if (daysToFill.some((el) => el === Number(x))) {
+        series.push({
+          x: x,
+          y: '125',
+        });
+      } else {
+        series.push({
+          x: x,
+          y: '50',
+        });
+      }
       i++;
     }
     return series;
   }
 
-  // eslint-disable-next-line no-unused-vars
-  function generateTheHeat(data) {
-    console.log(data);
-  }
-
   useEffect(() => {
-    async function hmm() {
-      const fin = await workouts;
-      console.log(fin);
+    const month1Data = [];
+    const month2Data = [];
+    const month3Data = [];
+    async function workoutLooper() {
+      workouts.forEach((sess) => {
+        let indvDate = new Date(sess.date);
+        let indvMonth = indvDate.getMonth();
+        let indvDay = indvDate.getDate();
+
+        if (indvMonth === 8) {
+          month1Data.push(indvDay);
+        } else if (indvMonth === 9) {
+          month2Data.push(indvDay);
+        } else if (indvMonth === 10) {
+          month3Data.push(indvDay);
+        }
+      });
     }
-    hmm();
+    workoutLooper();
+
+    setMonth1(month1Data);
+    setMonth2(month2Data);
+    setMonth3(month3Data);
   }, [workouts]);
 
   return (
@@ -40,8 +59,6 @@ export default function Heatmap({ workouts }) {
       <ReactApexChart
         options={{
           chart: {
-            height: 500,
-            width: 750,
             type: 'heatmap',
           },
           dataLabels: {
@@ -55,30 +72,20 @@ export default function Heatmap({ workouts }) {
         series={[
           {
             name: 'Nov',
-            data: [
-              { x: '1st', y: '1' },
-              { x: '2nd', y: '150' },
-              { x: '3rd', y: '150' },
-              { x: '4th', y: '150' },
-            ],
+            data: generateData(month1),
           },
           {
             name: 'Oct',
-            data: generateData(30, {
-              min: -30,
-              max: 55,
-            }),
+            data: generateData(month2),
           },
           {
             name: 'Sept',
-            data: generateData(30, {
-              min: -30,
-              max: 55,
-            }),
+            data: generateData(month3),
           },
         ]}
         type="heatmap"
-        height={350}
+        height={250}
+        width={750}
       />
       <p>profile</p>
     </div>

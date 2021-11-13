@@ -6,6 +6,7 @@ export default function Profile({ workouts }) {
   return (
     <div id="profile__page">
       {workouts.length && <Heatmap workouts={workouts} />}
+      <p>HAHAHAHAHAHAH</p>
     </div>
   );
 }

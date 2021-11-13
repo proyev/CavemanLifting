@@ -16,6 +16,8 @@ export default function Sidebar({ toggleForm }) {
   // className can be used to assign values in Bootstrap, it can get a bit confusing but searching
   // the acronym in the DOCS helps
 
+  // <Link to="/dashboard"> </Link>
+
   return (
     <div className="sidebar__container">
       <a href="/dashboard" className="text-center">

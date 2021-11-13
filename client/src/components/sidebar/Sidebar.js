@@ -10,6 +10,12 @@ import building from '../../assets/building.svg';
 import plus from '../../assets/plus.svg';
 
 export default function Sidebar({ toggleForm }) {
+  // This is a large file of what essentially is just cloning the same code over and over in order to get
+  // an eye-pleasing sidebar
+  // This was also done using  a mixture of CSS & Bootstrap
+  // className can be used to assign values in Bootstrap, it can get a bit confusing but searching
+  // the acronym in the DOCS helps
+
   return (
     <div className="sidebar__container">
       <a href="/dashboard" className="text-center">

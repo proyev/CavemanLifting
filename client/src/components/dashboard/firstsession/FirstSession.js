@@ -3,6 +3,8 @@ import { Card, Button } from 'react-bootstrap';
 import './FirstSession.css';
 
 export default function FirstSession({ workout, toggleDetailsForm }) {
+  // Unique styling done for first session in list to make it stand apart from the rest
+
   return (
     <Card className="firstsession__container" style={{ width: '50rem' }}>
       <Card.Header as="h4">{workout.title}</Card.Header>

@@ -4,16 +4,10 @@ import { Button, Card } from 'react-bootstrap';
 import './Session.css';
 
 export default function Session({ workout }) {
-  function handleClick(id) {
-    console.log(id);
-  }
+  // Card used to display session info w/ button for adding details
 
   return (
-    <Card
-      className="card__container"
-      style={{ width: '35rem' }}
-      onClick={() => handleClick(workout._id)}
-    >
+    <Card className="card__container" style={{ width: '35rem' }}>
       <Card.Header as="h5">{workout.title}</Card.Header>
       <Card.Body>
         <Card.Text as="h5">{workout.notes}</Card.Text>

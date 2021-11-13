@@ -5,6 +5,8 @@ import Firstsession from '../firstsession/FirstSession';
 import './SessionList.css';
 
 export default function SessionList({ workouts, toggleDetailsForm }) {
+  // Displays session as components, sets first in list to a seperate component with it's
+  // own unique styling
   return (
     <div className="scroller">
       <div className="session__container">

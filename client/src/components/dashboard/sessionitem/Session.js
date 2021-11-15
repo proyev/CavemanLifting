@@ -15,7 +15,7 @@ export default function Session({ workout, toggleDetailsForm }) {
 
   return (
     <VStack
-      w="40rem"
+      w="45rem"
       bg={bgColor}
       my="2rem"
       py="1.25rem"
@@ -51,12 +51,6 @@ export default function Session({ workout, toggleDetailsForm }) {
             );
           })}
         </Flex>
-        <Divider
-          borderStyle="none"
-          my="1rem"
-          // h={workout.length ? '0px' : '1px'}
-          display={workout ? 'none' : 'flex'}
-        />
       </VStack>
       <Button
         colorScheme="green"

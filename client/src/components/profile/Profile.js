@@ -18,10 +18,10 @@ import {
 
 import profilePic from '../../assets/caveman_profile_pic.PNG';
 
-export default function Profile({ workouts }) {
+export default function Profile({ workouts, userData }) {
   const [latest, setLatest] = useState({});
 
-  const tableBGColor = useColorModeValue('teal.300', 'teal.900');
+  const tableBGColor = useColorModeValue('teal.400', 'teal.900');
 
   useEffect(() => {
     setLatest(workouts[0]);
@@ -36,19 +36,25 @@ export default function Profile({ workouts }) {
       align="center"
       justifyContent="space-around"
     >
-      <Flex>
+      <Flex
+        w="50rem"
+        p="2.5rem"
+        bg={tableBGColor}
+        justify="space-evenly"
+        borderRadius="25px"
+      >
         <Image
           alignSelf="flex-start"
-          mr="10rem"
-          h="200px"
+          // mr="10rem"
+          h="10rem"
           borderRadius="10px"
           src={profilePic}
         />
 
-        <VStack>
-          <Text mb="1rem">WA</Text>
-          <Text mb="1rem !important">WB</Text>
-          <Text mb="1rem !important">WC</Text>
+        <VStack w="20rem" align="flex-start" justify="center">
+          <Text mb="0.25rem">Name: {userData.firstname}</Text>
+          <Text mb="0.25rem">Username: {userData.username}</Text>
+          <Text mb="1rem !important">{userData.bio}</Text>
         </VStack>
       </Flex>
       {latest ? (

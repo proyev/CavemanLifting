@@ -1,16 +1,10 @@
-import './App.css';
+// import './App.css';
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { useColorMode, useColorModeValue, HStack } from '@chakra-ui/react';
 import 'react-toastify/dist/ReactToastify.css';
 
-// import Dashboard from './components/dashboard/Dashboard.js';
-// import Sidebar from './components/sidebar/Sidebar.js';
-// import SessionForm from './components/sessioncreation/sessionform/SessionForm';
-// import SessionDetails from './components/dashboard/sessiondetails/SessionDetails';
-// import Gym from './components/gyms/Gym';
-// import Profile from './components/profile/Profile';
 import {
   Dashboard,
   Sidebar,
@@ -26,6 +20,8 @@ import ApiService from './ApiService';
 function App() {
   // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [userData, setUserData] = useState({});
   const [workouts, setWorkouts] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [detailsForm, setDetailsForm] = useState('');
@@ -36,7 +32,7 @@ function App() {
   // infoAdd used to keep track, and update the workout cards on the dashboard
 
   const { toggleColorMode } = useColorMode();
-  const bgColor = useColorModeValue('teal.200', 'teal.800');
+  const bgColor = useColorModeValue('teal.300', 'teal.800');
 
   const notifyAdd = () =>
     toast.info('New session added!', {
@@ -113,10 +109,10 @@ function App() {
       return setWorkouts(orderedWorkouts);
     });
     // standard API call to GET workout
+    ApiService.getUser().then((userInfo) => setUserData(userInfo));
   }, [infoAdd]);
 
   return (
-    // <div className="App">
     <HStack p="0" bg={bgColor}>
       <ToastContainer />
       {/* Used as a container for any and all Toasts (toast notification naming convention) */}
@@ -155,14 +151,16 @@ function App() {
                 />
               }
             />
-            <Route path="/profile" element={<Profile workouts={workouts} />} />
+            <Route
+              path="/profile"
+              element={<Profile workouts={workouts} userData={userData} />}
+            />
             <Route path="/workoutinfo" element={<Gym />} />
             <Route path="/gyms" element={<Gym />} />
           </Routes>
         </Router>
       </HStack>
     </HStack>
-    //</div>
   );
 }
 

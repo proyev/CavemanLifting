@@ -1,6 +1,6 @@
 import React from 'react';
 import './Dashboard.css';
-import { Box } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 
 import SessionList from './sessionlist/SessionList';
 // import Gym from '../gyms/Gym';
@@ -10,12 +10,12 @@ export default function Dashboard({ workouts, toggleDetailsForm }) {
   return (
     // <div className="dashboard">
     <Box w="100%" m="0px !important">
-      <div className="list__container">
+      <Flex direction="column" align="center">
         <SessionList
           workouts={workouts}
           toggleDetailsForm={toggleDetailsForm}
         />
-      </div>
+      </Flex>
     </Box>
     // </div>
   );

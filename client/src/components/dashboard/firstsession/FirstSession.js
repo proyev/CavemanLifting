@@ -51,7 +51,6 @@ export default function FirstSession({ workout, toggleDetailsForm }) {
             );
           })}
         </Flex>
-        <Divider borderStyle="none" my="1rem" h={workout ? 'none' : 'flex'} />
 
         <Button
           colorScheme="green"
@@ -59,7 +58,7 @@ export default function FirstSession({ workout, toggleDetailsForm }) {
           my="1.5rem"
           fontSize="lg"
         >
-          Add details
+          Add Details
         </Button>
       </Flex>
     </VStack>

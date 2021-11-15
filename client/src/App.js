@@ -2,7 +2,9 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import { useColorMode, useColorModeValue, HStack } from '@chakra-ui/react';
 import 'react-toastify/dist/ReactToastify.css';
+
 import Dashboard from './components/dashboard/Dashboard.js';
 import Sidebar from './components/sidebar/Sidebar.js';
 import SessionForm from './components/sessioncreation/sessionform/SessionForm';
@@ -22,6 +24,9 @@ function App() {
   // showForm used for displaying "Add New Session"
   // detialsForm used for "Add details"
   // infoAdd used to keep track, and update the workout cards on the dashboard
+
+  const { toggleColorMode } = useColorMode();
+  const bgColor = useColorModeValue('teal.200', 'teal.900');
 
   const notifyAdd = () =>
     toast.info('New session added!', {
@@ -101,7 +106,8 @@ function App() {
   }, [infoAdd]);
 
   return (
-    <div className="App">
+    // <div className="App">
+    <HStack p="0" bg={bgColor}>
       <ToastContainer />
       {/* Used as a container for any and all Toasts (toast notification naming convention) */}
 
@@ -120,9 +126,14 @@ function App() {
         />
       )}
       {/* Modals are created on the top level and displayed based on a boolean */}
-      <div className="sidedash__container">
+
+      <HStack m="0 !important" w="100%">
         <Router>
-          <Sidebar postWorkout={postWorkout} toggleForm={toggleForm} />
+          <Sidebar
+            postWorkout={postWorkout}
+            toggleForm={toggleForm}
+            toggleColorMode={toggleColorMode}
+          />
           {/* Router logic is give to the sidebar^ while actual routing happens below */}
           <Routes>
             <Route
@@ -139,8 +150,9 @@ function App() {
             <Route path="/gyms" element={<Gym />} />
           </Routes>
         </Router>
-      </div>
-    </div>
+      </HStack>
+    </HStack>
+    //</div>
   );
 }
 

@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import ApiService from '../../ApiService';
 import './Gym.css';
 
-import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+import mapboxgl from '!mapbox-gl';
 
 // Pls don't hate me for how messy this is
 
@@ -12,9 +12,13 @@ export default function Gym() {
 
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const [lng, setLng] = useState(-118.2437);
-  const [lat, setLat] = useState(34.052);
-  const [zoom, setZoom] = useState(14.5);
+  const [lng] = useState(-118.2437);
+  const [lat] = useState(34.052);
+  const [zoom] = useState(14.5);
+
+  // const [lng, setLng] = useState(-118.2437);
+  // const [lat, setLat] = useState(34.052);
+  // const [zoom, setZoom] = useState(14.5);
 
   function addMarkers(data) {
     // For each feature in the GeoJSON object that is recieved from the API call

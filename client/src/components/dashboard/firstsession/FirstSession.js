@@ -1,31 +1,29 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
 import {
-  Box,
   Flex,
-  Image,
-  Badge,
+  VStack,
   Button,
   Text,
-  Center,
   Divider,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import './FirstSession.css';
 
 export default function FirstSession({ workout, toggleDetailsForm }) {
   // Unique styling done for first session in list to make it stand apart from the rest
 
+  const bgColor = useColorModeValue('cyan.200', 'cyan.800');
+
   return (
-    <Flex
-      w="50rem"
+    <VStack
+      w="60rem"
       my="2rem"
       py="1.25rem"
-      // bg="tomato"
-      direction="column"
-      align="center"
+      px="1rem"
+      bg={bgColor}
       borderRadius="12.5px"
     >
-      <Text fontSize="lg" fontWeight="700">
+      <Text fontSize="xl" fontWeight="700">
         {workout.title}
       </Text>
       <Flex direction="column" align="center" m="1rem">
@@ -33,7 +31,7 @@ export default function FirstSession({ workout, toggleDetailsForm }) {
           {workout.notes}
         </Text>
         <Divider borderStyle="none" />
-        <Flex display="flex" align="center" justify="space-evenly">
+        <Flex align="center" justify="space-evenly">
           {workout.routine.map((routine) => {
             return (
               <Flex
@@ -42,15 +40,13 @@ export default function FirstSession({ workout, toggleDetailsForm }) {
                 align="center"
                 key={routine._id}
                 m="1rem"
-                // mr="1rem"
-                fontSize="md"
+                fontSize="lg"
               >
                 <Text>{routine.lift}</Text>
                 <Text>{routine.weight} kg</Text>
                 <Text>Sets: {routine.sets}</Text>
                 <Text>Reps: {routine.reps}</Text>
                 <Text>Rest per set: {routine.rest}s</Text>
-                <hr />
               </Flex>
             );
           })}
@@ -66,6 +62,6 @@ export default function FirstSession({ workout, toggleDetailsForm }) {
           Add details
         </Button>
       </Flex>
-    </Flex>
+    </VStack>
   );
 }

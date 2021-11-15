@@ -1,8 +1,25 @@
 import React, { useState } from 'react';
-import { Modal, Button } from 'react-bootstrap';
-import './SessionForm.css';
 
-export default function SessionForm({ showForm, toggleForm, postWorkout }) {
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  FormControl,
+  FormLabel,
+  Input,
+  Button,
+  Divider,
+  Textarea,
+} from '@chakra-ui/react';
+
+// import { Modal, Button } from 'react-bootstrap';
+// import './SessionForm.css';
+
+// export default function SessionForm({ showForm, toggleForm, postWorkout }) {
+export default function SessionForm({ toggleForm, postWorkout }) {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
   const [notes, setNotes] = useState('');
@@ -35,50 +52,47 @@ export default function SessionForm({ showForm, toggleForm, postWorkout }) {
 
   return (
     <>
-      <Modal size="lg" show={showForm} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Enter Session Details</Modal.Title>
-        </Modal.Header>
+      <Modal isOpen={true} onClose={handleClose}>
+        <ModalOverlay />
 
-        <Modal.Body className="input__details">
-          <form onSubmit={handleSubmit} className="form_container">
-            <h4>Title</h4>
-            <input
-              type="text"
-              placeholder="Insert a title..."
-              value={title}
-              onChange={handleTitle}
-            ></input>
-            <h4>Date</h4>
-
-            <input
-              type="datetime-local"
-              name="date"
-              placeholder="Date"
-              value={date}
-              onChange={handleDate}
-            ></input>
-            <h4>Notes</h4>
-
-            <textarea
-              type="text"
-              placeholder="Insert notes..."
-              value={notes}
-              onChange={handleNotes}
-              rows={7.5}
-              cols={70}
-            ></textarea>
-          </form>
-        </Modal.Body>
-
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleSubmit}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
+        <ModalContent>
+          <ModalHeader textAlign="center">Enter workout</ModalHeader>
+          <ModalBody pb={6}>
+            <FormControl>
+              <FormLabel>Title</FormLabel>
+              <Input
+                type="text"
+                size="lg"
+                variant="filled"
+                placeholder="Enter a title..."
+                onChange={handleTitle}
+                value={title}
+              />
+              <Divider my="2rem" />
+              <FormLabel>Date</FormLabel>
+              <Input
+                type="datetime-local"
+                size="lg"
+                variant="filled"
+                onChange={handleDate}
+                value={date}
+              />
+              <FormLabel>Notes</FormLabel>
+              <Textarea
+                type="text"
+                size="lg"
+                variant="filled"
+                onChange={handleNotes}
+                value={notes}
+              />
+            </FormControl>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="teal" onClick={handleSubmit}>
+              Save
+            </Button>
+          </ModalFooter>
+        </ModalContent>
       </Modal>
     </>
   );

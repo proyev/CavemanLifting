@@ -9,7 +9,7 @@ import {
   //   MenuList,
 } from '@chakra-ui/react';
 
-export default function NavItem({ navSize, title, icon, active, route }) {
+export default function NavItem({ navSize, title, icon, route }) {
   return (
     <Flex
       mt={30}
@@ -19,7 +19,7 @@ export default function NavItem({ navSize, title, icon, active, route }) {
     >
       <Menu placement="right">
         <Link
-          bg={active && 'teal.500'}
+          _hover={{ bg: 'teal.500' }}
           p={3}
           borderRadius={8}
           w={navSize === 'large' && '100%'}

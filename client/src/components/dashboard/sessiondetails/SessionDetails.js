@@ -1,5 +1,23 @@
 import React, { useState } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+// import { Modal, Button } from 'react-bootstrap';
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  FormControl,
+  FormLabel,
+  Input,
+  Button,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  Divider,
+} from '@chakra-ui/react';
 
 export default function SessionDetails({
   detailsForm,
@@ -7,7 +25,7 @@ export default function SessionDetails({
   addInfo,
 }) {
   const [lift, setLift] = useState('');
-  const [weight, setWeight] = useState(0);
+  const [weight, setWeight] = useState(5);
   const [sets, setSets] = useState(0);
   const [reps, setReps] = useState(0);
   const [rest, setRest] = useState(0);
@@ -18,20 +36,19 @@ export default function SessionDetails({
     setLift(e.target.value);
   }
   function handleWeight(e) {
-    setWeight(e.target.value);
+    setWeight(e);
   }
   function handleSets(e) {
-    setSets(e.target.value);
+    setSets(e);
   }
   function handleReps(e) {
-    setReps(e.target.value);
+    setReps(e);
   }
   function handleRest(e) {
-    setRest(e.target.value);
+    setRest(e);
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit() {
     if (!lift || !weight || !sets || !reps || !rest) {
       return alert('Please fill all fields');
     }
@@ -48,64 +65,96 @@ export default function SessionDetails({
 
   return (
     <>
-      <Modal size="lg" show={detailsForm} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Enter Session Details</Modal.Title>
-        </Modal.Header>
+      <Modal isOpen={true} onClose={handleClose}>
+        <ModalOverlay />
 
-        <Modal.Body className="input__details">
-          <form onSubmit={handleSubmit} className="form_container">
-            <h4>Lift</h4>
-            <input
-              type="text"
-              placeholder="Insert a lift..."
-              value={lift}
-              onChange={handleLift}
-            ></input>
-            <h4>Weight</h4>
+        <ModalContent>
+          <ModalHeader textAlign="center">Enter Session Details</ModalHeader>
+          <ModalBody pb={6}>
+            <FormControl>
+              <FormLabel>Lift</FormLabel>
+              <Input
+                type="text"
+                size="lg"
+                variant="filled"
+                placeholder="Enter a lift..."
+                onChange={handleLift}
+                value={lift}
+              />
 
-            <input
-              type="number"
-              name="weight"
-              placeholder="0"
-              value={weight}
-              onChange={handleWeight}
-            ></input>
-            <h4>Sets</h4>
+              <Divider my="2rem" />
 
-            <input
-              type="number"
-              placeholder="0"
-              value={sets}
-              onChange={handleSets}
-            ></input>
-            <h4>Reps</h4>
+              <FormLabel>Weight</FormLabel>
+              <NumberInput
+                step={2.5}
+                size="lg"
+                allowMouseWheel
+                variant="filled"
+                onChange={handleWeight}
+                value={weight}
+              >
+                <NumberInputField />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
 
-            <input
-              type="number"
-              placeholder="0"
-              value={reps}
-              onChange={handleReps}
-            ></input>
-            <h4>Rest</h4>
+              <FormLabel>Sets</FormLabel>
+              <NumberInput
+                step={1}
+                size="lg"
+                allowMouseWheel
+                variant="filled"
+                onChange={handleSets}
+                value={sets}
+              >
+                <NumberInputField />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
 
-            <input
-              type="number"
-              placeholder="0"
-              value={rest}
-              onChange={handleRest}
-            ></input>
-          </form>
-        </Modal.Body>
+              <FormLabel>Reps</FormLabel>
+              <NumberInput
+                step={1}
+                size="lg"
+                allowMouseWheel
+                variant="filled"
+                onChange={handleReps}
+                value={reps}
+              >
+                <NumberInputField />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
 
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleSubmit}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
+              <FormLabel>Rest</FormLabel>
+              <NumberInput
+                step={5}
+                size="lg"
+                allowMouseWheel
+                variant="filled"
+                onChange={handleRest}
+                value={rest}
+              >
+                <NumberInputField />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+            </FormControl>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="green" onClick={handleSubmit}>
+              Save
+            </Button>
+          </ModalFooter>
+        </ModalContent>
       </Modal>
     </>
   );

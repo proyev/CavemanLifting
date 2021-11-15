@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+
 import ApiService from '../../ApiService';
 import './Gym.css';
 
@@ -153,7 +154,7 @@ export default function Gym() {
     <div>
       <div className="sidebar">
         <div className="heading">
-          <h3>Local gyms</h3>
+          <h1>Local gyms</h1>
         </div>
         <div id="listings" className="listings"></div>
       </div>

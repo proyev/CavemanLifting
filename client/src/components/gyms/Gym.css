@@ -9,7 +9,7 @@
 
 .sidebar {
   position: absolute;
-  margin-left: 17.5%;
+  margin-left: 10%;
   width: 17.5%;
   height: 50%;
   border-radius: 10px;
@@ -18,7 +18,7 @@
   overflow: hidden;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   z-index: 1;
-  background: rgb(209, 196, 196);
+  background: #38b2ac;
 }
 * {
   box-sizing: border-box;
@@ -51,19 +51,18 @@ a:hover {
 
 .heading {
   text-align: center;
-  background: rgb(192, 189, 189);
+  background: #b2f5ea;
   border-bottom: 1px solid #eee;
-  height: 60px;
   line-height: 60px;
-  padding: 0 10px;
+  font-size: 25px !important;
 }
 
 .map-container {
   position: absolute;
-  left: 17.5%;
-  width: 82.5%;
+  width: 100%;
   top: 0;
   bottom: 0;
+  margin-left: -10px !important;
 }
 
 .listings {
@@ -112,7 +111,7 @@ a:hover {
 }
 
 .mapboxgl-popup-content h3 {
-  background: #5d8d1e;
+  background: #38b2ac;
   color: #fff;
   margin: 0;
   padding: 10px;

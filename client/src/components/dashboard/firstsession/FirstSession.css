@@ -1,12 +1,11 @@
-.firstsession__container {
-  /* background: linear-gradient(90deg, #c1c0cc, #e7e4dd); */
+/* .firstsession__container {
   background-color: #e2e2e7 !important;
 
   text-align: center;
   margin-top: 25px;
   margin-bottom: 50px;
   box-shadow: 0px 0px 10px 5px #6666;
-}
+} */
 
 .routine__display {
   display: flex;

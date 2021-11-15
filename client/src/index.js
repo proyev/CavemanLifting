@@ -9,9 +9,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <ChakraProvider> */}
-    <App />
-    {/* </ChakraProvider> */}
+    <ChakraProvider>
+      <App />
+    </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

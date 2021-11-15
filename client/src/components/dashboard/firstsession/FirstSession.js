@@ -1,34 +1,71 @@
 import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
+import {
+  Box,
+  Flex,
+  Image,
+  Badge,
+  Button,
+  Text,
+  Center,
+  Divider,
+} from '@chakra-ui/react';
 import './FirstSession.css';
 
 export default function FirstSession({ workout, toggleDetailsForm }) {
   // Unique styling done for first session in list to make it stand apart from the rest
 
   return (
-    <Card className="firstsession__container" style={{ width: '50rem' }}>
-      <Card.Header as="h4">{workout.title}</Card.Header>
-      <Card.Body>
-        <Card.Text>{workout.notes}</Card.Text>
-        <hr />
-        <Card.Text className="routine__display" as="h5">
+    <Flex
+      w="50rem"
+      my="2rem"
+      py="1.25rem"
+      // bg="tomato"
+      direction="column"
+      align="center"
+      borderRadius="12.5px"
+    >
+      <Text fontSize="lg" fontWeight="700">
+        {workout.title}
+      </Text>
+      <Flex direction="column" align="center" m="1rem">
+        <Text fontSize="lg" fontWeight="500" mb="1rem">
+          {workout.notes}
+        </Text>
+        <Divider borderStyle="none" />
+        <Flex display="flex" align="center" justify="space-evenly">
           {workout.routine.map((routine) => {
             return (
-              <div key={routine._id}>
-                <h5>{routine.lift}</h5>
-                <h5>{routine.weight} kg</h5>
-                <h5>Sets: {routine.sets}</h5>
-                <h5>Reps: {routine.reps}</h5>
-                <h5>Rest per set: {routine.rest}s</h5>
+              <Flex
+                display="flex"
+                direction="column"
+                align="center"
+                key={routine._id}
+                m="1rem"
+                // mr="1rem"
+                fontSize="md"
+              >
+                <Text>{routine.lift}</Text>
+                <Text>{routine.weight} kg</Text>
+                <Text>Sets: {routine.sets}</Text>
+                <Text>Reps: {routine.reps}</Text>
+                <Text>Rest per set: {routine.rest}s</Text>
                 <hr />
-              </div>
+              </Flex>
             );
           })}
-        </Card.Text>
-        <Button variant="dark" onClick={() => toggleDetailsForm(workout._id)}>
+        </Flex>
+        <Divider borderStyle="none" my="1rem" />
+
+        <Button
+          colorScheme="green"
+          onClick={() => toggleDetailsForm(workout._id)}
+          mt="1rem"
+          fontSize="lg"
+        >
           Add details
         </Button>
-      </Card.Body>
-    </Card>
+      </Flex>
+    </Flex>
   );
 }

@@ -101,7 +101,7 @@ export default function Gym() {
 
   function createPopUp(currentFeature) {
     const popUps = document.getElementsByClassName('mapboxgl-popup');
-    // Check if there is already a popup on the map and if so, remove it */
+    // Check if there is already a popup on the map and if so, remove it
     if (popUps[0]) popUps[0].remove();
 
     // VS code will probably give out about this, however it is used for pop-ups on the map
@@ -118,7 +118,7 @@ export default function Gym() {
     // This is here to simply show that geolocation works no problem
     // If you open the 'Gyms' section on the App, it will request your geoLocation
     // and display it in the console, should you be interested
-    // It request location from the user through the browser
+    // It requests location from the user through the browser
     // It is disabled simply because of my own location, where there are no gyms
     navigator.geolocation.getCurrentPosition(
       function (position) {

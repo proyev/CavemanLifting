@@ -4,14 +4,10 @@ import { Flex } from '@chakra-ui/react';
 import Session from '../sessionitem/Session';
 import Firstsession from '../firstsession/FirstSession';
 
-import './SessionList.css';
-
 export default function SessionList({ workouts, toggleDetailsForm }) {
   // Displays session as components, sets first in list to a seperate component with it's
   // own unique styling
   return (
-    // <div className="scroller">
-    // <div className="session__container">
     <Flex
       h="100vh"
       w="100%"
@@ -40,12 +36,5 @@ export default function SessionList({ workouts, toggleDetailsForm }) {
         );
       })}
     </Flex>
-    // </div>
-    // </div>
   );
 }
-
-// return (
-// user === '' ? Login : Logout
-//
-// )

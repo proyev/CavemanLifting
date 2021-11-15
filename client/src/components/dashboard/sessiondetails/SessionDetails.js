@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import { Modal, Button } from 'react-bootstrap';
 import {
   Modal,
   ModalOverlay,
@@ -25,7 +24,7 @@ export default function SessionDetails({
   addInfo,
 }) {
   const [lift, setLift] = useState('');
-  const [weight, setWeight] = useState(5);
+  const [weight, setWeight] = useState(0);
   const [sets, setSets] = useState(0);
   const [reps, setReps] = useState(0);
   const [rest, setRest] = useState(0);

@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Button, Card } from 'react-bootstrap';
 import {
   Flex,
   VStack,
@@ -9,12 +8,10 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 
-import './Session.css';
-
 export default function Session({ workout, toggleDetailsForm }) {
   // Card used to display session info w/ button for adding details
 
-  const bgColor = useColorModeValue('cyan.100', 'cyan.600');
+  const bgColor = useColorModeValue('cyan.50', 'cyan.600');
 
   return (
     <VStack
@@ -24,6 +21,7 @@ export default function Session({ workout, toggleDetailsForm }) {
       py="1.25rem"
       px="1rem"
       borderRadius="12.5px"
+      boxShadow="xl"
     >
       <Text fontSize="lg" fontWeight="600">
         {workout.title}
@@ -53,36 +51,20 @@ export default function Session({ workout, toggleDetailsForm }) {
             );
           })}
         </Flex>
+        <Divider
+          borderStyle="none"
+          my="1rem"
+          // h={workout.length ? '0px' : '1px'}
+          display={workout ? 'none' : 'flex'}
+        />
       </VStack>
       <Button
         colorScheme="green"
         onClick={() => toggleDetailsForm(workout._id)}
-        mt="1rem"
+        my="1.5rem"
       >
         Add Details
       </Button>
     </VStack>
-    // <Card className="card__container" style={{ width: '35rem' }}>
-    //   <Card.Header as="h5">{workout.title}</Card.Header>
-    //   <Card.Body>
-    //     <Card.Text as="h5">{workout.notes}</Card.Text>
-    //     <hr />
-    //     <Card.Text as="h5">
-    //       {workout.routine.map((routine) => {
-    //         return (
-    //           <div key={routine._id}>
-    //             <h5>Exercise: {routine.lift}</h5>
-    //             <h5>Weight: {routine.weight} kg</h5>
-    //             <h5>Sets: {routine.sets}</h5>
-    //             <h5>Reps: {routine.reps}</h5>
-    //             <h5>Rest per set: {routine.rest}s</h5>
-    //             <hr />
-    //           </div>
-    //         );
-    //       })}
-    //     </Card.Text>
-    //     <Button variant="dark">Add details</Button>
-    //   </Card.Body>
-    // </Card>
   );
 }

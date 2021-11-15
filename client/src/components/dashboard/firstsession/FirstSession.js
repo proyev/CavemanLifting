@@ -7,12 +7,11 @@ import {
   Divider,
   useColorModeValue,
 } from '@chakra-ui/react';
-import './FirstSession.css';
 
 export default function FirstSession({ workout, toggleDetailsForm }) {
   // Unique styling done for first session in list to make it stand apart from the rest
 
-  const bgColor = useColorModeValue('cyan.200', 'cyan.800');
+  const bgColor = useColorModeValue('cyan.100', 'cyan.800');
 
   return (
     <VStack
@@ -22,6 +21,7 @@ export default function FirstSession({ workout, toggleDetailsForm }) {
       px="1rem"
       bg={bgColor}
       borderRadius="12.5px"
+      boxShadow="dark-lg"
     >
       <Text fontSize="xl" fontWeight="700">
         {workout.title}
@@ -51,12 +51,12 @@ export default function FirstSession({ workout, toggleDetailsForm }) {
             );
           })}
         </Flex>
-        <Divider borderStyle="none" my="1rem" />
+        <Divider borderStyle="none" my="1rem" h={workout ? 'none' : 'flex'} />
 
         <Button
           colorScheme="green"
           onClick={() => toggleDetailsForm(workout._id)}
-          mt="1rem"
+          my="1.5rem"
           fontSize="lg"
         >
           Add details

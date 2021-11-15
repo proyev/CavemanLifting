@@ -63,9 +63,9 @@ export default function Heatmap({ workouts }) {
           dataLabels: {
             enabled: false,
           },
-          colors: ['#964B00'],
+          colors: ['#285E61'],
           title: {
-            text: 'Days in Gym',
+            text: '',
           },
         }}
         series={[
@@ -83,10 +83,9 @@ export default function Heatmap({ workouts }) {
           },
         ]}
         type="heatmap"
-        height={250}
-        width={750}
+        height={300}
+        width={'350%'}
       />
-      <p>profile</p>
     </div>
   );
 }

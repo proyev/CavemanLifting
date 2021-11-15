@@ -9,12 +9,11 @@
 
 .sidebar {
   position: absolute;
-  margin-left: 10%;
   width: 17.5%;
   height: 50%;
   border-radius: 10px;
-  top: 2vh;
-  left: 2vw;
+  top: 1vh;
+  left: 15vw;
   overflow: hidden;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   z-index: 1;

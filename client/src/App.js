@@ -5,17 +5,27 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useColorMode, useColorModeValue, HStack } from '@chakra-ui/react';
 import 'react-toastify/dist/ReactToastify.css';
 
-import Dashboard from './components/dashboard/Dashboard.js';
-import Sidebar from './components/sidebar/Sidebar.js';
-import SessionForm from './components/sessioncreation/sessionform/SessionForm';
-import SessionDetails from './components/dashboard/sessiondetails/SessionDetails';
-import Gym from './components/gyms/Gym';
-import Profile from './components/profile/Profile';
+// import Dashboard from './components/dashboard/Dashboard.js';
+// import Sidebar from './components/sidebar/Sidebar.js';
+// import SessionForm from './components/sessioncreation/sessionform/SessionForm';
+// import SessionDetails from './components/dashboard/sessiondetails/SessionDetails';
+// import Gym from './components/gyms/Gym';
+// import Profile from './components/profile/Profile';
+import {
+  Dashboard,
+  Sidebar,
+  SessionForm,
+  SessionDetails,
+  Gym,
+  Profile,
+} from './components/index';
 // import WorkoutInfo from './components/profile/Profile';
 
 import ApiService from './ApiService';
 
 function App() {
+  // eslint-disable-next-line no-unused-vars
+  const [user, setUser] = useState('');
   const [workouts, setWorkouts] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [detailsForm, setDetailsForm] = useState('');
@@ -26,7 +36,7 @@ function App() {
   // infoAdd used to keep track, and update the workout cards on the dashboard
 
   const { toggleColorMode } = useColorMode();
-  const bgColor = useColorModeValue('teal.200', 'teal.900');
+  const bgColor = useColorModeValue('teal.200', 'teal.800');
 
   const notifyAdd = () =>
     toast.info('New session added!', {

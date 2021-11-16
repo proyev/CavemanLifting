@@ -12,6 +12,9 @@ const userSchema = new Schema({
       reps: { type: Number },
     },
   ],
+  firstname: { type: String },
+  lastname: { type: String },
+  bio: { type: String },
 });
 
 module.exports = mongoose.model('User', userSchema);

@@ -13,7 +13,7 @@
   height: 50%;
   border-radius: 10px;
   top: 1vh;
-  left: 15vw;
+  left: 11vw;
   overflow: hidden;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   z-index: 1;
@@ -50,7 +50,7 @@ a:hover {
 
 .heading {
   text-align: center;
-  background: #b2f5ea;
+  background: #7dd1c6;
   border-bottom: 1px solid #eee;
   line-height: 60px;
   font-size: 25px !important;
@@ -59,9 +59,11 @@ a:hover {
 .map-container {
   position: absolute;
   width: 100%;
+  margin-left: 10vw;
   top: 0;
   bottom: 0;
   margin-left: -10px !important;
+  overflow-x: hidden;
 }
 
 .listings {
@@ -92,11 +94,11 @@ a:hover {
 
 .listings .item.active .title,
 .listings .item .title:hover {
-  color: #ce4c4c;
+  color: #123b39;
 }
 
 .listings .item.active {
-  background-color: #f8f8f8;
+  background-color: #eeeeee;
 }
 
 .mapboxgl-popup-close-button {

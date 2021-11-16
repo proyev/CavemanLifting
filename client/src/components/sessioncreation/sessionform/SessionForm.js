@@ -71,7 +71,7 @@ export default function SessionForm({ toggleForm, postWorkout }) {
               <Divider my="2rem" />
               <FormLabel>Date</FormLabel>
               <Input
-                type="datetime-local"
+                type="date"
                 size="lg"
                 variant="filled"
                 onChange={handleDate}

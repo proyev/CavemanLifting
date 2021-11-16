@@ -59,6 +59,7 @@ export default function Heatmap({ workouts }) {
         options={{
           chart: {
             type: 'heatmap',
+            foreColor: '#52ab80',
           },
           dataLabels: {
             enabled: false,

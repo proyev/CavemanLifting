@@ -20,19 +20,19 @@ import ApiService from './ApiService';
 function App() {
   // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useState('');
-  // eslint-disable-next-line no-unused-vars
   const [userData, setUserData] = useState({});
   const [workouts, setWorkouts] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [detailsForm, setDetailsForm] = useState('');
   const [infoAdd, setInfoAdd] = useState(false);
+  const [navSize, setSize] = useState('large');
 
   // showForm used for displaying "Add New Session"
   // detialsForm used for "Add details"
   // infoAdd used to keep track, and update the workout cards on the dashboard
 
   const { toggleColorMode } = useColorMode();
-  const bgColor = useColorModeValue('teal.300', 'teal.800');
+  const bgColor = useColorModeValue('teal.200', 'teal.800');
 
   const notifyAdd = () =>
     toast.info('New session added!', {
@@ -106,6 +106,7 @@ function App() {
   useEffect(() => {
     ApiService.getWorkouts().then((workouts) => {
       const orderedWorkouts = workouts.sort((a, b) => sortByDate(b, a));
+      console.log(workouts);
       return setWorkouts(orderedWorkouts);
     });
     // standard API call to GET workout
@@ -136,6 +137,8 @@ function App() {
       <HStack m="0 !important" w="100%">
         <Router>
           <Sidebar
+            navSize={navSize}
+            setSize={setSize}
             postWorkout={postWorkout}
             toggleForm={toggleForm}
             toggleColorMode={toggleColorMode}
@@ -146,6 +149,7 @@ function App() {
               path="/dashboard"
               element={
                 <Dashboard
+                  navSize={navSize}
                   workouts={workouts}
                   toggleDetailsForm={toggleDetailsForm}
                 />
@@ -153,10 +157,16 @@ function App() {
             />
             <Route
               path="/profile"
-              element={<Profile workouts={workouts} userData={userData} />}
+              element={
+                <Profile
+                  workouts={workouts}
+                  userData={userData}
+                  navSize={navSize}
+                />
+              }
             />
             <Route path="/workoutinfo" element={<Gym />} />
-            <Route path="/gyms" element={<Gym />} />
+            <Route path="/gyms" element={<Gym navSize={navSize} />} />
           </Routes>
         </Router>
       </HStack>

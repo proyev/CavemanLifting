@@ -95,7 +95,7 @@ export default function Gym() {
     // flyTo is an internal Mapbox function
     map.current.flyTo({
       center: currentFeature.geometry.coordinates,
-      zoom: 15,
+      zoom: 16,
     });
   }
 

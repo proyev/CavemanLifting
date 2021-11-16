@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Flex,
   Divider,
@@ -17,9 +17,12 @@ import { FaCity, FaDumbbell, FaPlusSquare } from 'react-icons/fa';
 import profilePic from '../../assets/caveman_profile_pic.PNG';
 import NavItem from './navitems/NavItem';
 
-export default function Sidebar({ toggleForm, toggleColorMode }) {
-  const [navSize, setSize] = useState('large');
-
+export default function Sidebar({
+  navSize,
+  setSize,
+  toggleForm,
+  toggleColorMode,
+}) {
   const bgColor = useColorModeValue('green.400', 'green.700');
 
   return (
@@ -27,7 +30,7 @@ export default function Sidebar({ toggleForm, toggleColorMode }) {
       pos="sticky"
       h="100vh"
       boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
-      borderRightRadius={navSize === 'small' ? '15px' : '30px'}
+      borderRightRadius={navSize === 'small' ? '5px' : '15px'}
       w={navSize === 'small' ? '75px' : '200px'}
       direction="column"
       justifyContent="space-between"
@@ -39,10 +42,17 @@ export default function Sidebar({ toggleForm, toggleColorMode }) {
         align={navSize === 'small' ? 'center' : 'flex-start'}
         as="nav"
       >
-        <Switch onChange={toggleColorMode} />
+        <Switch
+          size="md"
+          ml={navSize === 'small' ? '0%' : '35%'}
+          onChange={toggleColorMode}
+        />
         <IconButton
-          background="none"
-          m={5}
+          bg={bgColor}
+          mt={5}
+          mb={0}
+          mr={5}
+          ml={navSize === 'small' ? '5' : '0.5'}
           icon={<FiMenu />}
           onClick={() =>
             navSize === 'small' ? setSize('large') : setSize('small')
@@ -72,6 +82,7 @@ export default function Sidebar({ toggleForm, toggleColorMode }) {
           icon={FaCity}
           route="/gyms"
         ></NavItem>
+
         <Flex
           mt={30}
           direction="column"
@@ -79,11 +90,10 @@ export default function Sidebar({ toggleForm, toggleColorMode }) {
           align={navSize === 'small' ? 'center' : 'flex-start'}
         >
           <Button
-            // w="100%"
             bg="none"
             _hover={{ bg: 'teal.500' }}
             borderRadius={8}
-            w={navSize === 'large' && '100%'}
+            w={navSize === 'large' && '85%'}
             fontWeight="200"
             onClick={() => toggleForm()}
           >

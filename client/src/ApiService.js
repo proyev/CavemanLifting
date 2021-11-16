@@ -48,12 +48,17 @@ function getUser(id) {
   return fetchRequest('/user/' + id);
 }
 
+function getWorkoutInfo() {
+  return fetchRequest('/workoutinfo');
+}
+
 const ApiService = {
   getGeolocatedGyms,
   getWorkouts,
   postWorkout,
   addInfo,
   getUser,
+  getWorkoutInfo,
 };
 
 export default ApiService;

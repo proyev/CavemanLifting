@@ -12,6 +12,7 @@ import {
   SessionDetails,
   Gym,
   Profile,
+  WorkoutInfo,
 } from './components/index';
 // import WorkoutInfo from './components/profile/Profile';
 
@@ -22,6 +23,7 @@ function App() {
   const [user, setUser] = useState('');
   const [userData, setUserData] = useState({});
   const [workouts, setWorkouts] = useState([]);
+  const [workoutCards, setWorkoutCards] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [detailsForm, setDetailsForm] = useState('');
   const [infoAdd, setInfoAdd] = useState(false);
@@ -108,6 +110,9 @@ function App() {
     });
     // standard API call to GET workout
     ApiService.getUser().then((userInfo) => setUserData(userInfo));
+    ApiService.getWorkoutInfo().then((zeWorkoutCards) =>
+      setWorkoutCards(zeWorkoutCards)
+    );
   }, [infoAdd]);
 
   return (
@@ -162,7 +167,10 @@ function App() {
                 />
               }
             />
-            <Route path="/workoutinfo" element={<Gym />} />
+            <Route
+              path="/workouts"
+              element={<WorkoutInfo workoutCards={workoutCards}></WorkoutInfo>}
+            />
             <Route path="/gyms" element={<Gym navSize={navSize} />} />
           </Routes>
         </Router>

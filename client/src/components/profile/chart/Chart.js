@@ -78,7 +78,6 @@ export default function Chart({ workouts }) {
     }
 
     const arr = [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec];
-    console.log(arr);
     return arr;
   }
 

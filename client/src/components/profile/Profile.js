@@ -6,7 +6,6 @@ import {
   Flex,
   // HStack,
   VStack,
-  Box,
   Heading,
   Text,
   Image,
@@ -27,6 +26,7 @@ export default function Profile({ workouts, userData }) {
   const [latest, setLatest] = useState({});
 
   const tableBGColor = useColorModeValue('teal.400', 'teal.900');
+  const textBG = useColorModeValue('teal.300', 'teal.700');
 
   useEffect(() => {
     setLatest(workouts[0]);
@@ -90,15 +90,39 @@ export default function Profile({ workouts, userData }) {
           justify="space-evenly"
           bg={tableBGColor}
         >
-          <Box>PRS</Box>
-
-          <Text>data</Text>
+          <Flex
+            direction="column"
+            justify="space-evenly"
+            align="center"
+            w="75%"
+          >
+            <Heading size="lg">Personal Records</Heading>
+            {userData.prs &&
+              userData.prs.map((pr) => {
+                return (
+                  <Flex
+                    key={pr._id}
+                    bg={textBG}
+                    w="100%"
+                    h="2.5rem"
+                    m="1rem"
+                    justify="space-evenly"
+                    align="center"
+                    borderRadius="25px"
+                  >
+                    <Heading size="md">{pr.workout}</Heading>
+                    <Heading size="md">{pr.weight}</Heading>
+                    <Heading size="md">{pr.reps}</Heading>
+                  </Flex>
+                );
+              })}
+          </Flex>
         </Flex>
       </Flex>
       <Flex m={0} w="100%" justify="space-evenly" align="flex-end">
         {latest ? (
           <Table
-            size="lg"
+            size="sm"
             variant="simple"
             colorScheme="teal"
             bg={tableBGColor}

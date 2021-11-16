@@ -7,5 +7,6 @@ router.get('/profile', caveman.getUser);
 router.post('/exercise', caveman.postWorkout);
 router.put('/addinfo/:id', caveman.addInfo);
 router.get('/user/:id', caveman.getUser);
+router.get('/workoutinfo', caveman.getWorkoutInfo);
 
 module.exports = router;

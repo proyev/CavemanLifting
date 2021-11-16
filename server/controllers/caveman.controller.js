@@ -1,5 +1,6 @@
 const User = require('../models/user.model');
 const Workout = require('../models/workout.model');
+const WorkoutInfoCard = require('../models/workoutinfocard.model');
 
 const getUser = async (req, res) => {
   // Standard get request routing
@@ -55,7 +56,16 @@ const addInfo = async (req, res) => {
   }
 };
 
-module.exports = { getUser, getWorkouts, postWorkout, addInfo };
+const getWorkoutInfo = async (req, res) => {
+  try {
+    const workoutInfoCards = await WorkoutInfoCard.find();
+    res.status(200).send(workoutInfoCards);
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+module.exports = { getUser, getWorkouts, postWorkout, addInfo, getWorkoutInfo };
 
 // TODO:
 //  Add removal of workout

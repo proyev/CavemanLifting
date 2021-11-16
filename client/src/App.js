@@ -54,7 +54,6 @@ function App() {
   // Toastify notifications for adding workout and details
   function postWorkout(title, date, notes = '') {
     ApiService.postWorkout({ title, date, notes }).then((workout) => {
-      console.log(workout);
       setWorkouts((prevList) => {
         const newList = [workout, ...prevList];
 
@@ -68,8 +67,6 @@ function App() {
 
   function addInfo(body, id) {
     ApiService.addInfo(body, id).then((workout) => {
-      console.log(workout);
-
       setWorkouts((prevList) => {
         const filteredArr = prevList.filter(
           (workoutCard) => workout._id !== workoutCard._id
@@ -106,7 +103,7 @@ function App() {
   useEffect(() => {
     ApiService.getWorkouts().then((workouts) => {
       const orderedWorkouts = workouts.sort((a, b) => sortByDate(b, a));
-      console.log(workouts);
+
       return setWorkouts(orderedWorkouts);
     });
     // standard API call to GET workout

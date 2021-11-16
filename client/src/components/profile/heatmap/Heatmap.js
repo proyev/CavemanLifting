@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useColorModeValue } from '@chakra-ui/react';
 import ReactApexChart from 'react-apexcharts';
 
 export default function Heatmap({ workouts }) {
   const [month1, setMonth1] = useState([]);
   const [month2, setMonth2] = useState([]);
   const [month3, setMonth3] = useState([]);
+
+  const axisColor = useColorModeValue('black', 'white');
 
   function generateData(daysToFill) {
     let i = 0;
@@ -31,7 +34,7 @@ export default function Heatmap({ workouts }) {
     const month1Data = [];
     const month2Data = [];
     const month3Data = [];
-    async function workoutLooper() {
+    function workoutLooper() {
       workouts.forEach((sess) => {
         let indvDate = new Date(sess.date);
         let indvMonth = indvDate.getMonth();
@@ -59,7 +62,7 @@ export default function Heatmap({ workouts }) {
         options={{
           chart: {
             type: 'heatmap',
-            foreColor: '#52ab80',
+            foreColor: { axisColor },
           },
           dataLabels: {
             enabled: false,

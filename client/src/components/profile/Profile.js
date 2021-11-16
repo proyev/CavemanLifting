@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Chart from './chart/Chart';
 
 import Heatmap from './heatmap/Heatmap';
 import {
@@ -29,7 +30,6 @@ export default function Profile({ workouts, userData }) {
 
   useEffect(() => {
     setLatest(workouts[0]);
-    console.log(latest);
   }, [workouts]);
 
   return (
@@ -102,10 +102,16 @@ export default function Profile({ workouts, userData }) {
             variant="simple"
             colorScheme="teal"
             bg={tableBGColor}
-            borderRadius="25px"
+            borderBottomRadius="25px"
             w="40rem"
           >
-            <TableCaption placement="top">Latest workout</TableCaption>
+            <TableCaption
+              placement="top"
+              bg={tableBGColor}
+              borderTopRadius="25px"
+            >
+              Latest workout
+            </TableCaption>
             <Thead>
               <Tr>
                 <Th>Lift</Th>
@@ -135,17 +141,15 @@ export default function Profile({ workouts, userData }) {
           <Text>Profile Loading</Text>
         )}
         <Flex
-          h="82.5%"
+          h="95%"
           w="30rem"
           borderRadius="25px"
           direction="column"
-          align="center"
+          align="flex-start"
           justify="space-evenly"
           bg={tableBGColor}
         >
-          <Box>Ahhh</Box>
-
-          <Text>Im charting</Text>
+          <Chart workouts={workouts} />
         </Flex>
       </Flex>
       {workouts.length && <Heatmap workouts={workouts} />}

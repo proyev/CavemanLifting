@@ -83,7 +83,7 @@ export default function SessionDetails({
 
               <Divider my="2rem" />
 
-              <FormLabel>Weight</FormLabel>
+              <FormLabel>Weight (kg)</FormLabel>
               <NumberInput
                 step={2.5}
                 size="lg"

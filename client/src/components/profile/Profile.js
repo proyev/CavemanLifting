@@ -125,10 +125,16 @@ export default function Profile({ workouts, userData }) {
           </Flex>
         </Flex>
       </Flex>
-      <Flex m={0} w="100%" justify="space-evenly" align="flex-end">
+      <Flex
+        m={0}
+        minH="17.5rem"
+        w="100%"
+        justify="space-evenly"
+        align="flex-end"
+      >
         {latest ? (
           <Table
-            size="sm"
+            size="md"
             variant="simple"
             colorScheme="teal"
             bg={tableBGColor}

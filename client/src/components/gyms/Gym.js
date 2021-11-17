@@ -2,14 +2,14 @@ import React, { useRef, useEffect, useState } from 'react';
 
 import ApiService from '../../ApiService';
 import './Gym.css';
+import ApiKey from '../../ApiKey';
 
 import mapboxgl from '!mapbox-gl';
 
 // Pls don't hate me for how messy this is
 
 export default function Gym() {
-  mapboxgl.accessToken =
-    'pk.eyJ1Ijoic3dhcmdlIiwiYSI6ImNrdnJhZ3h0ejJhajgycW91NGh6a2RlanQifQ.aV2Rqje77LMUMfJI-McKEg';
+  mapboxgl.accessToken = ApiKey;
 
   const mapContainer = useRef(null);
   const map = useRef(null);

@@ -110,9 +110,15 @@ export default function Profile({ workouts, userData }) {
                     align="center"
                     borderRadius="25px"
                   >
-                    <Heading size="md">{pr.workout}</Heading>
-                    <Heading size="md">{pr.weight}</Heading>
-                    <Heading size="md">{pr.reps}</Heading>
+                    <Heading size="md" fontSize="lg" letterSpacing="wide">
+                      {pr.workout}
+                    </Heading>
+                    <Heading size="md" fontSize="md" fontWeight="semi-bold">
+                      {pr.weight}
+                    </Heading>
+                    <Heading size="md" fontSize="md" fontWeight="semi-bold">
+                      {pr.reps}
+                    </Heading>
                   </Flex>
                 );
               })}

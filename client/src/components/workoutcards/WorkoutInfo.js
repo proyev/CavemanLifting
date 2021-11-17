@@ -8,12 +8,13 @@ export default function WorkoutInfo({ workoutCards }) {
 
   return (
     <Flex
-      bg="tomato"
-      h="100%"
-      w="100%"
+      h="100vh"
+      w="90vw"
+      pt={10}
       wrap="wrap"
       align="center"
       justify="space-evenly"
+      overflowY="scroll"
     >
       {workoutCards.map((workout) => {
         return (
@@ -26,3 +27,4 @@ export default function WorkoutInfo({ workoutCards }) {
     </Flex>
   );
 }
+// BRB

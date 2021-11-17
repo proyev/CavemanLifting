@@ -21,6 +21,11 @@ export default function WorkoutComparison({ workouts }) {
   const [pieData, setPieData] = useState([]);
   const [areaData, setAreaData] = useState([]);
   const labelColor = useColorModeValue('black', 'white');
+  const deadliftColor = useColorModeValue('#5f5c97', '#8884d8');
+  const benchColor = useColorModeValue('#cc9520', '#ffbb28');
+  const overheadColor = useColorModeValue('black', '#ffe2ab');
+  const squatColor = useColorModeValue('#5b8d6d', '#75b58d');
+  const bicepColor = useColorModeValue('#f2665c', '#f2665c');
 
   let renderLabel = function (entry) {
     return entry.name;
@@ -153,7 +158,13 @@ export default function WorkoutComparison({ workouts }) {
             dataKey="value"
             nameKey="name"
             label={renderLabel}
-          ></Pie>
+          >
+            <Cell key={`cell-0`} fill={deadliftColor} />
+            <Cell key={`cell-1`} fill={benchColor} />
+            <Cell key={`cell-2`} fill={overheadColor} />
+            <Cell key={`cell-3`} fill={squatColor} />
+            <Cell key={`cell-4`} fill={bicepColor} />
+          </Pie>
         </PieChart>
       </ResponsiveContainer>
       <ResponsiveContainer
@@ -165,43 +176,43 @@ export default function WorkoutComparison({ workouts }) {
         <AreaChart data={areaData}>
           <XAxis dataKey="name" tick={{ fill: labelColor, fontSize: 12.5 }} />
           <YAxis tick={{ fill: labelColor, fontSize: 12.5 }} />
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid stroke={labelColor} />
           <Tooltip tick={{ fill: labelColor }} />
           <Legend verticalAlign="top" height={35} />
           <Area
             type="monotone"
             dataKey="Deadlift"
             stackId="1"
-            stroke="#8884d8"
-            fill="#8884d8"
+            stroke={deadliftColor}
+            fill={deadliftColor}
           />
           <Area
             type="monotone"
             dataKey="Bench"
             stackId="2"
-            stroke="#737170"
-            fill="#737170"
+            stroke={benchColor}
+            fill={benchColor}
           />
           <Area
             type="monotone"
             dataKey="Squat"
             stackId="3"
-            stroke="#82ca9d"
-            fill="#82ca9d"
+            stroke={squatColor}
+            fill={squatColor}
           />
           <Area
             type="monotone"
             dataKey="Overhead"
             stackId="4"
-            stroke="#ffc658"
-            fill="#ffc658"
+            stroke={overheadColor}
+            fill={overheadColor}
           />
           <Area
             type="monotone"
             dataKey="Bicep Curl"
             stackId="5"
-            stroke="#f2665c"
-            fill="#f2665c"
+            stroke={bicepColor}
+            fill={bicepColor}
           />
         </AreaChart>
       </ResponsiveContainer>

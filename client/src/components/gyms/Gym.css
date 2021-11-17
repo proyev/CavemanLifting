@@ -50,7 +50,7 @@ a:hover {
 
 .heading {
   text-align: center;
-  background: #7dd1c6;
+  background: #64b3a8;
   border-bottom: 1px solid #eee;
   line-height: 60px;
   font-size: 25px !important;
@@ -98,7 +98,7 @@ a:hover {
 }
 
 .listings .item.active {
-  background-color: #eeeeee;
+  background-color: #ff9b9b;
 }
 
 .mapboxgl-popup-close-button {
@@ -113,7 +113,7 @@ a:hover {
 
 .mapboxgl-popup-content h3 {
   background: #38b2ac;
-  color: #fff;
+  color: rgb(255, 255, 255);
   margin: 0;
   padding: 10px;
   border-radius: 3px 3px 0 0;
@@ -123,6 +123,8 @@ a:hover {
 
 .mapboxgl-popup-content h4 {
   margin: 0;
+  color: rgb(0, 0, 0);
+
   padding: 10px;
   font-weight: 400;
 }

@@ -7,6 +7,7 @@ import {
   Divider,
   useColorModeValue,
 } from '@chakra-ui/react';
+import moment from 'moment';
 
 export default function FirstSession({ workout, toggleDetailsForm }) {
   // Unique styling done for first session in list to make it stand apart from the rest
@@ -24,7 +25,7 @@ export default function FirstSession({ workout, toggleDetailsForm }) {
       boxShadow="dark-lg"
     >
       <Text fontSize="xl" fontWeight="700">
-        {workout.title}
+        {workout.title} - {moment(workout.date).format('MMM Do')}
       </Text>
       <Flex direction="column" align="center" m="1rem">
         <Text fontSize="lg" fontWeight="500" mb="1rem">

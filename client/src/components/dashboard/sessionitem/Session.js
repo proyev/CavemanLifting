@@ -7,6 +7,7 @@ import {
   Divider,
   useColorModeValue,
 } from '@chakra-ui/react';
+import moment from 'moment';
 
 export default function Session({ workout, toggleDetailsForm }) {
   // Card used to display session info w/ button for adding details
@@ -24,7 +25,7 @@ export default function Session({ workout, toggleDetailsForm }) {
       boxShadow="xl"
     >
       <Text fontSize="lg" fontWeight="600">
-        {workout.title}
+        {workout.title} - {moment(workout.date).format('MMM Do')}
       </Text>
       <VStack>
         <Text fontWeight="400" mb="1rem">

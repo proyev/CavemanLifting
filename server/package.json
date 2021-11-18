@@ -5,7 +5,10 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
+    "build": "tsc",
+    "prestart": "npm run build",
+    "start": "node tstest/server.js"
   },
   "author": "Aothe",
   "license": "ISC",
@@ -14,5 +17,9 @@
     "express": "^4.17.1",
     "mongo": "^0.1.0",
     "mongoose": "^6.0.12"
+  },
+  "devDependencies": {
+    "tslint": "^6.1.3",
+    "typescript": "^4.5.2"
   }
 }

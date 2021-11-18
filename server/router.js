@@ -9,4 +9,4 @@ router.put('/addinfo/:id', caveman.addInfo);
 router.get('/user/:id', caveman.getUser);
 router.get('/workoutinfo', caveman.getWorkoutInfo);
 
-module.exports = router;
+export default router;

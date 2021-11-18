@@ -28,7 +28,7 @@ app.use(router_1.default);
         //   DATABASE ${db}
         // `);
         app.listen(PORT, () => {
-            // console.log(`http://localhost:${PORT}`);
+            console.log(`http://localhost:${PORT}`);
         });
     }
     catch (err) {

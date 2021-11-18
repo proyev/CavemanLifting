@@ -141,6 +141,11 @@ async function setMockupWorkouts(index) {
 // for (let i = 0; i < 7; i++) {
 //   setMockupWorkouts(i);
 // }
+// WorkoutInfoCard.findByIdAndDelete({ _id: '61967ef1681fbd944e857a35' }).then(
+//   () => {
+//     WorkoutInfoCard.find({}).then(res => console.log(res));
+//   }
+// );
 
 module.exports = { getUser, getWorkouts, postWorkout, addInfo, getWorkoutInfo };
 

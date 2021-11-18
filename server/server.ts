@@ -19,7 +19,7 @@ app.use(router);
     //   DATABASE ${db}
     // `);
     app.listen(PORT, () => {
-      // console.log(`http://localhost:${PORT}`);
+      console.log(`http://localhost:${PORT}`);
     });
   } catch (err) {
     // console.log(err);

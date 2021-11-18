@@ -64,6 +64,36 @@ const getWorkoutInfo = async (req, res) => {
     console.error(e);
   }
 };
+//creates mock user in DB
+async function createMockUser() {
+  const user = {
+    username: 'SerCaveman',
+    program: 'Big Caveman Club',
+    location: 'Pangea',
+    firstname: 'Unga',
+    lastname: 'Bunga',
+    bio: 'Caveman run from SabreTooth get fast, lift rock get strong, study sun get smart',
+    prs: [
+      {
+        workout: 'Deadlift',
+        weight: 150,
+        reps: 10,
+      },
+      {
+        workout: 'Bench',
+        weight: 95,
+        reps: 12,
+      },
+      {
+        workout: 'Squat',
+        weight: 125,
+        reps: 8,
+      },
+    ],
+  };
+  const res = await User.create(user);
+  console.log(res);
+}
 
 module.exports = { getUser, getWorkouts, postWorkout, addInfo, getWorkoutInfo };
 

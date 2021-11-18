@@ -23,6 +23,7 @@ import { FaInfoCircle } from 'react-icons/fa';
 export default function WorkoutCardInfo({ workout }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  //this is nasty refactor to be an object
   function badgeColor(badge) {
     if (badge === 'Beginner') return 'green';
     if (badge === 'Intermediate') return 'orange';
@@ -37,6 +38,7 @@ export default function WorkoutCardInfo({ workout }) {
 
     return 'red';
   }
+  //massive element list items can be iterated over the loop
   return (
     <>
       <Box
@@ -51,7 +53,7 @@ export default function WorkoutCardInfo({ workout }) {
       >
         <Image src={workout.img} />
         <Box p={5}>
-          {workout.badge.map((badge) => {
+          {workout.badge.map(badge => {
             return (
               <Badge
                 key={badge._id}

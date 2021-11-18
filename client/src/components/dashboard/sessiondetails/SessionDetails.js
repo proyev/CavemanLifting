@@ -23,6 +23,7 @@ export default function SessionDetails({
   toggleDetailsForm,
   addInfo,
 }) {
+  //TODO this could be consolidated into one object and assigned names to the form input to refer to object props.. Then we can just refer to them as e.target.name and just have one handleChange function
   const [lift, setLift] = useState('');
   const [weight, setWeight] = useState(0);
   const [sets, setSets] = useState(0);
@@ -61,7 +62,8 @@ export default function SessionDetails({
     setRest(0);
     handleClose();
   }
-
+  //TODO form input can be placed as a separate element and looped over to get the right data
+  //TODO since our lift is limited to 5 exercises only we can use list input to restrict user. Currently if user makes a mistake it will accept it.
   return (
     <>
       <Modal isOpen={true} onClose={handleClose}>

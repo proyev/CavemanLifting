@@ -12,6 +12,8 @@ import moment from 'moment';
 export default function FirstSession({ workout, toggleDetailsForm }) {
   // Unique styling done for first session in list to make it stand apart from the rest
 
+  //TODO this can be managed by session details and styling managed in there
+
   const bgColor = useColorModeValue('cyan.100', 'cyan.800');
 
   return (
@@ -33,7 +35,7 @@ export default function FirstSession({ workout, toggleDetailsForm }) {
         </Text>
         <Divider borderStyle="none" />
         <Flex align="center" justify="space-evenly">
-          {workout.routine.map((routine) => {
+          {workout.routine.map(routine => {
             return (
               <Flex
                 display="flex"

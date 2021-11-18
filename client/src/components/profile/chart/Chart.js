@@ -13,6 +13,7 @@ export default function Chart({ workouts }) {
   const [organisedData, setOrganisedData] = useState([]);
   const labelColor = useColorModeValue('black', 'white');
 
+  //TODO There is a better way to work with month and dates
   function dataCreation(data) {
     let jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec;
     jan = { name: 'Jan', uv: 0 };

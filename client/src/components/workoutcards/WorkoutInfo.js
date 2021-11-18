@@ -6,6 +6,7 @@ import WorkoutCardInfo from './workoutcardinfo/WorkoutCardInfo';
 export default function WorkoutInfo({ workoutCards }) {
   console.log(workoutCards);
 
+  //Check if something can be done with the styling props to be outsourced
   return (
     <Flex
       h="100vh"
@@ -16,7 +17,7 @@ export default function WorkoutInfo({ workoutCards }) {
       justify="space-evenly"
       overflowY="scroll"
     >
-      {workoutCards.map((workout) => {
+      {workoutCards.map(workout => {
         return (
           <WorkoutCardInfo
             key={workout._id}

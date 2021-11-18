@@ -11,7 +11,7 @@ export default function Heatmap({ workouts }) {
     const series = [];
     while (i <= 30) {
       const x = (i + 1).toString();
-      if (daysToFill.some((el) => el === Number(x))) {
+      if (daysToFill.some(el => el === Number(x))) {
         series.push({
           x: x,
           y: '125',
@@ -26,13 +26,13 @@ export default function Heatmap({ workouts }) {
     }
     return series;
   }
-
+  //TODO this can be organised into the custom hook if needed. Workout looper doesnt need to be in useEffect at all
   useEffect(() => {
     const month1Data = [];
     const month2Data = [];
     const month3Data = [];
     function workoutLooper() {
-      workouts.forEach((sess) => {
+      workouts.forEach(sess => {
         let indvDate = new Date(sess.date);
         let indvMonth = indvDate.getMonth();
         let indvDay = indvDate.getDate();

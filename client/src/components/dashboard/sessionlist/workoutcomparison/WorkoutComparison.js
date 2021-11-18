@@ -41,7 +41,7 @@ export default function WorkoutComparison({ workouts }) {
       { name: 'Bicep Curl', value: 0 },
     ];
     const month = new Date().getMonth();
-
+    //TO DO this could be refactored into Date(year, month, 0).getDate() to get the number of days in a month.
     if (
       month === 1 ||
       month === 3 ||

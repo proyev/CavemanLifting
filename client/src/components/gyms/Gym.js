@@ -2,14 +2,15 @@ import React, { useRef, useEffect, useState } from 'react';
 
 import ApiService from '../../ApiService';
 import './Gym.css';
-import ApiKey from '../../ApiKey';
+//import ApiKey from '../../ApiKey';
 
 import mapboxgl from '!mapbox-gl';
 
 // Pls don't hate me for how messy this is
 
 export default function Gym() {
-  mapboxgl.accessToken = ApiKey;
+  mapboxgl.accessToken =
+    'pk.eyJ1IjoiemVuaWNlayIsImEiOiJja3c0b2JmdG0wNmg4MnZyaGN2dGJhcmJsIn0.pZGBDuB1Hj_9Rjow7q591Q';
 
   const mapContainer = useRef(null);
   const map = useRef(null);
@@ -37,7 +38,7 @@ export default function Gym() {
         .setLngLat(marker.geometry.coordinates)
         .addTo(map.current);
 
-      el.addEventListener('click', (e) => {
+      el.addEventListener('click', e => {
         // Fly to the point
         flyToStore(marker);
         // Close all other popups and display popup for clicked store

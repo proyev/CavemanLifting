@@ -18,6 +18,7 @@ import {
 
 import ApiService from './ApiService';
 
+//TODO: App is quite bloated with lots of states - usecontext or redux to define a data flow
 function App() {
   // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useState('');
@@ -36,6 +37,7 @@ function App() {
   const { toggleColorMode } = useColorMode();
   const bgColor = useColorModeValue('teal.200', 'teal.800');
 
+  //TODO the below can be outsored to the utils folder within helper function
   const notifyAdd = () =>
     toast.info('New session added!', {
       position: 'top-right',
@@ -55,10 +57,10 @@ function App() {
     });
   // Toastify notifications for adding workout and details
   function postWorkout(title, date, notes = '') {
-    ApiService.postWorkout({ title, date, notes }).then((workout) => {
-      setWorkouts((prevList) => {
+    ApiService.postWorkout({ title, date, notes }).then(workout => {
+      setWorkouts(prevList => {
         const newList = [workout, ...prevList];
-
+        //I assume that it adds the most recent workout to the front, but then it sorts it backward??? double check
         newList.sort((a, b) => sortByDate(b, a));
         return newList;
       });
@@ -68,10 +70,11 @@ function App() {
   // standard API call to POST workout
 
   function addInfo(body, id) {
-    ApiService.addInfo(body, id).then((workout) => {
-      setWorkouts((prevList) => {
+    ApiService.addInfo(body, id).then(workout => {
+      //TODO set workout should be simpler than all that logic, this can be outsourced.
+      setWorkouts(prevList => {
         const filteredArr = prevList.filter(
-          (workoutCard) => workout._id !== workoutCard._id
+          workoutCard => workout._id !== workoutCard._id
         );
         console.log(filteredArr);
         const newList = [workout, ...filteredArr];
@@ -103,18 +106,20 @@ function App() {
   // ID property, theoretically they all SHOULD have but this just double checks
 
   useEffect(() => {
-    ApiService.getWorkouts().then((workouts) => {
+    ApiService.getWorkouts().then(workouts => {
+      //TODO, sortation by date can be outsourced to the server
       const orderedWorkouts = workouts.sort((a, b) => sortByDate(b, a));
 
       return setWorkouts(orderedWorkouts);
     });
     // standard API call to GET workout
-    ApiService.getUser().then((userInfo) => setUserData(userInfo));
-    ApiService.getWorkoutInfo().then((zeWorkoutCards) =>
+    ApiService.getUser().then(userInfo => setUserData(userInfo));
+    ApiService.getWorkoutInfo().then(zeWorkoutCards =>
       setWorkoutCards(zeWorkoutCards)
     );
   }, [infoAdd]);
 
+  //TODO a lot of props drilling here needs to be managed centrally
   return (
     <HStack p="0" bg={bgColor}>
       <ToastContainer />

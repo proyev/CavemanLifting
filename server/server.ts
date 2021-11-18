@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 
-import router as router express.Router from './router';
+import router from './router';
 
 // const db = require('./models');
 

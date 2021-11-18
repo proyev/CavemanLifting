@@ -1,0 +1,12 @@
+import { Router } from 'express';
+const router: Router = Router();
+// const caveman = require('./controllers/caveman.controller');
+
+// router.get('/dashboard', caveman.getWorkouts);
+// router.get('/profile', caveman.getUser);
+// router.post('/exercise', caveman.postWorkout);
+// router.put('/addinfo/:id', caveman.addInfo);
+// router.get('/user/:id', caveman.getUser);
+// router.get('/workoutinfo', caveman.getWorkoutInfo);
+
+export default router;

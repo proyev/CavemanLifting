@@ -1,22 +1,29 @@
-import { Schema } from "mongoose";
+import { Schema } from 'mongoose';
 
-const workoutInfoCardSchema = new Schema({
+const workoutInfoCardSchema = new Schema<Exercise>({
   title: {
     type: String,
-    required: true
+    required: true,
   },
   body: {
     type: String,
-    required: true
+    required: true,
   },
   img: {
     type: String,
-    required: true
+    required: true,
   },
   badge: {
-    type: [String]
+    type: [String],
   },
 });
 
-//db name - workoutcardsinfo
+export interface Exercise {
+  title: string;
+  body: string;
+  img: string;
+  badge: string[];
+}
+
+// db name - workoutcardsinfo
 export default workoutInfoCardSchema;

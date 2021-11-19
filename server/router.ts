@@ -1,12 +1,20 @@
 import { Router } from 'express';
 const router: Router = Router();
-// const caveman = require('./controllers/caveman.controller');
+import {
+  getUser,
+  getWorkouts,
+  postWorkout,
+  addInfo,
+  getWorkoutInfo,
+  createMockUser,
+} from './controllers/caveman.controller';
 
-// router.get('/dashboard', caveman.getWorkouts);
-// router.get('/profile', caveman.getUser);
-// router.post('/exercise', caveman.postWorkout);
-// router.put('/addinfo/:id', caveman.addInfo);
-// router.get('/user/:id', caveman.getUser);
-// router.get('/workoutinfo', caveman.getWorkoutInfo);
+router.get('/dashboard', getWorkouts);
+// router.get('/profile', getUser);
+router.post('/exercise', postWorkout);
+router.put('/addinfo/:id', addInfo);
+router.get('/user/:id', getUser);
+router.get('/workoutinfo', getWorkoutInfo);
+router.post('/new-user', createMockUser); //test for mock data
 
 export default router;

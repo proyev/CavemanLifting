@@ -1,7 +1,7 @@
 import { Schema } from 'mongoose';
 import userWorkoutSchema from './workout.model';
-
-const userSchema = new Schema({
+import { Workout } from './workout.model';
+const userSchema = new Schema<User>({
   username: {
     type: String,
     required: true,
@@ -20,5 +20,15 @@ const userSchema = new Schema({
   bio: { type: String },
 });
 
-//db name - User
+export interface User {
+  username: string;
+  program: string;
+  location: string;
+  workouts: Workout[];
+  firstname: string;
+  lastname: string;
+  bio: string;
+}
+
+// db name - User
 export default userSchema;

@@ -1,14 +1,14 @@
-import { model, Model } from "mongoose";
+import { model, Model } from 'mongoose';
 
-import userSchema from "./user.model";
-import workoutInfoCardSchema from "./workoutinfocard.model";
+import userSchema, { User } from './user.model';
+import workoutInfoCardSchema, { Exercise } from './workoutinfocard.model';
 
-const db= {
+const db = {
   User: Model,
-  Exercises: Model
-}
-db.User = model("User", userSchema)
-//db Myworkouts changed to Exercises
-db.Exercises = model('Exercises', workoutInfoCardSchema)
+  Exercises: Model,
+};
+db.User = model<User>('User', userSchema);
+// db Myworkouts changed to Exercises
+db.Exercises = model<Exercise>('Exercises', workoutInfoCardSchema);
 
 export default db;

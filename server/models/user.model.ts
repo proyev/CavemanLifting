@@ -1,20 +1,24 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import { Schema } from "mongoose";
+import userWorkoutSchema from "./workout.model";
 
 const userSchema = new Schema({
-  username: { type: String },
-  program: { type: String },
-  location: { type: String },
-  prs: [
-    {
-      workout: { type: String },
-      weight: { type: Number },
-      reps: { type: Number },
-    },
-  ],
+  username: {
+    type: String,
+    required: true
+  },
+  program: {
+    type: String
+  },
+  location: {
+    type: String
+  },
+  workouts: {
+    type: [userWorkoutSchema],
+  },
   firstname: { type: String },
   lastname: { type: String },
   bio: { type: String },
 });
 
-module.exports = mongoose.model('User', userSchema);
+//db name - User
+export default userSchema;

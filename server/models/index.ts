@@ -1,9 +1,14 @@
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/caveman_db');
+import { model, Model } from "mongoose";
 
-const db = mongoose.connection;
+import userSchema from "./user.model";
+import workoutInfoCardSchema from "./workoutinfocard.model";
 
-db.on('error', () => console.log(error));
-db.on('open', () => console.log('We have been enlightened'));
+const db= {
+  User: Model,
+  Exercises: Model
+}
+db.User = model("User", userSchema)
+//db Myworkouts changed to Exercises
+db.Exercises = model('Exercises', workoutInfoCardSchema)
 
-module.exports = db;
+export default db;

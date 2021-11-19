@@ -1,11 +1,9 @@
-const User = require('../models/user.model');
-const Workout = require('../models/workout.model');
-const WorkoutInfoCard = require('../models/workoutinfocard.model');
+import db from '../models/index';
 
 const getUser = async (req, res) => {
   // Standard get request routing
   try {
-    const user = await User.findOne();
+    const user = await db.User.findOne();
     res.status(200).send(user);
   } catch (e) {
     console.error(e);
@@ -15,7 +13,8 @@ const getUser = async (req, res) => {
 const getWorkouts = async (req, res) => {
   // Standard get request routing
   try {
-    const workouts = await Workout.find();
+    //TODO find User by id or smth -> find user's workout array
+    const workouts = await db.User.find(req.body).select('workouts');
     res.status(200).send(workouts);
   } catch (e) {
     console.error(e);
@@ -138,9 +137,9 @@ async function setMockupWorkouts(index) {
   const res = await WorkoutInfoCard.create({ ...workout[index] });
   console.log(res);
 }
-for (let i = 0; i < 7; i++) {
-  setMockupWorkouts(i);
-}
+// for (let i = 0; i < 7; i++) {
+//   setMockupWorkouts(i);
+// }
 // WorkoutInfoCard.findByIdAndDelete({ _id: '61967ef1681fbd944e857a35' }).then(
 //   () => {
 //     WorkoutInfoCard.find({}).then(res => console.log(res));

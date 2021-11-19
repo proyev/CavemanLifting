@@ -1,11 +1,22 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import { Schema } from "mongoose";
 
 const workoutInfoCardSchema = new Schema({
-  title: { type: String },
-  body: { type: String },
-  img: { type: String },
-  badge: { type: [String] },
+  title: {
+    type: String,
+    required: true
+  },
+  body: {
+    type: String,
+    required: true
+  },
+  img: {
+    type: String,
+    required: true
+  },
+  badge: {
+    type: [String]
+  },
 });
 
-module.exports = mongoose.model('workoutcardsinfo', workoutInfoCardSchema);
+//db name - workoutcardsinfo
+export default workoutInfoCardSchema;

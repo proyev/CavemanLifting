@@ -1,4 +1,5 @@
 import { Schema } from 'mongoose';
+import { Workout } from './interfaces/workout';
 
 const userWorkoutSchema = new Schema<Workout>({
   title: {
@@ -42,19 +43,5 @@ const userWorkoutSchema = new Schema<Workout>({
   },
 });
 
-export interface Workout {
-  title: string;
-  date: Date | number;
-  notes: string;
-  routine: Routine[];
-}
-
-interface Routine {
-  lift: string;
-  weight: number;
-  sets: number;
-  reps: number;
-  rest: number;
-}
 // db name 'Myworkout'
 export default userWorkoutSchema;

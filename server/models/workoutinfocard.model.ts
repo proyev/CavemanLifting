@@ -1,4 +1,5 @@
 import { Schema } from 'mongoose';
+import { Exercise } from './interfaces/exercise';
 
 const workoutInfoCardSchema = new Schema<Exercise>({
   title: {
@@ -17,13 +18,6 @@ const workoutInfoCardSchema = new Schema<Exercise>({
     type: [String],
   },
 });
-
-export interface Exercise {
-  title: string;
-  body: string;
-  img: string;
-  badge: string[];
-}
 
 // db name - workoutcardsinfo
 export default workoutInfoCardSchema;

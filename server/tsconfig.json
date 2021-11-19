@@ -17,6 +17,11 @@
     "include": [
         "./**/*",
         // "models/index.js"
+<<<<<<< HEAD
         //"./server.ts"
+=======
+        "./**/*",
+        
+>>>>>>> e05db896ad1159c13a8c7d8bb811c5dbc803b97f
     ]
 }

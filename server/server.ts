@@ -1,9 +1,8 @@
 import express from 'express';
 import cors from 'cors';
+import  mongoose from 'mongoose';
 
 import router from './router';
-
-// const db = require('./models');
 
 const PORT = 3001;
 const app = express();
@@ -14,10 +13,7 @@ app.use(router);
 
 (async () => {
   try {
-    // await db;
-    // console.log(`
-    //   DATABASE ${db}
-    // `);
+    mongoose.connect('mongodb://localhost:27017/caveman_db');
     app.listen(PORT, () => {
       console.log(`http://localhost:${PORT}`);
     });

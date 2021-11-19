@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
-import { Workout } from '../models/workout.model';
 import db from '../models/index';
-import { User } from '../models/user.model';
-import { Exercise } from '../models/workoutinfocard.model';
+
+import { User } from '../models/interfaces/user';
+import { Workout } from '../models/interfaces/workout';
+import { Exercise } from '../models/interfaces/exercise';
 
 const getUser = async (req: Request, res: Response) => {
   // Standard get request routing

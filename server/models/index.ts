@@ -1,7 +1,10 @@
 import { model, Model } from 'mongoose';
 
-import userSchema, { User } from './user.model';
-import workoutInfoCardSchema, { Exercise } from './workoutinfocard.model';
+import userSchema from './user.model';
+import workoutInfoCardSchema from './workoutinfocard.model';
+
+import { Exercise } from './interfaces/exercise';
+import { User } from './interfaces/user';
 
 const db = {
   User: Model,

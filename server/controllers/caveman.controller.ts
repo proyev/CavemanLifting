@@ -1,6 +1,6 @@
-const User = require('../models/user.model');
-const Workout = require('../models/workout.model');
-const WorkoutInfoCard = require('../models/workoutinfocard.model');
+import User from '../models/user.model';
+import Workout from '../models/workout.model';
+import WorkoutInfoCard from '../models/workoutinfocard.model';
 
 const getUser = async (req, res) => {
   // Standard get request routing
@@ -64,7 +64,7 @@ const getWorkoutInfo = async (req, res) => {
     console.error(e);
   }
 };
-//creates mock user in DB
+// creates mock user in DB
 async function createMockUser() {
   const user = {
     username: 'SerCaveman',

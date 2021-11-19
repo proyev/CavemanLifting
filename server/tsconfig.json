@@ -15,8 +15,8 @@
         }
     },
     "include": [
-        // "./**/*",
+        "./**/*",
         // "models/index.js"
-        "./server.ts"
+        //"./server.ts"
     ]
 }

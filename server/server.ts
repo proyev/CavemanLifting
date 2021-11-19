@@ -22,7 +22,7 @@ app.use(router);
       console.log(`http://localhost:${PORT}`);
     });
   } catch (err) {
-    // console.log(err);
+    console.error(err);
   }
 })();
 

@@ -32,7 +32,7 @@ app.use(router_1.default);
         });
     }
     catch (err) {
-        // console.log(err);
+        console.error(err);
     }
 }))();
 /*

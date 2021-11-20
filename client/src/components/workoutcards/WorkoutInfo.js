@@ -1,10 +1,17 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Flex } from '@chakra-ui/react';
 import WorkoutCardInfo from './workoutcardinfo/WorkoutCardInfo';
+import ApiService from '../../ApiService';
 
-export default function WorkoutInfo({ workoutCards }) {
-  console.log(workoutCards);
+export default function WorkoutInfo() {
+  const [workoutCards, setWorkoutCards] = useState([]);
+  //this is to remove props drilling since its the separate table in the db API call is made here
+  useEffect(() => {
+    ApiService.getWorkoutInfo().then(res => {
+      setWorkoutCards([...res]);
+    });
+  }, []);
 
   //Check if something can be done with the styling props to be outsourced
   return (

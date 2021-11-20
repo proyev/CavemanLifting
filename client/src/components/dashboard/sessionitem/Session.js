@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Flex,
   VStack,
@@ -8,23 +8,20 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import moment from 'moment';
+import { CavemanContext } from '../../../CavemanContext';
 
-export default function Session({ workout, toggleDetailsForm }) {
-  // Card used to display session info w/ button for adding details
-
+export default function Session({ id, toggleDetailsForm, first }) {
   const bgColor = useColorModeValue('cyan.50', 'cyan.600');
+  const bgFirst = useColorModeValue('cyan.100', 'cyan.800');
+  const style = first ? styleFirst : styleStandard;
+
+  const { findWorkout } = useContext(CavemanContext);
+
+  const workout = { ...findWorkout(id) };
 
   return (
-    <VStack
-      w="45rem"
-      bg={bgColor}
-      my="2rem"
-      py="1.25rem"
-      px="1rem"
-      borderRadius="12.5px"
-      boxShadow="xl"
-    >
-      <Text fontSize="lg" fontWeight="600">
+    <VStack bg={first ? bgFirst : bgColor} {...style}>
+      <Text {...style.header}>
         {workout.title} - {moment(workout.date).format('MMM Do')}
       </Text>
       <VStack>
@@ -33,16 +30,9 @@ export default function Session({ workout, toggleDetailsForm }) {
         </Text>
         <Divider borderStyle="none" />
         <Flex align="center" justify="space-evenly">
-          {workout.routine.map((routine) => {
+          {workout.routine.map(routine => {
             return (
-              <Flex
-                display="flex"
-                direction="column"
-                align="center"
-                key={routine._id}
-                m="1rem"
-                fontSize="lg"
-              >
+              <Flex {...style.flex} key={routine._id}>
                 <Text>{routine.lift}</Text>
                 <Text>{routine.weight} kg</Text>
                 <Text>Sets: {routine.sets}</Text>
@@ -53,13 +43,48 @@ export default function Session({ workout, toggleDetailsForm }) {
           })}
         </Flex>
       </VStack>
-      <Button
-        colorScheme="green"
-        onClick={() => toggleDetailsForm(workout._id)}
-        my="1.5rem"
-      >
+      <Button {...style.button} onClick={() => toggleDetailsForm(id)}>
         Add Details
       </Button>
     </VStack>
   );
 }
+
+const styleStandard = {
+  w: '45rem',
+  my: '2rem',
+  py: '1.25rem',
+  px: '1rem',
+  borderRadius: '12.5px',
+  boxShadow: 'xl',
+  header: { fontSize: 'lg', fontWeight: '600' },
+  flex: {
+    display: 'flex',
+    direction: 'column',
+    align: 'center',
+    m: '1rem',
+    fontSize: 'lg',
+  },
+  button: {
+    my: '1.5rem',
+    colorScheme: 'green',
+  },
+};
+
+const styleFirst = {
+  w: '60rem',
+  my: '2rem',
+  py: '1.25rem',
+  px: '1rem',
+  borderRadius: '12.5px',
+  boxShadow: 'dark-lg',
+  header: { fontSize: 'xl', fontWeight: '700' },
+  button: { my: '1.5rem', colorScheme: 'green', fontSize: 'lg' },
+  flex: {
+    display: 'flex',
+    direction: 'column',
+    align: 'center',
+    m: '1rem',
+    fontSize: 'lg',
+  },
+};

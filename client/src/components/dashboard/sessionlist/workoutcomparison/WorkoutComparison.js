@@ -41,54 +41,19 @@ export default function WorkoutComparison({ workouts }) {
       { name: 'Bicep Curl', value: 0 },
     ];
     const month = new Date().getMonth();
-    //TO DO this could be refactored into Date(year, month, 0).getDate() to get the number of days in a month.
-    if (
-      month === 1 ||
-      month === 3 ||
-      month === 5 ||
-      month === 7 ||
-      month === 8 ||
-      month === 10 ||
-      month === 12
-    ) {
-      let count = 1;
-      while (count < 32) {
-        workoutData.push({
-          name: count,
-          Deadlift: 0,
-          Bench: 0,
-          Squat: 0,
-          Overhead: 0,
-          'Bicep Curl': 0,
-        });
-        count++;
-      }
-    } else if (month === 4 || month === 6 || month === 9 || month === 11) {
-      let count = 1;
-      while (count < 31) {
-        workoutData.push({
-          name: count,
-          Deadlift: 0,
-          Bench: 0,
-          Squat: 0,
-          Overhead: 0,
-          'Bicep Curl': 0,
-        });
-        count++;
-      }
-    } else {
-      let count = 1;
-      while (count < 29) {
-        workoutData.push({
-          name: count,
-          Deadlift: 0,
-          Bench: 0,
-          Squat: 0,
-          Overhead: 0,
-          'Bicep Curl': 0,
-        });
-        count++;
-      }
+    const year = new Date().getFullYear();
+    const days = new Date(year, month, 0).getDate();
+    let count = 1;
+    while (count < days) {
+      workoutData.push({
+        name: count,
+        Deadlift: 0,
+        Bench: 0,
+        Squat: 0,
+        Overhead: 0,
+        'Bicep Curl': 0,
+      });
+      count++;
     }
     for (let session of data) {
       const splitDate = session.date.split('-');

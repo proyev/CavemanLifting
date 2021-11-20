@@ -1,10 +1,10 @@
 // import './App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { useColorMode, useColorModeValue, HStack } from '@chakra-ui/react';
 import 'react-toastify/dist/ReactToastify.css';
-import { CavemanContextProvider } from './CavementContext';
+import { CavemanContextProvider } from './CavemanContext';
 
 import {
   Dashboard,
@@ -15,25 +15,13 @@ import {
   Profile,
   WorkoutInfo,
 } from './components/index';
-// import WorkoutInfo from './components/profile/Profile';
 
 import ApiService from './ApiService';
 
 //TODO: App is quite bloated with lots of states - usecontext or redux to define a data flow
 function App() {
-  //this function sets our initial state on the useReducer and context
-  // async function init() {
-  //   let initialState = await ApiService.getUser('6197bb2f2d805d2db970edee');
-  //   console.log(initialState);
-  //   return initialState;
-  // }
-  // // const [user, setUser] = useState('');
-  // // eslint-disable-next-line no-unused-vars
-  // const [userData, dispatch] = useReducer(reducer, undefined, init);
   // eslint-disable-next-line no-unused-vars
   const [workouts, setWorkouts] = useState([]);
-  // eslint-disable-next-line no-unused-vars
-  const [workoutCards, setWorkoutCards] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [detailsForm, setDetailsForm] = useState('');
   const [infoAdd, setInfoAdd] = useState(false);
@@ -114,22 +102,6 @@ function App() {
   // Displays the add details form modal for a card, only if that card has an
   // ID property, theoretically they all SHOULD have but this just double checks
 
-  useEffect(() => {
-    // ApiService.getWorkouts().then(workouts => {
-    //   //TODO, sortation by date can be outsourced to the server
-    //   const orderedWorkouts = workouts.sort((a, b) => sortByDate(b, a));
-    //   return setWorkouts(orderedWorkouts);
-    // });
-    // standard API call to GET workout
-    //SET FOR NOW SINCE WE ONLY HAVE ONE USER
-    // ApiService.getUser('6197bb2f2d805d2db970edee').then(userInfo =>
-    //   setUserData(userInfo)
-    // );
-    // ApiService.getWorkoutInfo().then(zeWorkoutCards =>
-    //   setWorkoutCards(zeWorkoutCards)
-    // );
-  }, [infoAdd]);
-
   //TODO a lot of props drilling here needs to be managed centrally
   return (
     <CavemanContextProvider>
@@ -184,12 +156,7 @@ function App() {
                   />
                 }
               />
-              <Route
-                path="/workouts"
-                element={
-                  <WorkoutInfo workoutCards={workoutCards}></WorkoutInfo>
-                }
-              />
+              <Route path="/workouts" element={<WorkoutInfo />} />
               <Route path="/gyms" element={<Gym navSize={navSize} />} />
             </Routes>
           </Router>

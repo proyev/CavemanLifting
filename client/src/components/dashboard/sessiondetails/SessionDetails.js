@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -12,54 +12,47 @@ import {
   Button,
   NumberInput,
   NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
   Divider,
 } from '@chakra-ui/react';
+import { CavemanContext } from '../../../CavemanContext';
 
 export default function SessionDetails({
   detailsForm,
   toggleDetailsForm,
   addInfo,
 }) {
-  //TODO this could be consolidated into one object and assigned names to the form input to refer to object props.. Then we can just refer to them as e.target.name and just have one handleChange function
-  const [lift, setLift] = useState('');
-  const [weight, setWeight] = useState(0);
-  const [sets, setSets] = useState(0);
-  const [reps, setReps] = useState(0);
-  const [rest, setRest] = useState(0);
+  const [routine, setRoutine] = useState({
+    lift: '',
+    weight: '',
+    sets: '',
+    reps: '',
+    rest: '',
+  });
+
+  const { dispatch } = useContext(CavemanContext);
 
   const handleClose = () => toggleDetailsForm();
 
-  function handleLift(e) {
-    setLift(e.target.value);
-  }
-  function handleWeight(e) {
-    setWeight(e);
-  }
-  function handleSets(e) {
-    setSets(e);
-  }
-  function handleReps(e) {
-    setReps(e);
-  }
-  function handleRest(e) {
-    setRest(e);
+  function handleRoutine(e) {
+    const number = isNaN(Number(e.target.value))
+      ? e.target.value
+      : Number(e.target.value);
+    setRoutine({ ...routine, [e.target.name]: number });
   }
 
   function handleSubmit() {
-    if (!lift || !weight || !sets || !reps || !rest) {
+    if (
+      !routine.lift ||
+      !routine.weight ||
+      !routine.sets ||
+      !routine.reps ||
+      !routine.rest
+    ) {
       return alert('Please fill all fields');
     }
+    dispatch({ type: 'ADD_ROUTINE', payload: routine, id: detailsForm });
+    addInfo(routine, detailsForm);
 
-    addInfo({ lift, weight, sets, reps, rest }, detailsForm);
-
-    setLift('');
-    setWeight(0);
-    setSets(0);
-    setReps(0);
-    setRest(0);
     handleClose();
   }
   //TODO form input can be placed as a separate element and looped over to get the right data
@@ -68,7 +61,6 @@ export default function SessionDetails({
     <>
       <Modal isOpen={true} onClose={handleClose}>
         <ModalOverlay />
-
         <ModalContent>
           <ModalHeader textAlign="center">Enter Session Details</ModalHeader>
           <ModalBody pb={6}>
@@ -76,29 +68,31 @@ export default function SessionDetails({
               <FormLabel>Lift</FormLabel>
               <Input
                 type="text"
+                name="lift"
                 size="lg"
                 variant="filled"
                 placeholder="Enter a lift..."
-                onChange={handleLift}
-                value={lift}
+                onChange={e => handleRoutine(e)}
+                value={routine.lift}
               />
 
               <Divider my="2rem" />
 
               <FormLabel>Weight (kg)</FormLabel>
               <NumberInput
+                type="number"
                 step={2.5}
                 size="lg"
                 allowMouseWheel
                 variant="filled"
-                onChange={handleWeight}
-                value={weight}
+                value={routine.weight}
+                placeholder="Weight.."
               >
-                <NumberInputField />
-                <NumberInputStepper>
-                  <NumberIncrementStepper />
-                  <NumberDecrementStepper />
-                </NumberInputStepper>
+                <NumberInputField
+                  name="weight"
+                  onChange={handleRoutine}
+                  placeholder="Weight.."
+                />
               </NumberInput>
 
               <FormLabel>Sets</FormLabel>
@@ -107,14 +101,13 @@ export default function SessionDetails({
                 size="lg"
                 allowMouseWheel
                 variant="filled"
-                onChange={handleSets}
-                value={sets}
+                value={routine.sets}
               >
-                <NumberInputField />
-                <NumberInputStepper>
-                  <NumberIncrementStepper />
-                  <NumberDecrementStepper />
-                </NumberInputStepper>
+                <NumberInputField
+                  name="sets"
+                  onChange={handleRoutine}
+                  placeholder="Number of sets.."
+                />
               </NumberInput>
 
               <FormLabel>Reps</FormLabel>
@@ -123,14 +116,13 @@ export default function SessionDetails({
                 size="lg"
                 allowMouseWheel
                 variant="filled"
-                onChange={handleReps}
-                value={reps}
+                value={routine.reps}
               >
-                <NumberInputField />
-                <NumberInputStepper>
-                  <NumberIncrementStepper />
-                  <NumberDecrementStepper />
-                </NumberInputStepper>
+                <NumberInputField
+                  name="reps"
+                  onChange={handleRoutine}
+                  placeholder="Number of reps.."
+                />
               </NumberInput>
 
               <FormLabel>Rest</FormLabel>
@@ -139,14 +131,13 @@ export default function SessionDetails({
                 size="lg"
                 allowMouseWheel
                 variant="filled"
-                onChange={handleRest}
-                value={rest}
+                value={routine.rest}
               >
-                <NumberInputField />
-                <NumberInputStepper>
-                  <NumberIncrementStepper />
-                  <NumberDecrementStepper />
-                </NumberInputStepper>
+                <NumberInputField
+                  name="rest"
+                  onChange={handleRoutine}
+                  placeholder="Rest in seconds.."
+                />
               </NumberInput>
             </FormControl>
           </ModalBody>

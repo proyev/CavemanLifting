@@ -8,7 +8,7 @@ import {
   ModalBody,
   FormControl,
   FormLabel,
-  Input,
+  Select,
   Button,
   NumberInput,
   NumberInputField,
@@ -65,15 +65,19 @@ export default function SessionDetails({ detailsForm, toggleDetailsForm }) {
           <ModalBody pb={6}>
             <FormControl>
               <FormLabel>Lift</FormLabel>
-              <Input
-                type="text"
+              <Select
                 name="lift"
                 size="lg"
-                variant="filled"
-                placeholder="Enter a lift..."
-                onChange={e => handleRoutine(e)}
+                placeholder="Select a lift..."
+                onChange={handleRoutine}
                 value={routine.lift}
-              />
+              >
+                <option value="Deadlift">Deadlift</option>
+                <option value="Bench">Bench</option>
+                <option value="Squat">Squat</option>
+                <option value="Overhead">Overhead</option>
+                <option value="Bicep Curl">Bicep Curl</option>
+              </Select>
 
               <Divider my="2rem" />
 

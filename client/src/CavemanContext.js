@@ -10,7 +10,7 @@ export function reducer(state, action) {
       return { ...action.payload };
     case 'ADD_ROUTINE': {
       const workouts = [...state.workouts].map(w => {
-        if (w._id === action.id) {
+        if (w._id ? w._id === action.id : w.id === action.id) {
           return { ...w, routine: [...w.routine, action.payload] };
         } else return w;
       });

@@ -19,11 +19,12 @@ export default function SessionList({ toggleDetailsForm }) {
     >
       <WorkoutComparison workouts={workouts} />
       {workouts.map((workout, index) => {
+        const id = workout._id ? workout._id : workout.id;
         return workout ? (
           <Session
             first={index === 0 && true}
-            id={workout._id ? workout._id : workout.id}
-            key={workout._id ? workout._id : workout.id}
+            id={id}
+            key={id}
             toggleDetailsForm={toggleDetailsForm}
           />
         ) : (

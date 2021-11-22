@@ -18,7 +18,6 @@ import {
 } from './components/index';
 
 import ApiService from './ApiService';
-import { showNotification } from './Utils/Helpers';
 
 //TODO: App is quite bloated with lots of states - usecontext or redux to define a data flow
 function App() {
@@ -35,7 +34,6 @@ function App() {
   const { toggleColorMode } = useColorMode();
   const bgColor = useColorModeValue('teal.200', 'teal.800');
 
-  // Toastify notifications for adding workout and details
   function postWorkout(title, date, notes = '') {
     ApiService.postWorkout({ title, date, notes }).then(workout => {
       setWorkouts(prevList => {
@@ -45,7 +43,6 @@ function App() {
         return newList;
       });
     });
-    showNotification('session');
   }
   // standard API call to POST workout
   //TODO addInfo now lives in context to add routines info to the workout, only post request which can be done in the context useEffect that monitors the change of userData state
@@ -99,7 +96,6 @@ function App() {
                 element={
                   <Dashboard
                     navSize={navSize}
-                    workouts={workouts}
                     toggleDetailsForm={toggleDetailsForm}
                   />
                 }

@@ -15,6 +15,7 @@ import {
   Textarea,
 } from '@chakra-ui/react';
 import { CavemanContext } from '../../../CavemanContext';
+import { showNotification } from '../../../Utils/Helpers';
 
 // import { Modal, Button } from 'react-bootstrap';
 // import './SessionForm.css';
@@ -43,9 +44,8 @@ export default function SessionForm({ toggleForm }) {
     if (!session.date) return alert('Cmon man you need to put a date');
     if (!session.notes) return alert('Nothing?');
     //TODO refactor post workout
-    // postWorkout(session);
-    //TODO this needs to be sent later on to the DB
     dispatch({ type: 'ADD_WORKOUT', payload: session });
+    showNotification('session');
     handleClose();
   }
 

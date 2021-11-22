@@ -1,5 +1,4 @@
-import { createContext, useEffect, useReducer } from 'react';
-import React from 'react';
+import React, { createContext, useEffect, useReducer } from 'react';
 import ApiService from './ApiService';
 
 export const CavemanContext = createContext();
@@ -41,14 +40,12 @@ export function CavemanContextProvider({ children }) {
   useEffect(() => {
     (async () => {
       const user = await ApiService.getUser('6197bb2f2d805d2db970edee');
-      console.log(user);
       dispatch({ type: 'SET_USER', payload: user });
     })();
   }, []);
 
-  //TODO when front end is ready, set the useEffect to post the data to the db whenever userData changes
   useEffect(() => {
-    console.log(userData);
+    if (userData._id) ApiService.updateUser(userData._id, userData);
   }, [userData]);
 
   return (

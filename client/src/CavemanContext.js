@@ -41,6 +41,8 @@ export function CavemanContextProvider({ children }) {
     })();
   }, []);
 
+  //TODO when front end is ready, set the useEffect to post the data to the db whenever userData changes
+
   return (
     <CavemanContext.Provider value={context}>
       {children}

@@ -15,12 +15,9 @@ import {
   Divider,
 } from '@chakra-ui/react';
 import { CavemanContext } from '../../../CavemanContext';
+import { showNotification } from '../../../Utils/Helpers';
 
-export default function SessionDetails({
-  detailsForm,
-  toggleDetailsForm,
-  addInfo,
-}) {
+export default function SessionDetails({ detailsForm, toggleDetailsForm }) {
   const [routine, setRoutine] = useState({
     lift: '',
     weight: '',
@@ -51,7 +48,9 @@ export default function SessionDetails({
       return alert('Please fill all fields');
     }
     dispatch({ type: 'ADD_ROUTINE', payload: routine, id: detailsForm });
-    addInfo(routine, detailsForm);
+    showNotification();
+
+    //addInfo(routine, detailsForm);
 
     handleClose();
   }

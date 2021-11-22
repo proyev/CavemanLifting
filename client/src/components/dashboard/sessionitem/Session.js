@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 import moment from 'moment';
 import { CavemanContext } from '../../../CavemanContext';
+import { nanoid } from 'nanoid';
 
 export default function Session({ id, toggleDetailsForm, first }) {
   const bgColor = useColorModeValue('cyan.50', 'cyan.600');
@@ -32,7 +33,7 @@ export default function Session({ id, toggleDetailsForm, first }) {
         <Flex align="center" justify="space-evenly">
           {workout.routine.map(routine => {
             return (
-              <Flex {...style.flex} key={routine._id}>
+              <Flex {...style.flex} key={routine._id ? routine._id : nanoid()}>
                 <Text>{routine.lift}</Text>
                 <Text>{routine.weight} kg</Text>
                 <Text>Sets: {routine.sets}</Text>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Chart from './chart/Chart';
 
 import Heatmap from './heatmap/Heatmap';
@@ -21,16 +21,20 @@ import {
 } from '@chakra-ui/react';
 
 import profilePic from '../../assets/caveman_profile_pic.PNG';
+import { CavemanContext } from '../../CavemanContext';
 
-export default function Profile({ workouts, userData }) {
+export default function Profile({ workouts }) {
   const [latest, setLatest] = useState({});
+
+  const { userData } = useContext(CavemanContext);
 
   const tableBGColor = useColorModeValue('teal.400', 'teal.900');
   const textBG = useColorModeValue('teal.300', 'teal.700');
 
   useEffect(() => {
-    setLatest(workouts[0]);
-  }, [workouts]);
+    if (userData.workouts && userData.workouts.length > 0)
+      setLatest(userData.workouts[0]);
+  }, [userData]);
 
   return (
     <Flex
@@ -98,7 +102,7 @@ export default function Profile({ workouts, userData }) {
           >
             <Heading size="lg">Personal Records</Heading>
             {userData.prs &&
-              userData.prs.map((pr) => {
+              userData.prs.map(pr => {
                 return (
                   <Flex
                     key={pr._id}
@@ -160,7 +164,7 @@ export default function Profile({ workouts, userData }) {
             <Tbody>
               <Tr></Tr>
               {latest.routine &&
-                latest.routine.map((routine) => {
+                latest.routine.map(routine => {
                   return (
                     <Tr size="lg" key={routine._id}>
                       <Td>{routine.lift}</Td>

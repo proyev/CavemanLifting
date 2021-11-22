@@ -33,7 +33,6 @@ export default function SessionForm({ toggleForm }) {
   const handleClose = () => toggleForm();
 
   function handleForm(e) {
-    console.log(session);
     //TODO date is currently a string... when posting to the DB this needs to be a date format
     setSession({ ...session, [e.target.name]: e.target.value });
   }
@@ -43,7 +42,6 @@ export default function SessionForm({ toggleForm }) {
     if (!session.title) return alert('Please enter a title bruh');
     if (!session.date) return alert('Cmon man you need to put a date');
     if (!session.notes) return alert('Nothing?');
-    //TODO refactor post workout
     dispatch({ type: 'ADD_WORKOUT', payload: session });
     showNotification('session');
     handleClose();

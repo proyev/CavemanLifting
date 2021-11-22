@@ -17,12 +17,8 @@ import {
   WorkoutInfo,
 } from './components/index';
 
-import ApiService from './ApiService';
-
 //TODO: App is quite bloated with lots of states - usecontext or redux to define a data flow
 function App() {
-  // eslint-disable-next-line no-unused-vars
-  const [workouts, setWorkouts] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [detailsForm, setDetailsForm] = useState('');
   const [navSize, setSize] = useState('large');
@@ -33,19 +29,6 @@ function App() {
 
   const { toggleColorMode } = useColorMode();
   const bgColor = useColorModeValue('teal.200', 'teal.800');
-
-  function postWorkout(title, date, notes = '') {
-    ApiService.postWorkout({ title, date, notes }).then(workout => {
-      setWorkouts(prevList => {
-        const newList = [workout, ...prevList];
-        //I assume that it adds the most recent workout to the front, but then it sorts it backward??? double check
-        newList.sort((a, b) => sortByDate(b, a));
-        return newList;
-      });
-    });
-  }
-  // standard API call to POST workout
-  //TODO addInfo now lives in context to add routines info to the workout, only post request which can be done in the context useEffect that monitors the change of userData state
 
   function toggleForm() {
     setShowForm(!showForm);
@@ -66,11 +49,7 @@ function App() {
         {/* Used as a container for any and all Toasts (toast notification naming convention) */}
 
         {showForm && (
-          <SessionForm
-            showForm={showForm}
-            toggleForm={toggleForm}
-            postWorkout={postWorkout}
-          />
+          <SessionForm showForm={showForm} toggleForm={toggleForm} />
         )}
         {detailsForm && (
           <SessionDetails
@@ -85,7 +64,6 @@ function App() {
             <Sidebar
               navSize={navSize}
               setSize={setSize}
-              postWorkout={postWorkout}
               toggleForm={toggleForm}
               toggleColorMode={toggleColorMode}
             />
@@ -102,13 +80,7 @@ function App() {
               />
               <Route
                 path="/profile"
-                element={
-                  <Profile
-                    workouts={workouts}
-                    userData="{}"
-                    navSize={navSize}
-                  />
-                }
+                element={<Profile userData="{}" navSize={navSize} />}
               />
               <Route path="/workouts" element={<WorkoutInfo />} />
               <Route path="/gyms" element={<Gym navSize={navSize} />} />
@@ -118,14 +90,6 @@ function App() {
       </HStack>
     </CavemanContextProvider>
   );
-}
-
-function sortByDate(a, b) {
-  // Function to sort array of workouts by date, highest being first
-  // TODO: implement calendar stopper for current day
-  const dateOne = new Date(a.date).getTime();
-  const datetwo = new Date(b.date).getTime();
-  return dateOne - datetwo;
 }
 
 export default App;

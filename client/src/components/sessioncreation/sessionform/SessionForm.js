@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import {
   Modal,
@@ -14,21 +14,25 @@ import {
   Divider,
   Textarea,
 } from '@chakra-ui/react';
+import { CavemanContext } from '../../../CavemanContext';
 
 // import { Modal, Button } from 'react-bootstrap';
 // import './SessionForm.css';
 
 // export default function SessionForm({ showForm, toggleForm, postWorkout }) {
-export default function SessionForm({ toggleForm, postWorkout }) {
+export default function SessionForm({ toggleForm }) {
+  const { dispatch } = useContext(CavemanContext);
   const [session, setSession] = useState({
     title: '',
     date: '',
     notes: '',
+    routine: [],
   });
   const handleClose = () => toggleForm();
 
   function handleForm(e) {
     console.log(session);
+    //TODO date is currently a string... when posting to the DB this needs to be a date format
     setSession({ ...session, [e.target.name]: e.target.value });
   }
 
@@ -38,7 +42,9 @@ export default function SessionForm({ toggleForm, postWorkout }) {
     if (!session.date) return alert('Cmon man you need to put a date');
     if (!session.notes) return alert('Nothing?');
     //TODO refactor post workout
-    postWorkout(session);
+    // postWorkout(session);
+    //TODO this needs to be sent later on to the DB
+    dispatch({ type: 'ADD_WORKOUT', payload: session });
     handleClose();
   }
 

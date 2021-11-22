@@ -4,6 +4,7 @@ import { Flex } from '@chakra-ui/react';
 import Session from '../sessionitem/Session';
 import WorkoutComparison from './workoutcomparison/WorkoutComparison';
 import { CavemanContext } from '../../../CavemanContext';
+import { nanoid } from 'nanoid';
 
 export default function SessionList({ toggleDetailsForm }) {
   const { userData } = useContext(CavemanContext);
@@ -23,7 +24,7 @@ export default function SessionList({ toggleDetailsForm }) {
           <Session
             first={index === 0 && true}
             id={workout._id}
-            key={workout._id}
+            key={workout._id ? workout._id : nanoid()}
             toggleDetailsForm={toggleDetailsForm}
           />
         ) : (

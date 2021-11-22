@@ -17,7 +17,7 @@ export function reducer(state, action) {
       return { ...state, workouts: [...workouts] };
     }
     case 'ADD_WORKOUT': {
-      return { ...state, workouts: [action.payload, ...state.workouts] };
+      return { ...state, workouts: [{ ...action.payload }, ...state.workouts] };
     }
     default:
       return state;
@@ -45,6 +45,9 @@ export function CavemanContextProvider({ children }) {
   }, []);
 
   //TODO when front end is ready, set the useEffect to post the data to the db whenever userData changes
+  useEffect(() => {
+    console.log(userData);
+  }, [userData]);
 
   return (
     <CavemanContext.Provider value={context}>

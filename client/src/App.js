@@ -26,7 +26,6 @@ function App() {
   const [workouts, setWorkouts] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [detailsForm, setDetailsForm] = useState('');
-  // const [infoAdd, setInfoAdd] = useState(false);
   const [navSize, setSize] = useState('large');
 
   // showForm used for displaying "Add New Session"
@@ -49,29 +48,7 @@ function App() {
     showNotification('session');
   }
   // standard API call to POST workout
-  //TODO this now lives in context to add routines info to the workout, only post request which can be done in the context useEffect that monitors the change of userData state
-  // function addInfo(body, id) {
-  //   ApiService.addInfo(body, id).then(workout => {
-  //     //TODO set workout should be simpler than all that logic, this can be outsourced.
-  //     setWorkouts(prevList => {
-  //       const filteredArr = prevList.filter(
-  //         workoutCard => workout._id !== workoutCard._id
-  //       );
-  //       console.log(filteredArr);
-  //       const newList = [workout, ...filteredArr];
-  //       // is needed (?) addInfo watches state
-
-  //       newList.sort((a, b) => sortByDate(b, a));
-  //       console.log(newList);
-  //       setInfoAdd(!infoAdd);
-
-  //       return newList;
-  //       // This function call a PUT request to update the selected card with a new workout
-  //       // based on the selected cards ID
-  //       // Then filters & replaces the edited workout card to insure consistency
-  //     });
-  //   });
-  // }
+  //TODO addInfo now lives in context to add routines info to the workout, only post request which can be done in the context useEffect that monitors the change of userData state
 
   function toggleForm() {
     setShowForm(!showForm);

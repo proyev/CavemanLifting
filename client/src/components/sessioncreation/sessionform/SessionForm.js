@@ -20,33 +20,25 @@ import {
 
 // export default function SessionForm({ showForm, toggleForm, postWorkout }) {
 export default function SessionForm({ toggleForm, postWorkout }) {
-  const [title, setTitle] = useState('');
-  const [date, setDate] = useState('');
-  const [notes, setNotes] = useState('');
-
+  const [session, setSession] = useState({
+    title: '',
+    date: '',
+    notes: '',
+  });
   const handleClose = () => toggleForm();
 
-  function handleTitle(e) {
-    setTitle(e.target.value);
-  }
-  function handleNotes(e) {
-    setNotes(e.target.value);
-  }
-  function handleDate(e) {
-    setDate(e.target.value);
+  function handleForm(e) {
+    console.log(session);
+    setSession({ ...session, [e.target.name]: e.target.value });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (!title) return alert('Please enter a title bruh');
-    if (!date) return alert('Cmon man you need to put a date');
-    if (!notes) return alert('Nothing?');
-
-    postWorkout(title, date, notes);
-
-    setTitle('');
-    setDate('');
-    setNotes('');
+    if (!session.title) return alert('Please enter a title bruh');
+    if (!session.date) return alert('Cmon man you need to put a date');
+    if (!session.notes) return alert('Nothing?');
+    //TODO refactor post workout
+    postWorkout(session);
     handleClose();
   }
 
@@ -62,28 +54,31 @@ export default function SessionForm({ toggleForm, postWorkout }) {
               <FormLabel>Title</FormLabel>
               <Input
                 type="text"
+                name="title"
                 size="lg"
                 variant="filled"
                 placeholder="Enter a title..."
-                onChange={handleTitle}
-                value={title}
+                onChange={handleForm}
+                value={session.title}
               />
               <Divider my="2rem" />
               <FormLabel>Date</FormLabel>
               <Input
                 type="date"
+                name="date"
                 size="lg"
                 variant="filled"
-                onChange={handleDate}
-                value={date}
+                onChange={handleForm}
+                value={session.date}
               />
               <FormLabel>Notes</FormLabel>
               <Textarea
                 type="text"
+                name="notes"
                 size="lg"
                 variant="filled"
-                onChange={handleNotes}
-                value={notes}
+                onChange={handleForm}
+                value={session.notes}
               />
             </FormControl>
           </ModalBody>

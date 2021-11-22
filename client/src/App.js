@@ -1,7 +1,7 @@
 // import './App.css';
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { useColorMode, useColorModeValue, HStack } from '@chakra-ui/react';
 import 'react-toastify/dist/ReactToastify.css';
 import { CavemanContextProvider } from './CavemanContext';
@@ -17,6 +17,7 @@ import {
 } from './components/index';
 
 import ApiService from './ApiService';
+import { showNotification } from './Utils/Helpers';
 
 //TODO: App is quite bloated with lots of states - usecontext or redux to define a data flow
 function App() {
@@ -34,15 +35,6 @@ function App() {
   const { toggleColorMode } = useColorMode();
   const bgColor = useColorModeValue('teal.200', 'teal.800');
 
-  //TODO the below can be outsored to the utils folder within helper function
-  const notifyAdd = () =>
-    toast.info('New session added!', {
-      position: 'top-right',
-      autoClose: 1500,
-      hideProgressBar: true,
-      closeOnClick: true,
-      theme: 'dark',
-    });
   // Toastify notifications for adding workout and details
   function postWorkout(title, date, notes = '') {
     ApiService.postWorkout({ title, date, notes }).then(workout => {
@@ -53,7 +45,7 @@ function App() {
         return newList;
       });
     });
-    notifyAdd();
+    showNotification('session');
   }
   // standard API call to POST workout
   //TODO this now lives in context to add routines info to the workout, only post request which can be done in the context useEffect that monitors the change of userData state

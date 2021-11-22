@@ -2,6 +2,9 @@ import { createContext, useEffect, useReducer } from 'react';
 import React from 'react';
 import ApiService from './ApiService';
 
+import { appInitState } from './context/app-state/app-init-states';
+import { appStateReducer } from './context/app-state/stateManager';
+
 export const CavemanContext = createContext();
 
 export function reducer(state, action) {
@@ -23,6 +26,7 @@ export function reducer(state, action) {
 
 export function CavemanContextProvider({ children }) {
   const [userData, dispatch] = useReducer(reducer, {});
+  const [appState, appStateDispatch] = useReducer(appStateReducer, appInitState);
 
   const context = {
     userData,
@@ -30,6 +34,8 @@ export function CavemanContextProvider({ children }) {
     findWorkout: id => {
       return userData.workouts.find(wk => wk._id === id);
     },
+    appState,
+    appStateDispatch
   };
 
   //check if loading works

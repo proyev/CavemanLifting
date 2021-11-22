@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-
+import { nanoid } from 'nanoid';
 import {
   Modal,
   ModalOverlay,
@@ -23,6 +23,7 @@ import { CavemanContext } from '../../../CavemanContext';
 export default function SessionForm({ toggleForm }) {
   const { dispatch } = useContext(CavemanContext);
   const [session, setSession] = useState({
+    id: nanoid(),
     title: '',
     date: '',
     notes: '',

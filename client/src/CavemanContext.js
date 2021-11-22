@@ -31,7 +31,9 @@ export function CavemanContextProvider({ children }) {
     userData,
     dispatch,
     findWorkout: id => {
-      return userData.workouts.find(wk => wk._id === id);
+      return userData.workouts.find(wk =>
+        wk._id ? wk._id === id : wk.id === id
+      );
     },
   };
 

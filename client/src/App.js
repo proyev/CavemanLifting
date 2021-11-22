@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import { useColorMode, useColorModeValue, HStack } from '@chakra-ui/react';
 import 'react-toastify/dist/ReactToastify.css';
 import { CavemanContextProvider } from './CavemanContext';
+//import { nanoid } from 'nanoid';
 
 import {
   Dashboard,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import {
   Modal,
@@ -15,29 +15,24 @@ import {
   Textarea,
 } from '@chakra-ui/react';
 
+import { CavemanContext } from '../../../CavemanContext';
+
 // import { Modal, Button } from 'react-bootstrap';
 // import './SessionForm.css';
 
 // export default function SessionForm({ showForm, toggleForm, postWorkout }) {
-export default function SessionForm({ toggleForm, postWorkout }) {
+  //now instead of props should work with context
+export default function SessionForm({ postWorkout }) {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
   const [notes, setNotes] = useState('');
 
-  const handleClose = () => toggleForm();
+  const { appState, appStateDispatch } = useContext(CavemanContext);
 
-  function handleTitle(e) {
-    setTitle(e.target.value);
-  }
-  function handleNotes(e) {
-    setNotes(e.target.value);
-  }
-  function handleDate(e) {
-    setDate(e.target.value);
-  }
 
   function handleSubmit(e) {
     e.preventDefault();
+    //replace alerts with error msgs surronding input
     if (!title) return alert('Please enter a title bruh');
     if (!date) return alert('Cmon man you need to put a date');
     if (!notes) return alert('Nothing?');
@@ -47,12 +42,13 @@ export default function SessionForm({ toggleForm, postWorkout }) {
     setTitle('');
     setDate('');
     setNotes('');
-    handleClose();
   }
 
   return (
     <>
-      <Modal isOpen={true} onClose={handleClose}>
+      <Modal
+        isOpen={appState.showNewSession}
+        onClose={() => appStateDispatch({type: 'TOGGLE_NEW_SESSION'})}>
         <ModalOverlay />
 
         <ModalContent>
@@ -65,7 +61,7 @@ export default function SessionForm({ toggleForm, postWorkout }) {
                 size="lg"
                 variant="filled"
                 placeholder="Enter a title..."
-                onChange={handleTitle}
+                onChange={event => setTitle(event.target.value)}
                 value={title}
               />
               <Divider my="2rem" />
@@ -74,7 +70,7 @@ export default function SessionForm({ toggleForm, postWorkout }) {
                 type="date"
                 size="lg"
                 variant="filled"
-                onChange={handleDate}
+                onChange={event => setDate(event.target.value)}
                 value={date}
               />
               <FormLabel>Notes</FormLabel>
@@ -82,7 +78,7 @@ export default function SessionForm({ toggleForm, postWorkout }) {
                 type="text"
                 size="lg"
                 variant="filled"
-                onChange={handleNotes}
+                onChange={event => setNotes(event.target.value)}
                 value={notes}
               />
             </FormControl>

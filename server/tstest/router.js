@@ -4,7 +4,7 @@ const express_1 = require("express");
 const router = (0, express_1.Router)();
 const caveman_controller_1 = require("./controllers/caveman.controller");
 router.get('/dashboard', caveman_controller_1.getWorkouts);
-// router.get('/profile', getUser);
+router.put('/update/:id', caveman_controller_1.updateUser);
 router.post('/exercise', caveman_controller_1.postWorkout);
 router.put('/addinfo/:id', caveman_controller_1.addInfo);
 router.get('/user/:id', caveman_controller_1.getUser);

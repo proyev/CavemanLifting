@@ -1,4 +1,5 @@
 export interface Workout {
+  id?: string;
   title: string;
   date: Date | number;
   notes: string;

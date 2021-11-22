@@ -11,6 +11,30 @@ const getUser = async (req: Request, res: Response) => {
     const user: User = await db.User.findById(req.params.id);
     res.status(200).send(user);
   } catch (e) {
+    res.status(500);
+    console.error(e);
+  }
+};
+
+const updateUser = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    // cleanup of workouts id from the front end
+    if (req.body.workouts) {
+      req.body.workouts.map((workout: Workout) => {
+        if (workout.id) {
+          delete workout.id;
+        }
+        return workout.id;
+      });
+    }
+    const updatedUser: User = await db.User.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    res.status(201).send(updatedUser);
+  } catch (e) {
+    res.status(500);
     console.error(e);
   }
 };
@@ -24,6 +48,7 @@ const getWorkouts = async (req: Request, res: Response) => {
     );
     res.status(200).send(workouts);
   } catch (e) {
+    res.status(500);
     console.error(e);
   }
 };
@@ -50,6 +75,7 @@ const postWorkout = async (req: Request, res: Response) => {
     res.status(201);
     res.send(workoutToPost);
   } catch (e) {
+    res.status(500);
     console.error(e);
   }
 };
@@ -74,6 +100,7 @@ const addInfo = async (req: Request, res: Response) => {
     res.status(201);
     res.send(workoutToUpdate);
   } catch (e) {
+    res.status(500);
     console.error(e);
   }
 };
@@ -89,9 +116,10 @@ const getWorkoutInfo = async (req: Request, res: Response) => {
 // creates mock user in DB
 async function createMockUser(req: Request, res: Response) {
   try {
-    const newUser = await db.User.create(req.body);
+    const newUser: User = await db.User.create(req.body);
     res.status(201).send(newUser);
   } catch (e) {
+    res.status(500);
     console.error(e);
   }
 }
@@ -147,6 +175,7 @@ export {
   addInfo,
   getWorkoutInfo,
   createMockUser,
+  updateUser,
 };
 
 // // TODO:

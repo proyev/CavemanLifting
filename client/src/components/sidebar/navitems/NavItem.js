@@ -1,32 +1,89 @@
-import React from 'react';
-import { Flex, Text, Icon, Link, Menu, MenuButton } from '@chakra-ui/react';
+import React, {useContext} from 'react';
+import { Flex, Text, Icon, Link, Button } from '@chakra-ui/react';
 
-export default function NavItem({ navSize, title, icon, route }) {
+import { CavemanContext } from '../../../CavemanContext';
+
+export default function NavItem({ title, icon, route }) {
+
+  const { appState, appStateDispatch } = useContext(CavemanContext);
+
   return (
     <Flex
-      mt={30}
-      direction="column"
-      w="100%"
-      align={navSize === 'small' ? 'center' : 'flex-start'}
+      alignItems='center'
+      mt={'30px'}
+      w='100%'
+      justifyContent={'space-between'}
     >
-      <Menu placement="right">
-        <Link
-          _hover={{ bg: 'teal.500' }}
-          p={3}
-          borderRadius={8}
-          w={navSize === 'large' && '100%'}
-          href={route}
+      { route ? (
+      <Link
+        _hover={{ bg: 'teal.500' }}
+        p={2}
+        borderRadius={8}
+        w='100%'
+        href={route}
+      >
+        <Flex
+          alignItems='center'
+          w='100%'
+          justifyContent='space-between'
         >
-          <MenuButton w="100%">
-            <Flex>
-              <Icon as={icon} fontSize="xl" />
-              <Text ml={5} display={navSize === 'small' ? 'none' : 'flex'}>
-                {title}
-              </Text>
-            </Flex>
-          </MenuButton>
-        </Link>
-      </Menu>
+          <Flex
+            align={'center'}
+            w={appState.showNavbar ? '100%' : '25%'}
+            h='50px'
+          >
+            <Icon
+              as={icon}
+              fontSize={'xl'}
+              w='100%'
+            />
+          </Flex>
+          <Text
+            mx='10px'
+            display={appState.showNavbar ? 'none' : 'flex'}
+            w='75%'
+          >
+            {title}
+          </Text>
+        </Flex>
+      </Link>
+      ) : (
+      <Button
+        _hover={{ bg: 'teal.500' }}
+        bg='none'
+        p={2}
+        borderRadius={8}
+        fontWeight='regular'
+        w='100%'
+        onClick={() => appStateDispatch({type: 'TOGGLE_NEW_SESSION'})}
+      >
+        <Flex
+          alignItems='center'
+          w='100%'
+          justifyContent='space-between'
+        >
+          <Flex
+            align={'center'}
+            w={appState.showNavbar ? '100%' : '25%'}
+            h='50px'
+          >
+            <Icon
+              as={icon}
+              fontSize={'xl'}
+              w='100%'
+            />
+          </Flex>
+          <Text
+            mx='10px'
+            display={appState.showNavbar ? 'none' : 'flex'}
+            w='75%'
+          >
+            {title}
+          </Text>
+        </Flex>
+      </Button>
+      )
+      }
     </Flex>
   );
 }

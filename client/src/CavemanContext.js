@@ -17,7 +17,7 @@ export function reducer(state, action) {
       return { ...state, workouts: [...workouts] };
     }
     case 'ADD_WORKOUT': {
-      return state;
+      return { ...state, workouts: [action.payload, ...state.workouts] };
     }
     default:
       return state;

@@ -38,89 +38,116 @@ export default function Profile({ workouts }) {
 
   return (
     <Flex
-      w="95%"
-      h="99vh"
-      direction="column"
-      align="center"
-      justifyContent="space-around"
+      align='center'
+      direction='column'
+      justifyContent='space-around'
+      h='99vh'
+      w='95%'
     >
       <Flex
-        m={0}
-        direction="row"
-        justify="space-evenly"
-        align="center"
-        w="100%"
+        align='center'
+        direction='row'
+        justify='space-evenly'
+        w='100%'
       >
         <Flex
-          w="40rem"
-          p="2.5rem"
+          align='center'
           bg={tableBGColor}
-          align="center"
-          justify="space-evenly"
-          borderRadius="25px"
+          borderRadius='25px'
+          justify='space-evenly'
+          p='2.5rem'
+          w='40rem'
         >
-          <Image h="10rem" borderRadius="10px" src={profilePic} />
+          <Image
+            borderRadius='10px'
+            h='10rem'
+            src={profilePic}
+          />
 
           <VStack
-            w="30rem"
-            m="1rem"
-            p="1rem"
-            align="flex-start"
-            justify="center"
-            borderColor="gray.700"
+            align='flex-start'
+            borderColor='gray.700'
+            justify='center'
+            m='1rem'
+            p='1rem'
+            w='30rem'
           >
-            <Heading size="sm" mb="0rem">
+            <Heading
+              mb='0rem'
+              size='sm'
+            >
               Username:
             </Heading>
-            <Text mb="0.25rem" fontWeight="semi-bold">
+            <Text
+              fontWeight='semi-bold'
+              mb='0.25rem'
+            >
               {userData.username}
             </Text>
             <Divider />
-            <Heading size="sm" mb="0rem">
+            <Heading
+              size='sm'
+              mb='0'
+            >
               Bio:
             </Heading>
 
-            <Text size="lg" mb="0rem">
+            <Text
+              mb='0'
+              size='lg'
+            >
               {userData.bio}
             </Text>
           </VStack>
         </Flex>
         <Flex
-          h="100%"
-          w="30rem"
-          borderRadius="25px"
-          direction="column"
-          align="center"
-          justify="space-evenly"
+          align='center'
           bg={tableBGColor}
+          borderRadius='25px'
+          direction='column'
+          justify='space-evenly'
+          h='100%'
+          w='30rem'
         >
           <Flex
-            direction="column"
-            justify="space-evenly"
-            align="center"
-            w="75%"
+            align='center'
+            direction='column'
+            justify='space-evenly'
+            w='75%'
           >
-            <Heading size="lg">Personal Records</Heading>
+            <Heading size='lg'>Personal Records</Heading>
             {userData.prs &&
               userData.prs.map(pr => {
                 return (
                   <Flex
                     key={pr._id}
                     bg={textBG}
-                    w="100%"
-                    h="2.5rem"
-                    m="1rem"
-                    justify="space-evenly"
-                    align="center"
-                    borderRadius="25px"
+                    w='100%'
+                    h='2.5rem'
+                    m='1rem'
+                    justify='space-evenly'
+                    align='center'
+                    borderRadius='25px'
                   >
-                    <Heading size="md" fontSize="lg" letterSpacing="wide">
+                    <Heading
+                      fontSize='lg'
+                      letterSpacing='wide'
+                      size='md'
+                    >
                       {pr.workout}
                     </Heading>
-                    <Heading size="md" fontSize="md" fontWeight="semi-bold">
+                    <Heading
+                      size='md'
+                      fontSize='md'
+                      fontWeight='semi-bold'
+                    >
                       {pr.weight}
                     </Heading>
-                    <Heading size="md" fontSize="md" fontWeight="semi-bold">
+                    <Heading
+                      size='md'
+                      fontSize='md'
+                      fontWeight='semi-bold'
+                    >
                       {pr.reps}
                     </Heading>
                   </Flex>
@@ -130,25 +157,25 @@ export default function Profile({ workouts }) {
         </Flex>
       </Flex>
       <Flex
+        align='flex-end'
+        justify='space-evenly'
         m={0}
-        minH="17.5rem"
-        w="100%"
-        justify="space-evenly"
-        align="flex-end"
+        minH='17.5rem'
+        w='100%'
       >
         {latest ? (
           <Table
-            size="md"
-            variant="simple"
-            colorScheme="teal"
             bg={tableBGColor}
-            borderBottomRadius="25px"
-            w="40rem"
+            borderBottomRadius='25px'
+            colorScheme='teal'
+            size='md'
+            variant='simple'
+            w='40rem'
           >
             <TableCaption
-              placement="top"
               bg={tableBGColor}
-              borderTopRadius="25px"
+              borderTopRadius='25px'
+              placement='top'
             >
               Latest workout
             </TableCaption>
@@ -166,7 +193,7 @@ export default function Profile({ workouts }) {
               {latest.routine &&
                 latest.routine.map(routine => {
                   return (
-                    <Tr size="lg" key={routine._id}>
+                    <Tr size='lg' key={routine._id}>
                       <Td>{routine.lift}</Td>
                       <Td>{routine.weight}</Td>
                       <Td>{routine.sets}</Td>
@@ -181,13 +208,13 @@ export default function Profile({ workouts }) {
           <Text>Profile Loading</Text>
         )}
         <Flex
-          h="95%"
-          w="30rem"
-          borderRadius="25px"
-          direction="column"
-          align="flex-start"
-          justify="space-evenly"
+          align='flex-start'
           bg={tableBGColor}
+          borderRadius='25px'
+          direction='column'
+          justify='space-evenly'
+          h='95%'
+          w='30rem'
         >
           <Chart workouts={workouts} />
         </Flex>

@@ -49,7 +49,6 @@ export function CavemanContextProvider({ children }) {
   useEffect(() => {
     (async () => {
       const user = await ApiService.getUser('6197bb2f2d805d2db970edee');
-      console.log(user);
       dispatch({ type: 'SET_USER', payload: user });
     })();
   }, []);

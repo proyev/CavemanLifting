@@ -26,11 +26,11 @@ export default function Session({ id, first }) {
         {workout.title} - {moment(workout.date).format('MMM Do')}
       </Text>
       <VStack>
-        <Text fontWeight='400' mb='1rem'>
+        <Text fontWeight="400" mb="1rem">
           {workout.notes}
         </Text>
-        <Divider borderStyle='none' />
-        <Flex align='center' justify='space-evenly'>
+        <Divider borderStyle="none" />
+        <Flex align="center" justify="space-evenly">
           {workout.routine.map(routine => {
             return (
               <Flex {...style.flex} key={routine._id ? routine._id : nanoid()}>
@@ -44,7 +44,12 @@ export default function Session({ id, first }) {
           })}
         </Flex>
       </VStack>
-      <Button {...style.button} onClick={() => appStateDispatch({type: 'TOGGLE_EDIT_SESSION'})}>
+      <Button
+        {...style.button}
+        onClick={() =>
+          appStateDispatch({ type: 'TOGGLE_EDIT_SESSION', id: id })
+        }
+      >
         Add Details
       </Button>
     </VStack>

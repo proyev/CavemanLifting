@@ -18,14 +18,15 @@ import { CavemanContext } from '../../../CavemanContext';
 import { showNotification } from '../../../Utils/Helpers';
 
 //TODO detailsForm should be a part of Context as
-export default function SessionDetails({ detailsForm }) {
-  const [routine, setRoutine] = useState({
+export default function SessionDetails({ id }) {
+  const initalRoutine = {
     lift: '',
     weight: '',
     sets: '',
     reps: '',
     rest: '',
-  });
+  };
+  const [routine, setRoutine] = useState(initalRoutine);
 
   const { dispatch, appState, appStateDispatch } = useContext(CavemanContext);
 
@@ -35,7 +36,6 @@ export default function SessionDetails({ detailsForm }) {
       : Number(e.target.value);
     setRoutine({ ...routine, [e.target.name]: number });
   }
-
   function handleSubmit() {
     if (
       !routine.lift ||
@@ -46,13 +46,10 @@ export default function SessionDetails({ detailsForm }) {
     ) {
       return alert('Please fill all fields');
     }
-    dispatch({ type: 'ADD_ROUTINE', payload: routine, id: detailsForm });
+    dispatch({ type: 'ADD_ROUTINE', payload: routine, id: id });
     showNotification();
-
-    //addInfo(routine, detailsForm);
+    setRoutine(initalRoutine);
   }
-  //TODO form input can be placed as a separate element and looped over to get the right data
-  //TODO since our lift is limited to 5 exercises only we can use list input to restrict user. Currently if user makes a mistake it will accept it.
   return (
     <Modal
       isOpen={appState.showEditSession}

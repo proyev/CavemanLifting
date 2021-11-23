@@ -1,5 +1,6 @@
 export const appInitState = {
   showEditSession: false,
   showNavbar: false,
-  showNewSession: false
-}
+  showNewSession: false,
+  workoutId: '',
+};

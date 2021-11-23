@@ -3,17 +3,18 @@ export function appStateReducer(state, action) {
     case 'TOGGLE_NEW_SESSION':
       return {
         ...state,
-        showNewSession: !state.showNewSession
-      }
+        showNewSession: !state.showNewSession,
+      };
     case 'TOGGLE_EDIT_SESSION':
       return {
         ...state,
-        showEditSession: !state.showEditSession
+        showEditSession: !state.showEditSession,
+        workoutId: action.id,
       };
     case 'TOGGLE_NAVBAR':
       return {
         ...state,
-        showNavbar: !state.showNavbar
+        showNavbar: !state.showNavbar,
       };
     default:
       return state;

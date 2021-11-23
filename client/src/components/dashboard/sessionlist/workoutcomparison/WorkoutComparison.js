@@ -103,7 +103,6 @@ export default function WorkoutComparison({ workouts }) {
 
   useEffect(() => {
     setAreaData(dataCreation(workouts));
-    console.log(workouts);
   }, [workouts]);
 
   return (

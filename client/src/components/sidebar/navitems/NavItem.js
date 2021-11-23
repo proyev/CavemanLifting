@@ -10,16 +10,16 @@ export default function NavItem({ title, icon, route }) {
   return (
     <Flex
       alignItems='center'
-      justifyContent={'space-between'}
-      mt={'30px'}
+      justifyContent='space-between'
+      mt='30px'
       w='100%'
     >
       { route ? (
       <Link
         _hover={{ bg: 'teal.500' }}
-        borderRadius={8}
+        borderRadius='8px'
         href={route}
-        p={2}
+        p='2px'
         w='100%'
       >
         <Flex
@@ -28,13 +28,13 @@ export default function NavItem({ title, icon, route }) {
           w='100%'
         >
           <Flex
-            align={'center'}
+            align='center'
             h='50px'
             w={appState.showNavbar ? '100%' : '25%'}
           >
             <Icon
               as={icon}
-              fontSize={'xl'}
+              fontSize='xl'
               w='100%'
             />
           </Flex>
@@ -51,9 +51,9 @@ export default function NavItem({ title, icon, route }) {
       <Button
         _hover={{ bg: 'teal.500' }}
         bg='none'
-        borderRadius={8}
+        borderRadius='8px'
         fontWeight='regular'
-        p={2}
+        p='2px'
         w='100%'
         onClick={() => appStateDispatch({type: 'TOGGLE_NEW_SESSION'})}
       >
@@ -63,13 +63,13 @@ export default function NavItem({ title, icon, route }) {
           w='100%'
         >
           <Flex
-            align={'center'}
+            align='center'
             h='50px'
             w={appState.showNavbar ? '100%' : '25%'}
           >
             <Icon
               as={icon}
-              fontSize={'xl'}
+              fontSize='xl'
               w='100%'
             />
           </Flex>

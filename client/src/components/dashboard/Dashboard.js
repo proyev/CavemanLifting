@@ -2,6 +2,7 @@ import React from 'react';
 import './Dashboard.css';
 import { Box, Flex } from '@chakra-ui/react';
 
+import SessionDetails from './sessiondetails/SessionDetails';
 import SessionList from './sessionlist/SessionList';
 // import Gym from '../gyms/Gym';
 
@@ -10,6 +11,7 @@ export default function Dashboard({ navSize, workouts, toggleDetailsForm }) {
   return (
     // <div className="dashboard">
     <Box w={navSize === 'small' ? '97.5%' : '92.5%'} m="0px !important">
+      <SessionDetails />
       <Flex direction="column" align="center">
         <SessionList
           workouts={workouts}

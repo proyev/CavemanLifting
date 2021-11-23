@@ -10,27 +10,27 @@ export default function NavItem({ title, icon, route }) {
   return (
     <Flex
       alignItems='center'
+      justifyContent={'space-between'}
       mt={'30px'}
       w='100%'
-      justifyContent={'space-between'}
     >
       { route ? (
       <Link
         _hover={{ bg: 'teal.500' }}
-        p={2}
         borderRadius={8}
-        w='100%'
         href={route}
+        p={2}
+        w='100%'
       >
         <Flex
           alignItems='center'
-          w='100%'
           justifyContent='space-between'
+          w='100%'
         >
           <Flex
             align={'center'}
-            w={appState.showNavbar ? '100%' : '25%'}
             h='50px'
+            w={appState.showNavbar ? '100%' : '25%'}
           >
             <Icon
               as={icon}
@@ -39,8 +39,8 @@ export default function NavItem({ title, icon, route }) {
             />
           </Flex>
           <Text
-            mx='10px'
             display={appState.showNavbar ? 'none' : 'flex'}
+            mx='10px'
             w='75%'
           >
             {title}
@@ -51,21 +51,21 @@ export default function NavItem({ title, icon, route }) {
       <Button
         _hover={{ bg: 'teal.500' }}
         bg='none'
-        p={2}
         borderRadius={8}
         fontWeight='regular'
+        p={2}
         w='100%'
         onClick={() => appStateDispatch({type: 'TOGGLE_NEW_SESSION'})}
       >
         <Flex
           alignItems='center'
-          w='100%'
           justifyContent='space-between'
+          w='100%'
         >
           <Flex
             align={'center'}
-            w={appState.showNavbar ? '100%' : '25%'}
             h='50px'
+            w={appState.showNavbar ? '100%' : '25%'}
           >
             <Icon
               as={icon}
@@ -74,8 +74,8 @@ export default function NavItem({ title, icon, route }) {
             />
           </Flex>
           <Text
-            mx='10px'
             display={appState.showNavbar ? 'none' : 'flex'}
+            mx='10px'
             w='75%'
           >
             {title}

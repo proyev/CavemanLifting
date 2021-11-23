@@ -23,7 +23,7 @@ import {
 import profilePic from '../../assets/caveman_profile_pic.PNG';
 import { CavemanContext } from '../../CavemanContext';
 
-export default function Profile({ workouts }) {
+export default function Profile() {
   const [latest, setLatest] = useState({});
 
   const { userData } = useContext(CavemanContext);
@@ -191,9 +191,9 @@ export default function Profile({ workouts }) {
             <Tbody>
               <Tr></Tr>
               {latest.routine &&
-                latest.routine.map(routine => {
+                latest.routine.map((routine, index) => {
                   return (
-                    <Tr size='lg' key={routine._id}>
+                    <Tr size="lg" key={index}>
                       <Td>{routine.lift}</Td>
                       <Td>{routine.weight}</Td>
                       <Td>{routine.sets}</Td>
@@ -216,10 +216,10 @@ export default function Profile({ workouts }) {
           h='95%'
           w='30rem'
         >
-          <Chart workouts={workouts} />
+          <Chart workouts={userData.workouts} />
         </Flex>
       </Flex>
-      {workouts.length && <Heatmap workouts={workouts} />}
+      {userData.workouts && <Heatmap workouts={userData.workouts} />}
     </Flex>
   );
 }

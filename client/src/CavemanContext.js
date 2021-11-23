@@ -28,7 +28,10 @@ export function reducer(state, action) {
 
 export function CavemanContextProvider({ children }) {
   const [userData, dispatch] = useReducer(reducer, {});
-  const [appState, appStateDispatch] = useReducer(appStateReducer, appInitState);
+  const [appState, appStateDispatch] = useReducer(
+    appStateReducer,
+    appInitState
+  );
 
   const context = {
     userData,
@@ -39,7 +42,7 @@ export function CavemanContextProvider({ children }) {
       );
     },
     appState,
-    appStateDispatch
+    appStateDispatch,
   };
 
   //check if loading works

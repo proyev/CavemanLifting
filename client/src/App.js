@@ -19,7 +19,6 @@ import {
 
 //TODO: App is quite bloated with lots of states - usecontext or redux to define a data flow
 function App() {
-
   // detialsForm used for 'Add details'
   // infoAdd used to keep track, and update the workout cards on the dashboard
 
@@ -34,10 +33,7 @@ function App() {
   //TODO a lot of props drilling here needs to be managed centrally
   return (
     <CavemanContextProvider>
-      <HStack
-        p='0'
-        bg={bgColor}
-      >
+      <HStack p="0" bg={bgColor}>
         <ToastContainer />
         {/* Used as a container for any and all Toasts (toast notification naming convention) */}
 
@@ -48,30 +44,15 @@ function App() {
         */}
         <SessionForm />
 
-        <HStack
-          m='0 !important'
-          w='100%'
-        >
+        <HStack m="0 !important" w="100%">
           <Router>
             <Sidebar toggleColorMode={toggleColorMode} />
             {/* Router logic is give to the sidebar^ while actual routing happens below */}
             <Routes>
-              <Route
-                path='/dashboard'
-                element={<Dashboard />}
-              />
-              <Route
-                path='/profile'
-                element={<Profile />}
-              />
-              <Route
-                path='/workouts'
-                element={<WorkoutInfo />}
-              />
-              <Route
-                path='/gyms'
-                element={<Gym />}
-              />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/workouts" element={<WorkoutInfo />} />
+              <Route path="/gyms" element={<Gym />} />
             </Routes>
           </Router>
         </HStack>

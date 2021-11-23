@@ -1,10 +1,6 @@
 // import './App.css';
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-<<<<<<< HEAD
-
-=======
->>>>>>> 63bc06076715c1d5746a1451fc77c9f049c12388
 import { ToastContainer } from 'react-toastify';
 import { useColorMode, useColorModeValue, HStack } from '@chakra-ui/react';
 import 'react-toastify/dist/ReactToastify.css';
@@ -44,10 +40,7 @@ function App() {
   //TODO a lot of props drilling here needs to be managed centrally
   return (
     <CavemanContextProvider>
-      <HStack
-        p='0'
-        bg={bgColor}
-      >
+      <HStack p="0" bg={bgColor}>
         <ToastContainer />
         {/* Used as a container for any and all Toasts (toast notification naming convention) */}
 
@@ -58,10 +51,7 @@ function App() {
         */}
         <SessionForm />
 
-        <HStack
-          m='0 !important'
-          w='100%'
-        >
+        <HStack m="0 !important" w="100%">
           <Router>
             <Sidebar
               //postWorkout={postWorkout}
@@ -71,7 +61,7 @@ function App() {
             {/* Router logic is give to the sidebar^ while actual routing happens below */}
             <Routes>
               <Route
-                path='/dashboard'
+                path="/dashboard"
                 element={
                   <Dashboard
                     navSize={navSize}
@@ -81,23 +71,17 @@ function App() {
                 }
               />
               <Route
-                path='/profile'
+                path="/profile"
                 element={
                   <Profile
                     workouts={workouts}
-                    userData='{}'
+                    userData="{}"
                     navSize={navSize}
                   />
                 }
               />
-              <Route
-                path='/workouts'
-                element={<WorkoutInfo />}
-              />
-              <Route
-                path='/gyms'
-                element={<Gym navSize={navSize} />}
-              />
+              <Route path="/workouts" element={<WorkoutInfo />} />
+              <Route path="/gyms" element={<Gym navSize={navSize} />} />
             </Routes>
           </Router>
         </HStack>

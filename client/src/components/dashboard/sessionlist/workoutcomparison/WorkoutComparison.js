@@ -55,53 +55,55 @@ export default function WorkoutComparison({ workouts }) {
       });
       count++;
     }
-    for (let session of data) {
-      const splitDate = session.date.split('-');
-      const day = splitDate[2].slice(0, 2);
-      const month = Number(splitDate[1]) - 1;
+    if (data) {
+      for (let session of data) {
+        const splitDate = session.date.split('-');
+        const day = splitDate[2].slice(0, 2);
+        const month = Number(splitDate[1]) - 1;
 
-      if (month === new Date().getMonth() && session.routine.length > 0) {
-        for (let workout of session.routine) {
-          if (
-            workout.lift === 'Deadlift' ||
-            workout.lift === 'Bench' ||
-            workout.lift === 'Squat' ||
-            workout.lift === 'Overhead' ||
-            workout.lift === 'Bicep Curl'
-          ) {
-            const theOne = workout.lift;
-            workoutData[Number(day) - 1][theOne] = workout.weight;
-            switch (theOne) {
-              case 'Deadlift':
-                organisedPieData[0].value += 1;
-                break;
-              case 'Bench':
-                organisedPieData[1].value += 1;
-                break;
-              case 'Overhead':
-                organisedPieData[2].value += 1;
-                break;
-              case 'Squat':
-                organisedPieData[3].value += 1;
-                break;
-              case 'Bicep Curl':
-                organisedPieData[4].value += 1;
-                break;
+        if (month === new Date().getMonth() && session.routine.length > 0) {
+          for (let workout of session.routine) {
+            if (
+              workout.lift === 'Deadlift' ||
+              workout.lift === 'Bench' ||
+              workout.lift === 'Squat' ||
+              workout.lift === 'Overhead' ||
+              workout.lift === 'Bicep Curl'
+            ) {
+              const theOne = workout.lift;
+              workoutData[Number(day) - 1][theOne] = workout.weight;
+              switch (theOne) {
+                case 'Deadlift':
+                  organisedPieData[0].value += 1;
+                  break;
+                case 'Bench':
+                  organisedPieData[1].value += 1;
+                  break;
+                case 'Overhead':
+                  organisedPieData[2].value += 1;
+                  break;
+                case 'Squat':
+                  organisedPieData[3].value += 1;
+                  break;
+                case 'Bicep Curl':
+                  organisedPieData[4].value += 1;
+                  break;
 
-              default:
-                break;
+                default:
+                  break;
+              }
             }
           }
         }
       }
     }
     setPieData(organisedPieData);
-    console.log(pieData);
     return workoutData;
   }
 
   useEffect(() => {
     setAreaData(dataCreation(workouts));
+    console.log(workouts);
   }, [workouts]);
 
   return (

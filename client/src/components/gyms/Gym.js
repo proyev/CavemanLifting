@@ -1,10 +1,11 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useContext, useState } from 'react';
 
 import ApiService from '../../ApiService';
 import './Gym.css';
-//import ApiKey from '../../ApiKey';
 
 import mapboxgl from '!mapbox-gl';
+
+import { CavemanContext } from '../../CavemanContext';
 
 // Pls don't hate me for how messy this is
 
@@ -17,6 +18,8 @@ export default function Gym() {
   const [lng] = useState(-118.2437);
   const [lat] = useState(34.052);
   const [zoom] = useState(14.5);
+
+  const { appState } = useContext(CavemanContext);
 
   // const [lng, setLng] = useState(-118.2437);
   // const [lat, setLat] = useState(34.052);
@@ -152,7 +155,11 @@ export default function Gym() {
   });
 
   return (
-    <div>
+    <div
+      style={
+        appState.showNavbar ? {width: '97.5%'} : {width: '92.5%'}
+      }
+    >
       <div className="sidebar">
         <div className="heading">
           <h1>Local gyms</h1>

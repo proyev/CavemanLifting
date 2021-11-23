@@ -5,17 +5,17 @@ import Session from '../sessionitem/Session';
 import WorkoutComparison from './workoutcomparison/WorkoutComparison';
 import { CavemanContext } from '../../../CavemanContext';
 
-export default function SessionList({ toggleDetailsForm }) {
+export default function SessionList() {
   const { userData } = useContext(CavemanContext);
   const workouts = userData.workouts ? [...userData.workouts] : [];
   return (
     <Flex
-      h="100vh"
-      w="100%"
-      align="center"
-      pt="1.5rem"
-      direction="column"
-      overflowY="scroll"
+      align='center'
+      direction='column'
+      h='100vh'
+      overflowY='scroll'
+      pt='1.5rem'
+      w='100%'
     >
       <WorkoutComparison workouts={workouts} />
       {workouts.map((workout, index) => {
@@ -25,7 +25,6 @@ export default function SessionList({ toggleDetailsForm }) {
             first={index === 0 && true}
             id={id}
             key={id}
-            toggleDetailsForm={toggleDetailsForm}
           />
         ) : (
           <p>Go hit the gym bud</p>

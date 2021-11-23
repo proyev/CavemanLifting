@@ -21,7 +21,7 @@ import { showNotification } from '../../../Utils/Helpers';
 // import './SessionForm.css';
 
 // export default function SessionForm({ showForm, toggleForm, postWorkout }) {
-export default function SessionForm({ toggleForm }) {
+export default function SessionForm() {
   const { appState, appStateDispatch, dispatch } = useContext(CavemanContext);
   const [session, setSession] = useState({
     id: nanoid(),

@@ -10,8 +10,6 @@ export function appStateReducer(state, action) {
         ...state,
         showEditSession: !state.showEditSession
       };
-    case 'TOGGLE_VIEW_MODE':
-      return {}
     case 'TOGGLE_NAVBAR':
       return {
         ...state,

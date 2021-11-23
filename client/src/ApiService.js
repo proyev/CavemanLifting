@@ -4,7 +4,7 @@ const BASE_URL = 'http://localhost:3001';
 //import ApiKey from './ApiKey';
 
 //TODO check this function with the below fetch request. consolidate
-function mapRequest(path) {
+async function mapRequest(path) {
   return fetch(path)
     .then(res => (res.status < 400 ? res : Promise.reject()))
     .then(res => (res.status !== 204 ? res.json() : res))
@@ -13,7 +13,7 @@ function mapRequest(path) {
     });
 }
 // TODO can potentially refactor to async functions
-function fetchRequest(path, options) {
+async function fetchRequest(path, options) {
   return fetch(BASE_URL + path, options)
     .then(res => (res.status < 400 ? res : Promise.reject()))
     .then(res => (res.status !== 204 ? res.json() : res))
@@ -31,6 +31,14 @@ function getGeolocatedGyms(lat, lng) {
 
 function getWorkouts() {
   return fetchRequest('/dashboard');
+}
+
+function updateUser(id, body) {
+  return fetchRequest(`/update/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
 }
 
 function postWorkout(body) {
@@ -64,6 +72,7 @@ const ApiService = {
   addInfo,
   getUser,
   getWorkoutInfo,
+  updateUser,
 };
 
 export default ApiService;

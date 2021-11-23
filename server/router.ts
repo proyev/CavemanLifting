@@ -7,10 +7,11 @@ import {
   addInfo,
   getWorkoutInfo,
   createMockUser,
+  updateUser,
 } from './controllers/caveman.controller';
 
 router.get('/dashboard', getWorkouts);
-// router.get('/profile', getUser);
+router.put('/update/:id', updateUser);
 router.post('/exercise', postWorkout);
 router.put('/addinfo/:id', addInfo);
 router.get('/user/:id', getUser);

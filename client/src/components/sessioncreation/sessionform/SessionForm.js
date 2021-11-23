@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-
+import React, { useContext, useState } from 'react';
+import { nanoid } from 'nanoid';
 import {
   Modal,
   ModalOverlay,
@@ -14,34 +14,35 @@ import {
   Divider,
   Textarea,
 } from '@chakra-ui/react';
-
 import { CavemanContext } from '../../../CavemanContext';
+import { showNotification } from '../../../Utils/Helpers';
 
 // import { Modal, Button } from 'react-bootstrap';
 // import './SessionForm.css';
 
 // export default function SessionForm({ showForm, toggleForm, postWorkout }) {
-  //now instead of props should work with context
-export default function SessionForm({ postWorkout }) {
-  const [title, setTitle] = useState('');
-  const [date, setDate] = useState('');
-  const [notes, setNotes] = useState('');
+export default function SessionForm({ toggleForm }) {
+  const { appState, appStateDispatch, dispatch } = useContext(CavemanContext);
+  const [session, setSession] = useState({
+    id: nanoid(),
+    title: '',
+    date: '',
+    notes: '',
+    routine: [],
+  });
 
-  const { appState, appStateDispatch } = useContext(CavemanContext);
-
+  function handleForm(e) {
+    //TODO date is currently a string... when posting to the DB this needs to be a date format
+    setSession({ ...session, [e.target.name]: e.target.value });
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
-    //replace alerts with error msgs surronding input
-    if (!title) return alert('Please enter a title bruh');
-    if (!date) return alert('Cmon man you need to put a date');
-    if (!notes) return alert('Nothing?');
-
-    postWorkout(title, date, notes);
-
-    setTitle('');
-    setDate('');
-    setNotes('');
+    if (!session.title) return alert('Please enter a title bruh');
+    if (!session.date) return alert('Cmon man you need to put a date');
+    if (!session.notes) return alert('Nothing?');
+    dispatch({ type: 'ADD_WORKOUT', payload: session });
+    showNotification('session');
   }
 
   return (
@@ -58,28 +59,31 @@ export default function SessionForm({ postWorkout }) {
               <FormLabel>Title</FormLabel>
               <Input
                 type="text"
+                name="title"
                 size="lg"
                 variant="filled"
                 placeholder="Enter a title..."
-                onChange={event => setTitle(event.target.value)}
-                value={title}
+                onChange={handleForm}
+                value={session.title}
               />
               <Divider my="2rem" />
               <FormLabel>Date</FormLabel>
               <Input
                 type="date"
+                name="date"
                 size="lg"
                 variant="filled"
-                onChange={event => setDate(event.target.value)}
-                value={date}
+                onChange={handleForm}
+                value={session.date}
               />
               <FormLabel>Notes</FormLabel>
               <Textarea
                 type="text"
+                name="notes"
                 size="lg"
                 variant="filled"
-                onChange={event => setNotes(event.target.value)}
-                value={notes}
+                onChange={handleForm}
+                value={session.notes}
               />
             </FormControl>
           </ModalBody>

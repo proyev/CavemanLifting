@@ -8,7 +8,7 @@ import {
   ModalBody,
   FormControl,
   FormLabel,
-  Input,
+  Select,
   Button,
   NumberInput,
   NumberInputField,
@@ -56,98 +56,101 @@ export default function SessionDetails({ detailsForm }) {
   return (
     <Modal
       isOpen={appState.showEditSession}
-      onClose={appStateDispatch({type: 'TOGGLE_EDIT_SESSION'})}
-    >
+      onClose={appStateDispatch({type: 'TOGGLE_EDIT_SESSION'})}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader textAlign="center">Enter Session Details</ModalHeader>
         <ModalBody pb={6}>
           <FormControl>
             <FormLabel>Lift</FormLabel>
-            <Input
-              type="text"
+            <Select
               name="lift"
               size="lg"
-              variant="filled"
-              placeholder="Enter a lift..."
-              onChange={e => handleRoutine(e)}
+              placeholder="Select a lift..."
+              onChange={handleRoutine}
               value={routine.lift}
-            />
-
-            <Divider my="2rem" />
-
-            <FormLabel>Weight (kg)</FormLabel>
-            <NumberInput
-              type="number"
-              step={2.5}
-              size="lg"
-              allowMouseWheel
-              variant="filled"
-              value={routine.weight}
-              placeholder="Weight.."
             >
-              <NumberInputField
-                name="weight"
-                onChange={handleRoutine}
-                placeholder="Weight.."
-              />
-            </NumberInput>
+              <option value="Deadlift">Deadlift</option>
+              <option value="Bench">Bench</option>
+              <option value="Squat">Squat</option>
+              <option value="Overhead">Overhead</option>
+              <option value="Bicep Curl">Bicep Curl</option>
+            </Select>
 
-            <FormLabel>Sets</FormLabel>
-            <NumberInput
-              step={1}
-              size="lg"
-              allowMouseWheel
-              variant="filled"
-              value={routine.sets}
-            >
-              <NumberInputField
-                name="sets"
-                onChange={handleRoutine}
-                placeholder="Number of sets.."
-              />
-            </NumberInput>
+          <Divider my="2rem" />
 
-            <FormLabel>Reps</FormLabel>
-            <NumberInput
-              step={1}
-              size="lg"
-              allowMouseWheel
-              variant="filled"
-              value={routine.reps}
-            >
-              <NumberInputField
-                name="reps"
-                onChange={handleRoutine}
-                placeholder="Number of reps.."
-              />
-            </NumberInput>
-
-            <FormLabel>Rest</FormLabel>
-            <NumberInput
-              step={5}
-              size="lg"
-              allowMouseWheel
-              variant="filled"
-              value={routine.rest}
-            >
-              <NumberInputField
-                name="rest"
-                onChange={handleRoutine}
-                placeholder="Rest in seconds.."
-              />
-            </NumberInput>
-          </FormControl>
-        </ModalBody>
-        <ModalFooter>
-          <Button
-            colorScheme="green"
-            onClick={handleSubmit}
+          <FormLabel>Weight (kg)</FormLabel>
+          <NumberInput
+            type="number"
+            step={2.5}
+            size="lg"
+            allowMouseWheel
+            variant="filled"
+            value={routine.weight}
+            placeholder="Weight.."
           >
-            Save
-          </Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+            <NumberInputField
+              name="weight"
+              onChange={handleRoutine}
+              placeholder="Weight.."
+            />
+          </NumberInput>
+
+          <FormLabel>Sets</FormLabel>
+          <NumberInput
+            step={1}
+            size="lg"
+            allowMouseWheel
+            variant="filled"
+            value={routine.sets}
+          >
+            <NumberInputField
+              name="sets"
+              onChange={handleRoutine}
+              placeholder="Number of sets.."
+            />
+          </NumberInput>
+
+          <FormLabel>Reps</FormLabel>
+          <NumberInput
+            step={1}
+            size="lg"
+            allowMouseWheel
+            variant="filled"
+            value={routine.reps}
+          >
+            <NumberInputField
+              name="reps"
+              onChange={handleRoutine}
+              placeholder="Number of reps.."
+            />
+          </NumberInput>
+
+          <FormLabel>Rest</FormLabel>
+          <NumberInput
+            step={5}
+            size="lg"
+            allowMouseWheel
+            variant="filled"
+            value={routine.rest}
+          >
+            <NumberInputField
+              name="rest"
+              onChange={handleRoutine}
+              placeholder="Rest in seconds.."
+            />
+          </NumberInput>
+        </FormControl>
+      </ModalBody>
+      <ModalFooter>
+        <Button
+          colorScheme="green"
+          onClick={handleSubmit}
+        >
+          Save
+        </Button>
+      </ModalFooter>
+    </ModalContent>
+  </Modal>
   );
 }

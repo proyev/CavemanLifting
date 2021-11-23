@@ -1,5 +1,4 @@
-import { createContext, useEffect, useReducer } from 'react';
-import React from 'react';
+import React, { createContext, useEffect, useReducer } from 'react';
 import ApiService from './ApiService';
 
 import { appInitState } from './context/app-state/app-init-states';
@@ -13,11 +12,14 @@ export function reducer(state, action) {
       return { ...action.payload };
     case 'ADD_ROUTINE': {
       const workouts = [...state.workouts].map(w => {
-        if (w._id === action.id) {
+        if (w._id ? w._id === action.id : w.id === action.id) {
           return { ...w, routine: [...w.routine, action.payload] };
         } else return w;
       });
       return { ...state, workouts: [...workouts] };
+    }
+    case 'ADD_WORKOUT': {
+      return { ...state, workouts: [{ ...action.payload }, ...state.workouts] };
     }
     default:
       return state;
@@ -32,7 +34,9 @@ export function CavemanContextProvider({ children }) {
     userData,
     dispatch,
     findWorkout: id => {
-      return userData.workouts.find(wk => wk._id === id);
+      return userData.workouts.find(wk =>
+        wk._id ? wk._id === id : wk.id === id
+      );
     },
     appState,
     appStateDispatch
@@ -42,12 +46,13 @@ export function CavemanContextProvider({ children }) {
   useEffect(() => {
     (async () => {
       const user = await ApiService.getUser('6197bb2f2d805d2db970edee');
-      console.log(user);
       dispatch({ type: 'SET_USER', payload: user });
     })();
   }, []);
 
-  //TODO when front end is ready, set the useEffect to post the data to the db whenever userData changes
+  useEffect(() => {
+    if (userData._id) ApiService.updateUser(userData._id, userData);
+  }, [userData]);
 
   return (
     <CavemanContext.Provider value={context}>

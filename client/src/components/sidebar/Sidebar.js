@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+
 import {
   Flex,
   Divider,
@@ -13,12 +14,11 @@ import {
 import { FiMenu, FiHome, FiUser } from 'react-icons/fi';
 import { FaCity, FaDumbbell, FaPlusSquare } from 'react-icons/fa';
 import profilePic from '../../assets/caveman_profile_pic.PNG';
+
 import NavItem from './navitems/NavItem';
 import { CavemanContext } from '../../CavemanContext';
 
-export default function Sidebar({
-  toggleColorMode,
-}) {
+export default function Sidebar({ toggleColorMode }) {
   const bgColor = useColorModeValue('green.400', 'green.700');
 
   const { appState, appStateDispatch } = useContext(CavemanContext);
@@ -28,7 +28,7 @@ export default function Sidebar({
       alignItems='center'
       bg={bgColor}
       boxShadow='0 4px 12px 0 rgba(0, 0, 0, 0.05)'
-      borderRightRadius={'15px'}
+      borderRightRadius='15px'
       direction='column'
       pos='sticky'
       h='100vh'
@@ -36,25 +36,25 @@ export default function Sidebar({
     >
       <Flex
         alignItems='center'
-        p='15px'
-        direction='column'
         as='nav'
+        direction='column'
         justifyContent='center'
+        p='15px'
       >
         <Flex
           justifyContent='center'
           mb='15px'
         >
           <Switch
-            onChange={toggleColorMode}
             w='100%'
+            onChange={toggleColorMode}
           />
         </Flex>
         <IconButton
           bg={bgColor}
-          w='100%'
           icon={<FiMenu />}
-          onClick={() => appStateDispatch({type: 'TOGGLE_NAVBAR'})}
+          w='100%'
+          onClick={() => appStateDispatch({ type: 'TOGGLE_NAVBAR' })}
         />
         <NavItem
           title='Dashboard'
@@ -84,36 +84,60 @@ export default function Sidebar({
 
       {/*bottom avatar thingy */}
       <Flex
-        p='5%'
+        alignItems='center'
         direction='column'
-        //this
-        align={appState.showNavbar ? 'none' : 'flex'}
-        //
+        justifyContent='flex-end'
+        h='100%'
+        my='30px'
         w='100%'
-        mb={4}
       >
         <Divider
-          display={appState.showNavbar ? 'none' : 'flex'}
           borderStyle='none'
+          display={appState.showNavbar ? 'none' : 'flex'}
+          w='100%'
         />
-        <Flex mt={4} align='center'>
-          <Link href='/dashboard'>
-            <Avatar
-              size='sm'
-              src={profilePic}
-              // ml={navSize === 'small' ? '15px' : '0px'}
-            />
-          </Link>
-          <Flex
-            direction='column'
-            ml={4}
-            // display={navSize === 'small' ? 'none' : 'flex'}
+        <Flex
+          alignItems='center'
+          justifyContent='space-between'
+          mt='30px'
+          h='50px'
+          w='100%'
+        >
+          <Link
+            _hover={{ bg: 'teal.500' }}
+            borderRadius='8px'
+            display='flex'
+            href='/dashboard'
+            p='2px'
+            w='100%'
           >
-            <Heading as='h3' size='sm'>
-              Unga Bunga
-            </Heading>
-            <Text>SerCaveman</Text>
-          </Flex>
+            <Flex
+              alignItems='center'
+              justifyContent='center'
+              w={appState.showNavbar ? '100%' : '25%'}
+            >
+              <Avatar
+                size='sm'
+                src={profilePic}
+              />
+            </Flex>
+            <Flex
+              alignItems='flex-end'
+              direction='column'
+              display={appState.showNavbar ? 'none' : 'flex'}
+              justifyContent='center'
+              mx='10px'
+              w='75%'
+            >
+              <Heading
+                as='h3'
+                size='sm'
+              >
+                Unga Bunga
+              </Heading>
+              <Text>SerCaveman</Text>
+            </Flex>
+          </Link>
         </Flex>
       </Flex>
     </Flex>

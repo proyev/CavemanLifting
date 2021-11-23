@@ -28,7 +28,10 @@ export function reducer(state, action) {
 
 export function CavemanContextProvider({ children }) {
   const [userData, dispatch] = useReducer(reducer, {});
-  const [appState, appStateDispatch] = useReducer(appStateReducer, appInitState);
+  const [appState, appStateDispatch] = useReducer(
+    appStateReducer,
+    appInitState
+  );
 
   const context = {
     userData,
@@ -39,13 +42,14 @@ export function CavemanContextProvider({ children }) {
       );
     },
     appState,
-    appStateDispatch
+    appStateDispatch,
   };
 
   //check if loading works
   useEffect(() => {
     (async () => {
       const user = await ApiService.getUser('6197bb2f2d805d2db970edee');
+      console.log(user);
       dispatch({ type: 'SET_USER', payload: user });
     })();
   }, []);

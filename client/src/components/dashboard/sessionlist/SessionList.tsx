@@ -7,7 +7,7 @@ import { CavemanContext } from '../../../CavemanContext';
 
 export default function SessionList() {
   const { userData } = useContext(CavemanContext);
-  const workouts = userData.workouts ? [...userData.workouts] : [];
+  const workouts = userData!.workouts ? [...userData!.workouts] : [];
   return (
     <Flex
       align='center'
@@ -19,7 +19,7 @@ export default function SessionList() {
     >
       <WorkoutComparison workouts={workouts} />
       {workouts.map((workout, index) => {
-        const id = workout._id ? workout._id : workout.id;
+        const id = workout._id ? workout._id : String(index);
         return workout ? (
           <Session
             first={index === 0 && true}

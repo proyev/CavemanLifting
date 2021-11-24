@@ -1,12 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 
-export default function Heatmap({ workouts }) {
-  const [month1, setMonth1] = useState([]);
-  const [month2, setMonth2] = useState([]);
-  const [month3, setMonth3] = useState([]);
+import { Workout } from '../../../Utils/interface';
 
-  function generateData(daysToFill) {
+type Props = {
+  workouts: Workout[];
+}
+
+export default function Heatmap({ workouts }: Props) {
+  const [month1, setMonth1] = useState<Array<number>>([]);
+  const [month2, setMonth2] = useState<Array<number>>([]);
+  const [month3, setMonth3] = useState<Array<number>>([]);
+
+  type Series = {
+    x: string;
+    y: string
+  }
+
+  function generateData(daysToFill: number[]): Series[] {
     let i = 0;
     const series = [];
     while (i <= 30) {
@@ -28,9 +39,10 @@ export default function Heatmap({ workouts }) {
   }
   //TODO this can be organised into the custom hook if needed. Workout looper doesnt need to be in useEffect at all
   useEffect(() => {
-    const month1Data = [];
-    const month2Data = [];
-    const month3Data = [];
+    const month1Data: number[] = [];
+    const month2Data: number[] = [];
+    const month3Data: number[] = [];
+    //TYPES
     function workoutLooper() {
       workouts.forEach(sess => {
         let indvDate = new Date(sess.date);

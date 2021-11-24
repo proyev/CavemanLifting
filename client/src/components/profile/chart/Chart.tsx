@@ -9,12 +9,23 @@ import {
   YAxis,
 } from 'recharts';
 
-export default function Chart({ workouts }) {
-  const [organisedData, setOrganisedData] = useState([]);
+import { Workout } from '../../../Utils/interface';
+
+type Props = {
+  workouts: Workout[];
+}
+
+export default function Chart({ workouts }: Props) {
+  type Date = {
+    name: string;
+    uv: number;
+  }
+
+  const [organisedData, setOrganisedData] = useState<Date[]>([]);
   const labelColor = useColorModeValue('black', 'white');
 
   //TODO There is a better way to work with month and dates
-  function dataCreation(data) {
+  function dataCreation(data: Workout[]): Date[] {
     let jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec;
     jan = { name: 'Jan', uv: 0 };
     feb = { name: 'Feb', uv: 0 };
@@ -33,7 +44,6 @@ export default function Chart({ workouts }) {
         const splitDate = el.date.split('-');
         const year = splitDate[0];
         const month = splitDate[1];
-        //   console.log(year, month);
         if (Number(year) === new Date().getFullYear())
           switch (Number(month)) {
             case 1:
@@ -74,7 +84,7 @@ export default function Chart({ workouts }) {
               break;
 
             default:
-              nov += 1;
+              nov.uv += 1;
               break;
           }
       }
@@ -88,11 +98,11 @@ export default function Chart({ workouts }) {
   }, [workouts]);
 
   return (
-    <ResponsiveContainer width="95%" height="90%">
+    <ResponsiveContainer width='95%' height='90%'>
       <LineChart data={organisedData}>
-        <Line type="montone" dataKey="uv" stroke={labelColor} />
-        <CartesianGrid stroke="#eee" />
-        <XAxis dataKey="name" tick={{ fill: labelColor, fontSize: 12.5 }} />
+        <Line type='monotone' dataKey='uv' stroke={labelColor} />
+        <CartesianGrid stroke='#eee' />
+        <XAxis dataKey='name' tick={{ fill: labelColor, fontSize: 12.5 }} />
         <YAxis tick={{ fill: labelColor, fontSize: 12.5 }} />
       </LineChart>
     </ResponsiveContainer>

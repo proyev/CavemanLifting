@@ -1,15 +1,20 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { Flex } from '@chakra-ui/react';
+
 import WorkoutCardInfo from './workoutcardinfo/WorkoutCardInfo';
 import ApiService from '../../ApiService';
 
+import { Exercise } from '../../Utils/interface';
+
+
 export default function WorkoutInfo() {
-  const [workoutCards, setWorkoutCards] = useState([]);
+  const [workoutCards, setWorkoutCards] = useState<Exercise[] | null>(null);
   //this is to remove props drilling since its the separate table in the db API call is made here
+  //I guess res should be of type workout too
   useEffect(() => {
-    ApiService.getWorkoutInfo().then(res => {
-      setWorkoutCards([...res]);
+    ApiService.getWorkoutInfo()
+      .then(res => {
+        setWorkoutCards([...res]);
     });
   }, []);
 
@@ -24,7 +29,8 @@ export default function WorkoutInfo() {
       justify="space-evenly"
       overflowY="scroll"
     >
-      {workoutCards.map(workout => {
+      {/*use workout interface here */}
+      {workoutCards && workoutCards.map(workout => {
         return (
           <WorkoutCardInfo
             key={workout._id}

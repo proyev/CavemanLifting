@@ -17,11 +17,8 @@ import {
 import { CavemanContext } from '../../../CavemanContext';
 import { showNotification } from '../../../Utils/Helpers';
 
-// import { Modal, Button } from 'react-bootstrap';
-// import './SessionForm.css';
-
-// export default function SessionForm({ showForm, toggleForm, postWorkout }) {
 export default function SessionForm() {
+  //DO NOT forget to set types here as well
   const { appState, appStateDispatch, dispatch } = useContext(CavemanContext);
   const [session, setSession] = useState({
     id: nanoid(),
@@ -31,25 +28,27 @@ export default function SessionForm() {
     routine: [],
   });
 
-  function handleForm(e) {
+  function handleForm(e: React.ChangeEvent<any>): void {
     //TODO date is currently a string... when posting to the DB this needs to be a date format
     setSession({ ...session, [e.target.name]: e.target.value });
   }
 
-  function handleSubmit(e) {
+  //TODO change alerts to red line highlights
+  function handleSubmit(e: React.FormEvent<any>): void {
     e.preventDefault();
     if (!session.title) return alert('Please enter a title bruh');
     if (!session.date) return alert('Cmon man you need to put a date');
     if (!session.notes) return alert('Nothing?');
-    dispatch({ type: 'ADD_WORKOUT', payload: session });
+    //types for dispatch needed
+    dispatch && dispatch({ type: 'ADD_WORKOUT', payload: session });
     showNotification('session');
   }
 
   return (
     <>
       <Modal
-        isOpen={appState.showNewSession}
-        onClose={() => appStateDispatch({type: 'TOGGLE_NEW_SESSION'})}>
+        isOpen={appState!.showNewSession ? true : false}
+        onClose={() => appStateDispatch && appStateDispatch({type: 'TOGGLE_NEW_SESSION'})}>
         <ModalOverlay />
 
         <ModalContent>
@@ -88,7 +87,10 @@ export default function SessionForm() {
             </FormControl>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="teal" onClick={handleSubmit}>
+            <Button
+              colorScheme="teal"
+              onClick={handleSubmit}
+            >
               Save
             </Button>
           </ModalFooter>

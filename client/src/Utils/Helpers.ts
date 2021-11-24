@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 
-export const showNotification = type =>
+export const showNotification = (type: string) =>
   toast.info(
     type === 'session' ? 'New session added!' : 'Details have been added!🎉',
     {

@@ -17,7 +17,11 @@ import {
   Legend,
 } from 'recharts';
 
-export default function WorkoutComparison({ workouts }) {
+//MESSS NEED HELP
+
+import { Workout } from '../../../../Utils/interface';
+
+export default function WorkoutComparison({ workouts }: {workouts: Workout[]}) {
   const [pieData, setPieData] = useState([]);
   const [areaData, setAreaData] = useState([]);
   const labelColor = useColorModeValue('black', 'white');
@@ -27,8 +31,8 @@ export default function WorkoutComparison({ workouts }) {
   const squatColor = useColorModeValue('#5b8d6d', '#75b58d');
   const bicepColor = useColorModeValue('#f2665c', '#f2665c');
 
-  let renderLabel = function (entry) {
-    return entry.name;
+  let renderLabel = function (entry: Workout) {
+    return entry.title;
   };
 
   function dataCreation(data) {
@@ -102,7 +106,7 @@ export default function WorkoutComparison({ workouts }) {
   }
 
   useEffect(() => {
-    setAreaData(dataCreation(workouts));
+    setAreaData(dataCreation(workouts: Workout[]));
   }, [workouts]);
 
   return (

@@ -11,29 +11,32 @@ import moment from 'moment';
 import { CavemanContext } from '../../../CavemanContext';
 import { nanoid } from 'nanoid';
 
-export default function Session({ id, first }) {
+export default function Session({ id, first }: { id: string, first: boolean}) {
   const bgColor = useColorModeValue('cyan.50', 'cyan.600');
   const bgFirst = useColorModeValue('cyan.100', 'cyan.800');
   const style = first ? styleFirst : styleStandard;
 
   const { appStateDispatch, findWorkout } = useContext(CavemanContext);
 
-  const workout = { ...findWorkout(id) };
+  const workout = findWorkout && {...findWorkout(id)};
 
   return (
     <VStack bg={first ? bgFirst : bgColor} {...style}>
       <Text {...style.header}>
-        {workout.title} - {moment(workout.date).format('MMM Do')}
+        {workout!.title} - {moment(workout!.date).format('MMM Do')}
       </Text>
       <VStack>
         <Text fontWeight="400" mb="1rem">
-          {workout.notes}
+          {workout!.notes}
         </Text>
         <Divider borderStyle="none" />
         <Flex align="center" justify="space-evenly">
-          {workout.routine.map(routine => {
+          {workout!.routine!.map(routine => {
             return (
-              <Flex {...style.flex} key={routine._id ? routine._id : nanoid()}>
+              <Flex
+                {...style.flex}
+                key={nanoid()}
+              >
                 <Text>{routine.lift}</Text>
                 <Text>{routine.weight} kg</Text>
                 <Text>Sets: {routine.sets}</Text>
@@ -47,7 +50,7 @@ export default function Session({ id, first }) {
       <Button
         {...style.button}
         onClick={() =>
-          appStateDispatch({ type: 'TOGGLE_EDIT_SESSION', id: id })
+          appStateDispatch && appStateDispatch({ type: 'TOGGLE_EDIT_SESSION', id: id })
         }
       >
         Add Details

@@ -1,10 +1,18 @@
 import React, {useContext} from 'react';
 import { Flex, Text, Icon, Link, Button } from '@chakra-ui/react';
+import { IconType } from 'react-icons';
 
 import { CavemanContext } from '../../../CavemanContext';
 
-export default function NavItem({ title, icon, route }) {
+type Props = {
+  title: string;
+  icon: IconType;
+  route?: string;
+}
 
+export default function NavItem({ title, icon, route }: Props) {
+
+  //WHY NO TYPE DETECTION?
   const { appState, appStateDispatch } = useContext(CavemanContext);
 
   return (
@@ -16,7 +24,7 @@ export default function NavItem({ title, icon, route }) {
     >
       { route ? (
       <Link
-        _hover={{ bg: 'teal.500' }}
+        hover={{ bg: 'teal.500' }}
         borderRadius='8px'
         href={route}
         p='2px'

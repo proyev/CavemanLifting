@@ -13,14 +13,18 @@ import {
 } from '@chakra-ui/react';
 import { FiMenu, FiHome, FiUser } from 'react-icons/fi';
 import { FaCity, FaDumbbell, FaPlusSquare } from 'react-icons/fa';
-import profilePic from '../../assets/caveman_profile_pic.PNG';
 
 import NavItem from './navitems/NavItem';
 import { CavemanContext } from '../../CavemanContext';
 
-export default function Sidebar({ toggleColorMode }) {
+type Props = {
+  toggleColorMode: () => void;
+}
+
+export default function Sidebar({ toggleColorMode }: Props) {
   const bgColor = useColorModeValue('green.400', 'green.700');
 
+  //AGAIN WHY NO TYPE DETECTION? appState and so on
   const { appState, appStateDispatch } = useContext(CavemanContext);
 
   return (
@@ -32,7 +36,7 @@ export default function Sidebar({ toggleColorMode }) {
       direction='column'
       pos='sticky'
       h='100vh'
-      w={appState.showNavbar ? '75px' : '225px'}
+      w={appState!.showNavbar ? '75px' : '225px'}
     >
       <Flex
         alignItems='center'
@@ -51,10 +55,11 @@ export default function Sidebar({ toggleColorMode }) {
           />
         </Flex>
         <IconButton
+          aria-label='Open menu'
           bg={bgColor}
           icon={<FiMenu />}
           w='100%'
-          onClick={() => appStateDispatch({ type: 'TOGGLE_NAVBAR' })}
+          onClick={() => appStateDispatch && appStateDispatch({ type: 'TOGGLE_NAVBAR' })}
         />
         <NavItem
           title='Dashboard'
@@ -93,7 +98,7 @@ export default function Sidebar({ toggleColorMode }) {
       >
         <Divider
           borderStyle='none'
-          display={appState.showNavbar ? 'none' : 'flex'}
+          display={appState!.showNavbar ? 'none' : 'flex'}
           w='100%'
         />
         <Flex
@@ -114,17 +119,17 @@ export default function Sidebar({ toggleColorMode }) {
             <Flex
               alignItems='center'
               justifyContent='center'
-              w={appState.showNavbar ? '100%' : '25%'}
+              w={appState!.showNavbar ? '100%' : '25%'}
             >
               <Avatar
                 size='sm'
-                src={profilePic}
+                src={require('../../assets/caveman_profile_pic.png')}
               />
             </Flex>
             <Flex
               alignItems='flex-end'
               direction='column'
-              display={appState.showNavbar ? 'none' : 'flex'}
+              display={appState!.showNavbar ? 'none' : 'flex'}
               justifyContent='center'
               mx='10px'
               w='75%'

@@ -1,4 +1,13 @@
-export function appStateReducer(state, action) {
+import { AppState, Action } from "./interface";
+
+export const appInitState: AppState = {
+  showEditSession: false,
+  showNavbar: false,
+  showNewSession: false,
+  workoutId: '',
+};
+
+export function appStateReducer(state: AppState, action: Action): AppState{
   switch (action.type) {
     case 'TOGGLE_NEW_SESSION':
       return {

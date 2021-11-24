@@ -18,7 +18,7 @@ import { CavemanContext } from '../../../CavemanContext';
 import { showNotification } from '../../../Utils/Helpers';
 
 //TODO detailsForm should be a part of Context as
-export default function SessionDetails({ id }) {
+export default function SessionDetails({ id }: {id: string | undefined}) {
   const initalRoutine = {
     lift: '',
     weight: '',
@@ -30,13 +30,13 @@ export default function SessionDetails({ id }) {
 
   const { dispatch, appState, appStateDispatch } = useContext(CavemanContext);
 
-  function handleRoutine(e) {
+  function handleRoutine(e: React.ChangeEvent<any>): void {
     const number = isNaN(Number(e.target.value))
       ? e.target.value
       : Number(e.target.value);
     setRoutine({ ...routine, [e.target.name]: number });
   }
-  function handleSubmit() {
+  function handleSubmit(): void {
     if (
       !routine.lift ||
       !routine.weight ||
@@ -44,104 +44,105 @@ export default function SessionDetails({ id }) {
       !routine.reps ||
       !routine.rest
     ) {
-      return alert('Please fill all fields');
+      alert('Please fill all fields');
+    } else {
+      dispatch && dispatch({ type: 'ADD_ROUTINE', payload: routine, id: id });
+      showNotification('smth was created');
+      setRoutine(initalRoutine);
     }
-    dispatch({ type: 'ADD_ROUTINE', payload: routine, id: id });
-    showNotification();
-    setRoutine(initalRoutine);
   }
   return (
     <Modal
-      isOpen={appState.showEditSession}
-      onClose={() => appStateDispatch({ type: 'TOGGLE_EDIT_SESSION' })}
+      isOpen={appState!.showEditSession ? true : false}
+      onClose={() => appStateDispatch && appStateDispatch({ type: 'TOGGLE_EDIT_SESSION' })}
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader textAlign="center">Enter Session Details</ModalHeader>
+        <ModalHeader textAlign='center'>Enter Session Details</ModalHeader>
         <ModalBody pb={6}>
           <FormControl>
             <FormLabel>Lift</FormLabel>
             <Select
-              name="lift"
-              size="lg"
-              placeholder="Select a lift..."
-              onChange={handleRoutine}
+              name='lift'
+              placeholder='Select a lift...'
+              size='lg'
               value={routine.lift}
+              onChange={handleRoutine}
             >
-              <option value="Deadlift">Deadlift</option>
-              <option value="Bench">Bench</option>
-              <option value="Squat">Squat</option>
-              <option value="Overhead">Overhead</option>
-              <option value="Bicep Curl">Bicep Curl</option>
+              <option value='Deadlift'>Deadlift</option>
+              <option value='Bench'>Bench</option>
+              <option value='Squat'>Squat</option>
+              <option value='Overhead'>Overhead</option>
+              <option value='Bicep Curl'>Bicep Curl</option>
             </Select>
 
-            <Divider my="2rem" />
+            <Divider my='2rem' />
 
             <FormLabel>Weight (kg)</FormLabel>
             <NumberInput
-              type="number"
-              step={2.5}
-              size="lg"
               allowMouseWheel
-              variant="filled"
+              placeholder='Weight..'
+              type='number'
+              step={2.5}
+              size='lg'
+              variant='filled'
               value={routine.weight}
-              placeholder="Weight.."
             >
               <NumberInputField
-                name="weight"
+                name='weight'
+                placeholder='Weight..'
                 onChange={handleRoutine}
-                placeholder="Weight.."
               />
             </NumberInput>
 
             <FormLabel>Sets</FormLabel>
             <NumberInput
-              step={1}
-              size="lg"
               allowMouseWheel
-              variant="filled"
+              step={1}
+              size='lg'
+              variant='filled'
               value={routine.sets}
             >
               <NumberInputField
-                name="sets"
+                name='sets'
+                placeholder='Number of sets..'
                 onChange={handleRoutine}
-                placeholder="Number of sets.."
               />
             </NumberInput>
 
             <FormLabel>Reps</FormLabel>
             <NumberInput
-              step={1}
-              size="lg"
               allowMouseWheel
-              variant="filled"
+              step={1}
+              size='lg'
+              variant='filled'
               value={routine.reps}
             >
               <NumberInputField
-                name="reps"
+                name='reps'
+                placeholder='Number of reps..'
                 onChange={handleRoutine}
-                placeholder="Number of reps.."
               />
             </NumberInput>
 
             <FormLabel>Rest</FormLabel>
             <NumberInput
-              step={5}
-              size="lg"
               allowMouseWheel
-              variant="filled"
+              step={5}
+              size='lg'
+              variant='filled'
               value={routine.rest}
             >
               <NumberInputField
-                name="rest"
+                name='rest'
+                placeholder='Rest in seconds..'
                 onChange={handleRoutine}
-                placeholder="Rest in seconds.."
               />
             </NumberInput>
           </FormControl>
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="green" onClick={handleSubmit}>
+          <Button colorScheme='green' onClick={handleSubmit}>
             Save
           </Button>
         </ModalFooter>

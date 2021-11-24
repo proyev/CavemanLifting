@@ -20,11 +20,12 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 
-import profilePic from '../../assets/caveman_profile_pic.PNG';
 import { CavemanContext } from '../../CavemanContext';
+import { Workout } from '../../Utils/interface';
 
 export default function Profile() {
-  const [latest, setLatest] = useState({});
+  //types needed
+  const [latest, setLatest] = useState<Workout>();
 
   const { userData } = useContext(CavemanContext);
 
@@ -32,8 +33,8 @@ export default function Profile() {
   const textBG = useColorModeValue('teal.300', 'teal.700');
 
   useEffect(() => {
-    if (userData.workouts && userData.workouts.length > 0)
-      setLatest(userData.workouts[0]);
+    if (userData!.workouts && userData!.workouts.length > 0)
+      setLatest(userData!.workouts[0]);
   }, [userData]);
 
   return (
@@ -61,7 +62,7 @@ export default function Profile() {
           <Image
             borderRadius='10px'
             h='10rem'
-            src={profilePic}
+            src={require('../../assets/caveman_profile_pic.png')}
           />
 
           <VStack
@@ -82,7 +83,7 @@ export default function Profile() {
               fontWeight='semi-bold'
               mb='0.25rem'
             >
-              {userData.username}
+              {userData!.username}
             </Text>
             <Divider />
             <Heading
@@ -96,7 +97,7 @@ export default function Profile() {
               mb='0'
               size='lg'
             >
-              {userData.bio}
+              {userData!.bio}
             </Text>
           </VStack>
         </Flex>
@@ -116,42 +117,45 @@ export default function Profile() {
             w='75%'
           >
             <Heading size='lg'>Personal Records</Heading>
-            {userData.prs &&
-              userData.prs.map(pr => {
-                return (
-                  <Flex
-                    key={pr._id}
-                    bg={textBG}
-                    w='100%'
-                    h='2.5rem'
-                    m='1rem'
-                    justify='space-evenly'
-                    align='center'
-                    borderRadius='25px'
-                  >
-                    <Heading
-                      fontSize='lg'
-                      letterSpacing='wide'
-                      size='md'
+            {/*type for personal records */}
+            {userData!.workouts &&
+              userData!.workouts.map(workout => {
+                workout.routine.map((routine, index) => {
+                  return (
+                    <Flex
+                      key={index}
+                      bg={textBG}
+                      w='100%'
+                      h='2.5rem'
+                      m='1rem'
+                      justify='space-evenly'
+                      align='center'
+                      borderRadius='25px'
                     >
-                      {pr.workout}
-                    </Heading>
-                    <Heading
-                      size='md'
-                      fontSize='md'
-                      fontWeight='semi-bold'
-                    >
-                      {pr.weight}
-                    </Heading>
-                    <Heading
-                      size='md'
-                      fontSize='md'
-                      fontWeight='semi-bold'
-                    >
-                      {pr.reps}
-                    </Heading>
-                  </Flex>
-                );
+                      <Heading
+                        fontSize='lg'
+                        letterSpacing='wide'
+                        size='md'
+                      >
+                        {routine.lift}
+                      </Heading>
+                      <Heading
+                        size='md'
+                        fontSize='md'
+                        fontWeight='semi-bold'
+                      >
+                        {routine.weight}
+                      </Heading>
+                      <Heading
+                        size='md'
+                        fontSize='md'
+                        fontWeight='semi-bold'
+                      >
+                        {routine.reps}
+                      </Heading>
+                    </Flex>
+                  );
+                })
               })}
           </Flex>
         </Flex>
@@ -190,6 +194,7 @@ export default function Profile() {
             </Thead>
             <Tbody>
               <Tr></Tr>
+              {/*TYPES */}
               {latest.routine &&
                 latest.routine.map((routine, index) => {
                   return (
@@ -216,10 +221,10 @@ export default function Profile() {
           h='95%'
           w='30rem'
         >
-          <Chart workouts={userData.workouts} />
+        <Chart workouts={userData!.workouts} />
         </Flex>
       </Flex>
-      {userData.workouts && <Heatmap workouts={userData.workouts} />}
+      {userData!.workouts && <Heatmap workouts={userData!.workouts} />}
     </Flex>
   );
 }

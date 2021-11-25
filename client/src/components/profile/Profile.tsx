@@ -4,7 +4,6 @@ import Chart from './chart/Chart';
 import Heatmap from './heatmap/Heatmap';
 import {
   Flex,
-  // HStack,
   VStack,
   Heading,
   Text,
@@ -24,7 +23,6 @@ import { CavemanContext } from '../../CavemanContext';
 import { Workout } from '../../Utils/interface';
 
 export default function Profile() {
-  //types needed
   const [latest, setLatest] = useState<Workout>();
 
   const { userData } = useContext(CavemanContext);
@@ -33,8 +31,8 @@ export default function Profile() {
   const textBG = useColorModeValue('teal.300', 'teal.700');
 
   useEffect(() => {
-    if (userData!.workouts && userData!.workouts.length > 0)
-      setLatest(userData!.workouts[0]);
+    if (userData?.workouts && userData?.workouts.length > 0)
+      setLatest(userData?.workouts[0]);
   }, [userData]);
 
   return (
@@ -62,7 +60,7 @@ export default function Profile() {
           <Image
             borderRadius='10px'
             h='10rem'
-            src={require('../../assets/caveman_profile_pic.png')}
+            src={'../../assets/caveman_profile_pic.png'}
           />
 
           <VStack
@@ -83,7 +81,7 @@ export default function Profile() {
               fontWeight='semi-bold'
               mb='0.25rem'
             >
-              {userData!.username}
+              {userData?.username}
             </Text>
             <Divider />
             <Heading
@@ -97,7 +95,7 @@ export default function Profile() {
               mb='0'
               size='lg'
             >
-              {userData!.bio}
+              {userData?.bio}
             </Text>
           </VStack>
         </Flex>
@@ -118,8 +116,8 @@ export default function Profile() {
           >
             <Heading size='lg'>Personal Records</Heading>
             {/*type for personal records */}
-            {userData!.workouts &&
-              userData!.workouts.map(workout => {
+            {userData?.workouts &&
+              userData?.workouts.map(workout => {
                 workout.routine.map((routine, index) => {
                   return (
                     <Flex
@@ -221,10 +219,10 @@ export default function Profile() {
           h='95%'
           w='30rem'
         >
-        <Chart workouts={userData!.workouts} />
+        <Chart workouts={userData?.workouts} />
         </Flex>
       </Flex>
-      {userData!.workouts && <Heatmap workouts={userData!.workouts} />}
+      {userData?.workouts && <Heatmap workouts={userData?.workouts} />}
     </Flex>
   );
 }

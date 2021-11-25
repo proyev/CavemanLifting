@@ -8,9 +8,9 @@ type Props = {
 }
 
 export default function Heatmap({ workouts }: Props) {
-  const [month1, setMonth1] = useState<Array<number>>([]);
-  const [month2, setMonth2] = useState<Array<number>>([]);
-  const [month3, setMonth3] = useState<Array<number>>([]);
+  const [month1, setMonth1] = useState<number[]>([]);
+  const [month2, setMonth2] = useState<number[]>([]);
+  const [month3, setMonth3] = useState<number[]>([]);
 
   type Series = {
     x: string;
@@ -24,12 +24,12 @@ export default function Heatmap({ workouts }: Props) {
       const x = (i + 1).toString();
       if (daysToFill.some(el => el === Number(x))) {
         series.push({
-          x: x,
+          x,
           y: '125',
         });
       } else {
         series.push({
-          x: x,
+          x,
           y: '50',
         });
       }
@@ -37,17 +37,17 @@ export default function Heatmap({ workouts }: Props) {
     }
     return series;
   }
-  //TODO this can be organised into the custom hook if needed. Workout looper doesnt need to be in useEffect at all
+  // TODO this can be organised into the custom hook if needed. Workout looper doesnt need to be in useEffect at all
   useEffect(() => {
     const month1Data: number[] = [];
     const month2Data: number[] = [];
     const month3Data: number[] = [];
-    //TYPES
+    // TYPES
     function workoutLooper() {
       workouts.forEach(sess => {
-        let indvDate = new Date(sess.date);
-        let indvMonth = indvDate.getMonth();
-        let indvDay = indvDate.getDate();
+        const indvDate = new Date(sess.date);
+        const indvMonth = indvDate.getMonth();
+        const indvDay = indvDate.getDate();
 
         if (indvMonth === 8) {
           month1Data.push(indvDay);

@@ -12,7 +12,7 @@ import {
 import { Workout } from '../../../Utils/interface';
 
 type Props = {
-  workouts: Workout[];
+  workouts: Workout[] | undefined;
 }
 
 export default function Chart({ workouts }: Props) {
@@ -24,23 +24,22 @@ export default function Chart({ workouts }: Props) {
   const [organisedData, setOrganisedData] = useState<Date[]>([]);
   const labelColor = useColorModeValue('black', 'white');
 
-  //TODO There is a better way to work with month and dates
-  function dataCreation(data: Workout[]): Date[] {
-    let jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec;
-    jan = { name: 'Jan', uv: 0 };
-    feb = { name: 'Feb', uv: 0 };
-    mar = { name: 'Mar', uv: 0 };
-    apr = { name: 'Apr', uv: 0 };
-    may = { name: 'May', uv: 0 };
-    jun = { name: 'Jun', uv: 0 };
-    jul = { name: 'Jul', uv: 0 };
-    aug = { name: 'Aug', uv: 0 };
-    sep = { name: 'Sep', uv: 0 };
-    oct = { name: 'Oct', uv: 0 };
-    nov = { name: 'Nov', uv: 0 };
-    dec = { name: 'De', uv: 0 };
+  // TODO There is a better way to work with month and dates
+  function dataCreation(data?: Workout[]): Date[] {
+    const jan = { name: 'Jan', uv: 0 };
+    const feb = { name: 'Feb', uv: 0 };
+    const  mar = { name: 'Mar', uv: 0 };
+    const apr = { name: 'Apr', uv: 0 };
+    const  may = { name: 'May', uv: 0 };
+    const  jun = { name: 'Jun', uv: 0 };
+    const  jul = { name: 'Jul', uv: 0 };
+    const  aug = { name: 'Aug', uv: 0 };
+    const  sep = { name: 'Sep', uv: 0 };
+    const  oct = { name: 'Oct', uv: 0 };
+    const  nov = { name: 'Nov', uv: 0 };
+    const  dec = { name: 'De', uv: 0 };
     if (data) {
-      for (let el of data) {
+      for (const el of data) {
         const splitDate = el.date.split('-');
         const year = splitDate[0];
         const month = splitDate[1];

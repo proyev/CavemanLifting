@@ -16,7 +16,7 @@ import {
   WorkoutInfo,
 } from './components/index';
 
-//TODO: App is quite bloated with lots of states - usecontext or redux to define a data flow
+// TODO: App is quite bloated with lots of states - usecontext or redux to define a data flow
 function App() {
 
   const { toggleColorMode } = useColorMode();

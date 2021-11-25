@@ -12,7 +12,6 @@ type Props = {
 
 export default function NavItem({ title, icon, route }: Props) {
 
-  //WHY NO TYPE DETECTION?
   const { appState, appStateDispatch } = useContext(CavemanContext);
 
   return (
@@ -38,7 +37,7 @@ export default function NavItem({ title, icon, route }: Props) {
           <Flex
             align='center'
             h='50px'
-            w={appState.showNavbar ? '100%' : '25%'}
+            w={appState?.showNavbar ? '100%' : '25%'}
           >
             <Icon
               as={icon}
@@ -47,7 +46,7 @@ export default function NavItem({ title, icon, route }: Props) {
             />
           </Flex>
           <Text
-            display={appState.showNavbar ? 'none' : 'flex'}
+            display={appState?.showNavbar ? 'none' : 'flex'}
             mx='10px'
             w='75%'
           >
@@ -63,7 +62,7 @@ export default function NavItem({ title, icon, route }: Props) {
         fontWeight='regular'
         p='2px'
         w='100%'
-        onClick={() => appStateDispatch({type: 'TOGGLE_NEW_SESSION'})}
+        onClick={() => appStateDispatch && appStateDispatch({type: 'TOGGLE_NEW_SESSION'})}
       >
         <Flex
           alignItems='center'
@@ -73,7 +72,7 @@ export default function NavItem({ title, icon, route }: Props) {
           <Flex
             align='center'
             h='50px'
-            w={appState.showNavbar ? '100%' : '25%'}
+            w={appState?.showNavbar ? '100%' : '25%'}
           >
             <Icon
               as={icon}
@@ -82,7 +81,7 @@ export default function NavItem({ title, icon, route }: Props) {
             />
           </Flex>
           <Text
-            display={appState.showNavbar ? 'none' : 'flex'}
+            display={appState?.showNavbar ? 'none' : 'flex'}
             mx='10px'
             w='75%'
           >

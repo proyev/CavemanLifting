@@ -7,7 +7,7 @@ import { CavemanContext } from '../../../CavemanContext';
 
 export default function SessionList() {
   const { userData } = useContext(CavemanContext);
-  const workouts = userData!.workouts ? [...userData!.workouts] : [];
+  const workouts = userData?.workouts ? [...userData?.workouts] : [];
   return (
     <Flex
       align='center'

@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useReducer, useState } from 'react';
+import React, { createContext, useEffect, useReducer } from 'react';
 import ApiService from './ApiService';
 
 import { appInitState, appStateReducer } from './Utils/appStateManager';
@@ -40,11 +40,11 @@ type Props = {
 }
 
 export function CavemanContextProvider({ children }: Props) {
-  let userData: User | undefined = undefined;
-  let dispatch: React.Dispatch<Action> | undefined = undefined;
+  let userData: User | undefined;
+  let dispatch: React.Dispatch<Action> | undefined;
   const [appState, appStateDispatch] = useReducer(appStateReducer, appInitState);
 
-  //check if loading works
+  // check if loading works
   useEffect(() => {
     (async () => {
       const user = await ApiService.getUser<User>('6197bb2f2d805d2db970edee');

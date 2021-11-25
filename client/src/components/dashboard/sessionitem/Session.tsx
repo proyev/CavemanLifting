@@ -23,18 +23,20 @@ export default function Session({ id, first }: { id: string, first: boolean}) {
   return (
     <VStack bg={first ? bgFirst : bgColor} {...style}>
       <Text {...style.header}>
-        {workout!.title} - {moment(workout!.date).format('MMM Do')}
+        {workout?.title} - {moment(workout?.date).format('MMM Do')}
       </Text>
       <VStack>
         <Text fontWeight="400" mb="1rem">
-          {workout!.notes}
+          {workout?.notes}
         </Text>
         <Divider borderStyle="none" />
         <Flex align="center" justify="space-evenly">
-          {workout!.routine!.map(routine => {
+          {workout?.routine?.map(routine => {
             return (
+              // if direction is set as a part of style - error, dunno what is the reason for that
               <Flex
                 {...style.flex}
+                direction='column'
                 key={nanoid()}
               >
                 <Text>{routine.lift}</Text>
@@ -50,7 +52,7 @@ export default function Session({ id, first }: { id: string, first: boolean}) {
       <Button
         {...style.button}
         onClick={() =>
-          appStateDispatch && appStateDispatch({ type: 'TOGGLE_EDIT_SESSION', id: id })
+          appStateDispatch && appStateDispatch({ type: 'TOGGLE_EDIT_SESSION', id })
         }
       >
         Add Details
@@ -68,7 +70,6 @@ const styleStandard = {
   boxShadow: 'xl',
   header: { fontSize: 'lg', fontWeight: '600' },
   flex: {
-    display: 'flex',
     direction: 'column',
     align: 'center',
     m: '1rem',
@@ -90,8 +91,6 @@ const styleFirst = {
   header: { fontSize: 'xl', fontWeight: '700' },
   button: { my: '1.5rem', colorScheme: 'green', fontSize: 'lg' },
   flex: {
-    display: 'flex',
-    direction: 'column',
     align: 'center',
     m: '1rem',
     fontSize: 'lg',

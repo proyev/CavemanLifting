@@ -11,10 +11,10 @@ export default function Dashboard() {
   // Simply launches the dashboard component so it renders the list of sessions
   return (
     <Box
-      m='0px !important'
-      w={appState!.showNavbar ? '97.5%' : '92.5%'}
+      m='0px ?important'
+      w={appState?.showNavbar ? '97.5%' : '92.5%'}
     >
-      <SessionDetails id={appState!.workoutId} />
+      <SessionDetails id={appState?.workoutId} />
       <Flex
         align='center'
         direction='column'

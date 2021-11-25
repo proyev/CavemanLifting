@@ -35,9 +35,9 @@ export interface User {
 }
 
 export interface AppState {
-  showEditSession: Boolean;
-  showNavbar: Boolean | boolean;
-  showNewSession: boolean | Boolean;
+  showEditSession: boolean;
+  showNavbar: boolean;
+  showNewSession: boolean;
   workoutId?: string;
 }
 

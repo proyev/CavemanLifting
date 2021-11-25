@@ -17,7 +17,7 @@ import {
 import { CavemanContext } from '../../../CavemanContext';
 import { showNotification } from '../../../Utils/Helpers';
 
-//TODO detailsForm should be a part of Context as
+// TODO detailsForm should be a part of Context as
 export default function SessionDetails({ id }: {id: string | undefined}) {
   const initalRoutine = {
     lift: '',
@@ -31,29 +31,29 @@ export default function SessionDetails({ id }: {id: string | undefined}) {
   const { dispatch, appState, appStateDispatch } = useContext(CavemanContext);
 
   function handleRoutine(e: React.ChangeEvent<any>): void {
-    const number = isNaN(Number(e.target.value))
+    const num = isNaN(Number(e.target.value))
       ? e.target.value
       : Number(e.target.value);
-    setRoutine({ ...routine, [e.target.name]: number });
+    setRoutine({ ...routine, [e.target.name]: num });
   }
   function handleSubmit(): void {
     if (
-      !routine.lift ||
-      !routine.weight ||
-      !routine.sets ||
-      !routine.reps ||
-      !routine.rest
+      routine.lift ||
+      routine.weight ||
+      routine.sets ||
+      routine.reps ||
+      routine.rest
     ) {
       alert('Please fill all fields');
     } else {
-      dispatch && dispatch({ type: 'ADD_ROUTINE', payload: routine, id: id });
+      if(dispatch) dispatch({ type: 'ADD_ROUTINE', payload: routine, id });
       showNotification('smth was created');
       setRoutine(initalRoutine);
     }
   }
   return (
     <Modal
-      isOpen={appState!.showEditSession ? true : false}
+      isOpen={appState?.showEditSession ? true : false}
       onClose={() => appStateDispatch && appStateDispatch({ type: 'TOGGLE_EDIT_SESSION' })}
     >
       <ModalOverlay />

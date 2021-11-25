@@ -9,8 +9,8 @@ import { Exercise } from '../../Utils/interface';
 
 export default function WorkoutInfo() {
   const [workoutCards, setWorkoutCards] = useState<Exercise[] | null>(null);
-  //this is to remove props drilling since its the separate table in the db API call is made here
-  //I guess res should be of type workout too
+  // this is to remove props drilling since its the separate table in the db API call is made here
+  // I guess res should be of type workout too
   useEffect(() => {
     ApiService.getWorkoutInfo()
       .then(res => {
@@ -18,7 +18,7 @@ export default function WorkoutInfo() {
     });
   }, []);
 
-  //Check if something can be done with the styling props to be outsourced
+  // Check if something can be done with the styling props to be outsourced
   return (
     <Flex
       h="100vh"
@@ -29,7 +29,6 @@ export default function WorkoutInfo() {
       justify="space-evenly"
       overflowY="scroll"
     >
-      {/*use workout interface here */}
       {workoutCards && workoutCards.map(workout => {
         return (
           <WorkoutCardInfo

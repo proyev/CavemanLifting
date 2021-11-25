@@ -11,19 +11,31 @@ import {
   CartesianGrid,
   XAxis,
   YAxis,
-  Sector,
   Cell,
   Tooltip,
   Legend,
 } from 'recharts';
 
-//MESSS NEED HELP
-
 import { Workout } from '../../../../Utils/interface';
 
 export default function WorkoutComparison({ workouts }: {workouts: Workout[]}) {
-  const [pieData, setPieData] = useState([]);
-  const [areaData, setAreaData] = useState([]);
+
+  type PieData = {
+    name: string;
+    value: number;
+  }
+
+  type AreaData = {
+    name: string | number;
+    Deadlift: number;
+    Bench: number;
+    Overhead: number;
+    Squat: number;
+    'Bicep Curl': number;
+  }
+
+  const [pieData, setPieData] = useState<PieData[]>([]);
+  const [areaData, setAreaData] = useState<AreaData[]>([]);
   const labelColor = useColorModeValue('black', 'white');
   const deadliftColor = useColorModeValue('#5f5c97', '#8884d8');
   const benchColor = useColorModeValue('#cc9520', '#ffbb28');
@@ -31,13 +43,13 @@ export default function WorkoutComparison({ workouts }: {workouts: Workout[]}) {
   const squatColor = useColorModeValue('#5b8d6d', '#75b58d');
   const bicepColor = useColorModeValue('#f2665c', '#f2665c');
 
-  let renderLabel = function (entry: Workout) {
+  const renderLabel = (entry: Workout): string => {
     return entry.title;
   };
 
-  function dataCreation(data) {
-    let workoutData = [];
-    let organisedPieData = [
+  function dataCreation(data: Workout[]): AreaData[] {
+    const workoutData: AreaData[] = [];
+    const organisedPieData = [
       { name: 'Deadlift', value: 0 },
       { name: 'Bench', value: 0 },
       { name: 'Overhead', value: 0 },
@@ -60,13 +72,13 @@ export default function WorkoutComparison({ workouts }: {workouts: Workout[]}) {
       count++;
     }
     if (data) {
-      for (let session of data) {
+      for (const session of data) {
         const splitDate = session.date.split('-');
         const day = splitDate[2].slice(0, 2);
         const month = Number(splitDate[1]) - 1;
 
         if (month === new Date().getMonth() && session.routine.length > 0) {
-          for (let workout of session.routine) {
+          for (const workout of session.routine) {
             if (
               workout.lift === 'Deadlift' ||
               workout.lift === 'Bench' ||
@@ -106,7 +118,7 @@ export default function WorkoutComparison({ workouts }: {workouts: Workout[]}) {
   }
 
   useEffect(() => {
-    setAreaData(dataCreation(workouts: Workout[]));
+    setAreaData(dataCreation(workouts));
   }, [workouts]);
 
   return (
@@ -147,7 +159,7 @@ export default function WorkoutComparison({ workouts }: {workouts: Workout[]}) {
           <XAxis dataKey="name" tick={{ fill: labelColor, fontSize: 12.5 }} />
           <YAxis tick={{ fill: labelColor, fontSize: 12.5 }} />
           <CartesianGrid stroke={labelColor} />
-          <Tooltip tick={{ fill: labelColor }} />
+          <Tooltip />
           <Legend verticalAlign="top" height={35} />
           <Area
             type="monotone"

@@ -18,7 +18,6 @@ import { CavemanContext } from '../../../CavemanContext';
 import { showNotification } from '../../../Utils/Helpers';
 
 export default function SessionForm() {
-  //DO NOT forget to set types here as well
   const { appState, appStateDispatch, dispatch } = useContext(CavemanContext);
   const [session, setSession] = useState({
     id: nanoid(),
@@ -29,25 +28,25 @@ export default function SessionForm() {
   });
 
   function handleForm(e: React.ChangeEvent<any>): void {
-    //TODO date is currently a string... when posting to the DB this needs to be a date format
+    // TODO date is currently a string... when posting to the DB this needs to be a date format
     setSession({ ...session, [e.target.name]: e.target.value });
   }
 
-  //TODO change alerts to red line highlights
+  // TODO change alerts to red line highlights
   function handleSubmit(e: React.FormEvent<any>): void {
     e.preventDefault();
     if (!session.title) return alert('Please enter a title bruh');
     if (!session.date) return alert('Cmon man you need to put a date');
     if (!session.notes) return alert('Nothing?');
-    //types for dispatch needed
-    dispatch && dispatch({ type: 'ADD_WORKOUT', payload: session });
+
+    if(dispatch) dispatch({ type: 'ADD_WORKOUT', payload: session });
     showNotification('session');
   }
 
   return (
     <>
       <Modal
-        isOpen={appState!.showNewSession ? true : false}
+        isOpen={appState?.showNewSession ? true : false}
         onClose={() => appStateDispatch && appStateDispatch({type: 'TOGGLE_NEW_SESSION'})}>
         <ModalOverlay />
 

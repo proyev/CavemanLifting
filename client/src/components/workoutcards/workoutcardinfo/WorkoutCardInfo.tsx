@@ -26,8 +26,8 @@ type Props = {
   workout: Exercise;
 }
 
-//use later - will help to throw badgeColor away
-//needs to be there in BE too
+// use later - will help to throw badgeColor away
+// needs to be there in BE too
 // enum Badge {
 //   Beginner = 'green',
 //   Intermediate = 'orange',
@@ -42,7 +42,6 @@ type Props = {
 export default function WorkoutCardInfo({ workout, key }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  //this is nasty refactor to be an object
   function badgeColor(badge: string): string {
     if (badge === 'Beginner') return 'green';
     if (badge === 'Intermediate') return 'orange';
@@ -57,7 +56,7 @@ export default function WorkoutCardInfo({ workout, key }: Props) {
 
     return 'red';
   }
-  //massive element list items can be iterated over the loop
+  // massive element list items can be iterated over the loop
   return (
     <>
       <Box

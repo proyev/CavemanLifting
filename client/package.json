@@ -14,7 +14,7 @@
     "apexcharts": "^3.29.0",
     "bootstrap": "^5.1.3",
     "framer-motion": "^4.1.17",
-    "mapbox-gl": "^2.6.0",
+    "mapbox-gl": "^2.6.1",
     "minute": "^0.0.1",
     "moment": "^2.29.1",
     "nanoid": "^3.1.30",
@@ -30,8 +30,10 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "react-scripts build",
+    "prestart": "npm run build",
+    "start": "react-scripts /dist start",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -54,11 +56,14 @@
     ]
   },
   "devDependencies": {
+    "@types/mapbox-gl": "^2.4.2",
     "@types/node": "^16.11.9",
     "@types/react": "^17.0.36",
     "@types/react-dom": "^17.0.11",
     "@types/react-icons": "^3.0.0",
+    "@typescript-eslint/parser": "^4.33.0",
     "cypress": "^9.0.0",
+    "tslint": "^6.1.3",
     "typescript": "^4.5.2"
   }
 }

@@ -1,0 +1,20 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended",
+        "@typescript-eslint/parser"
+    ],
+    "jsRules": {},
+    "rules": {
+        "no-console": {
+            "severity": "warning"
+        },
+        "no-shadowed-variable": {
+            "severity": "warning"
+        },
+        "no-undef": {
+            "severity": "warning"
+        }
+    },
+    "rulesDirectory": []
+}

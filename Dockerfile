@@ -1,29 +1,25 @@
-# Use Node.js 16 LTS (compatible with your older dependencies)
+# Simple Dockerfile for both client and server
 FROM node:16-alpine
 
-# Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json (if available)
-COPY server/package*.json ./
+# Install server dependencies
+COPY server/package*.json ./server/
+RUN cd server && npm install
 
-# Install dependencies
-RUN npm ci --only=production
+# Install client dependencies
+COPY client/package*.json ./client/
+RUN cd client && npm install
 
-# Copy server source code
-COPY server/ ./
+# Copy source code
+COPY server/ ./server/
+COPY client/ ./client/
 
-# Expose the port the app runs on
-EXPOSE 3001
+# Install concurrently globally
+RUN npm install -g concurrently
 
-# Create a non-root user for security
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nodejs -u 1001
-USER nodejs
+# Expose ports
+EXPOSE 3000 3001
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:3001/dashboard', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"
-
-# Start the application
-CMD ["node", "server.js"]
+# Start both services - let's see if it works without OpenSSL flag
+CMD ["concurrently", "cd /app/server && node server.js", "cd /app/client && npm start"]
